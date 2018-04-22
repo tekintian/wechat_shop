@@ -7,9 +7,7 @@
       </swiper-item>
     </block>
   </swiper>
-  
-    
-    <view class="cont">
+  <view class="cont">
       <navigator class="pr" url="../product/detail?productId={{item.id}}" hover-class="changestyle"
                  wx:for="{{productData}}">
         <image class="photo" src="{{item.photo_x}}"></image>

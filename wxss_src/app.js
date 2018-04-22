@@ -2,8 +2,8 @@
 App({
   d: {
     hostUrl: 'https://wxshop.yunnan.ws/index.php',
-    hostImg: 'http://wxshop.yunnan.ws',
-    hostVideo: 'http://wxshop.yunnan.ws',
+    hostImg: 'https://wxshop.yunnan.ws',
+    hostVideo: 'https://wxshop.yunnan.ws',
     userId: 1,
     appId:"",
     appKey:"",
