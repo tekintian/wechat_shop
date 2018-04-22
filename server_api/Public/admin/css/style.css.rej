@@ -1,0 +1,35 @@
+diff a/Public/admin/css/style.css b/Public/admin/css/style.css	(rejected hunks)
+@@ -17,7 +17,7 @@
+ table{border-collapse:collapse;border-spacing: 0;}
+ cite{font-style:normal;}
+ h2{font-weight:normal;}
+-/**************grass*********/
++/*************************************grass*************************************/
+ .w100{width:100px;}
+ .w300{width:30%;}
+ .list-img{max-width:200px;max-height:40px;}
+@@ -30,7 +30,23 @@
+ .forminfo i.tip-success{color:green;background:url(../images/tip-success.png) no-repeat;margin-left:8px;}
+ .forminfo i.tip-error{color:red;background:url(../images/tip-error.png) no-repeat;margin-left:8px;}
+ 
+-/*************grass*************/
++.error-msg,
++.info-msg{font-style:normal;font-size:12px;color:#aaa;display:inline-block;vertical-align:middle;padding:4px 20px 4px 4px;height:20px;line-height:20px;margin: 0 0 0 20px;border: 1px solid #dfb7b7;background: #fcf8f8;position:relative;text-indent:22px;}
++.info-msg{border: 1px solid #C0D7FD; background: #EFF5FF;}
++.success-msg{position:relative;}
++
++.error-msg:before,
++.error-msg:after,
++.info-msg:before,
++.info-msg:after,
++.success-msg:after{background:url(../images/icon-warning.png) no-repeat;content:"";display:block;position:absolute;}
++.error-msg:before {background-position: -8px -17px;width:5px;height:7px;left:-5px;top:10px;}
++.error-msg:after {background-position: -114px 0;width:12px;height:12px;left:8px;top:8px;}
++.info-msg:before{background-position: 0px -17px;width:5px;height:7px;left:-5px;top:10px;}
++.info-msg:after{background-position: -86px 0;width:12px;height:12px;left:8px;top:8px;}
++.success-msg:after {background-position: -29px 0;width:12px;height:12px;left:8px;top:6px;}
++
++/*************************************grass*************************************/
+ /*cloud*/
+ 
+ #mainBody {width:100%;height:100%;position:absolute;z-index:-1;}

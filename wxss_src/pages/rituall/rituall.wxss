@@ -1,0 +1,134 @@
+page {
+  background: white;
+}
+
+.orderDetails {
+  border-bottom: 20rpx solid #f3f3f3;
+  background: #fff;
+}
+
+.orderListTitle {
+  height: 100rpx;
+  line-height: 100rpx;
+  border-bottom: 1rpx solid #f3f3f3;
+}
+
+.orderListTitle .userImg {
+  float: left;
+  width: 70rpx;
+  height: 70rpx;
+  border-radius: 35rpx;
+  margin: 15rpx;
+}
+
+.orderListTitle .userImg image {
+  border-radius: 35rpx;
+  width: 100%;
+  height: 100%;
+}
+
+.orderListTitle .userName {
+  padding-right: 50rpx;
+  background: url(../../../images/member_list_arrow.png) no-repeat 90% center;
+  background-size: 35rpx 35rpx;
+}
+
+.orderListTitle .orderStatus {
+  float: right;
+  margin-right: 20rpx;
+  color: #2f7b27;
+  font-size: 34rpx;
+}
+
+.orderListDetails {
+  margin: 10px;
+  display: flex;
+  height: 200rpx;
+  border-bottom: 1rpx solid #f3f3f3;
+  border:2px solid #ff4081;
+  border-radius: 20rpx;
+}
+
+.orderListDetails .productImg {
+  flex: 1.3;
+  height: 217rpx;
+  margin-top: 20rpx;
+  margin-left: 20rpx;
+}
+
+.orderListDetails .productImg image {
+  width: 100%;
+  height: 100%;
+}
+
+.orderListDetails .productInfo {
+  flex: 1.5;
+  padding: 20rpx 10rpx;
+  text-align: center;
+}
+
+.pr {
+  flex: 2.6;
+  padding: 0 10rpx;
+  line-height: 44rpx;
+}
+
+.n {
+  margin-top: 47rpx;
+  font-size: 30rpx;
+  display: inline-block;
+  line-height: 40rpx;
+  font-weight: 900;
+  overflow: hidden;
+}
+
+.b {
+  margin-top: 8rpx;
+  font-size: 27rpx;
+  display: inline-block;
+  line-height: 30rpx;
+  color: #999;
+}
+
+.y {
+  font-size: 112rpx;
+  font-weight: 900;
+  color: #ff4081;
+}
+
+.x {
+  color: #ff4081;
+  font-size: 38rpx;
+  font-weight: 900;
+}
+
+.hh {
+  font-weight: 800;
+  color: #ff4081;
+  flex: 1.3;
+  padding: 20rpx 0rpx;
+  text-align: center;
+  border-left: 1px dashed #ccc;
+}
+
+.hb {
+  width: 80%;
+  margin-top: 38rpx;
+  font-size: 40rpx;
+  padding: 18rpx;
+  border-radius: 4rpx;
+}
+
+.c {
+  font-size: 21rpx;
+  position: relative;
+  top: -73rpx;
+  left: 237rpx;
+  width: 400rpx;
+  color: #ccc;
+}
+
+.classname {
+  font-size: 25rpx;
+  color: #ccc;
+}

@@ -1,0 +1,56 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<title>后台管理</title>
+<link href="__PUBLIC__/admin/css/main.css" rel="stylesheet" type="text/css" />
+<script type="text/javascript" src="__PUBLIC__/admin/js/jquery.js"></script>
+<script type="text/javascript" src="__PUBLIC__/admin/js/action.js"></script>
+<script type="text/javascript" src="__PUBLIC__/plugins/xheditor/xheditor-1.2.1.min.js"></script>
+<script type="text/javascript" src="__PUBLIC__/plugins/xheditor/xheditor_lang/zh-cn.js"></script>
+</head>
+<body>
+
+<div class="aaa_pts_show_1">【 栏目管理 】</div>
+
+<div class="aaa_pts_show_2">
+    
+    <div>
+       <div class="aaa_pts_4"><a href="{:U('More/city')}">返回</a></div>
+    </div>
+    <div class="aaa_pts_3">
+      <form action="{:U('More/city_add')}?tid={$priv.id}&id={$city.id}" method="post" onsubmit="return ac_from();">
+      <ul class="aaa_pts_5">
+         <li>
+            <div class="d1">所属级别:</div>
+            <div>
+              <input class="inp_1" name="" id="tid" value="{$priv.name}" disabled="disabled"/>
+            </div>
+         </li>
+         <li>
+            <div class="d1">地区名称:</div>
+            <div>
+              <input class="inp_1" name="name" id="name" value="{$city.name}"/>
+            </div>
+         </li>
+         
+         <li><input type="submit" name="submit" value="提交" class="aaa_pts_web_3" border="0"></li>
+      </ul>
+      </form>
+         
+    </div>
+    
+</div>
+<script>
+//检查空提交
+function ac_from(){
+  if($('#name').val()!=""){
+    return true
+  }else{
+    alert("请输入名称");
+    return false
+  }
+}
+</script>
+</body>
+</html>

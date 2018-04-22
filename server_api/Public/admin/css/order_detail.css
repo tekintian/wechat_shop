@@ -1,0 +1,29 @@
+@charset "utf-8";
+html,body,ul,li,ol,dl,dd,dt,p,h1,h2,h3,h4,h5,h6,form,fieldset,legend,img{margin:0;padding:0;}
+/*img{border:none; display: block;}*/
+img{border:none;}
+ul, li, ol{list-style: none;}
+body, html {width: 100%; height: 100%;overflow-x: hidden;}
+body {font: 12px "Microsoft YaHei", Verdana, arial, sans-serif;}
+a{text-decoration:none; outline: none; text-decoration: none; cursor: pointer; color: #448ff4;}
+.king_ie_box {box-sizing: border-box; -moz-box-sizing: border-box;}
+.king_clear {clear: both;}
+.king_show {display: block;}
+.king_hide {display: none;}
+
+#king_wrap {width: 610px; min-height: 430px; _height: 430px;margin-left: 10px; /*margin-top: 90px;*/}
+.inp-mtro {display: block; float: left; color: rgb(51, 51, 51); padding: 9px 8px; width: 464px; height: 24px; line-height: 24px; font-size: 16px; border: 1px solid #3EAFE1; vertical-align: middle; outline: none;}
+.btn-query {display: inline-block; width: 128px; height: 44px; line-height: 44px; font-size: 18px; text-indent: 60px; color: #fff; background: url(../images/search.png) 24px 10px no-repeat #3EAFE0;}
+
+.result-top {width: 608px; height: 43px; margin-top: 15px; background: #fff; border: 1px solid #3EAFE1; border-bottom: none;}
+.col1, .col2 {display: inline-block; height: 43px; line-height: 43px; vertical-align: middle; font-size: 14px; color: #333; text-align: center; font-weight: bold;}
+.col1 {width: 220px; border-right: 1px solid #D4E7F0;}
+.col2 {width: 383px;}
+/* 表格 */
+.result-info2 {width: 610px; border: 1px solid #3EAFE1; border-top: 1px solid #D4E7F0; border-collapse: collapse; border-spacing: 0;}
+.result-info2 td {padding: 10px; color: #878787; border-bottom: 1px solid #D4E7F0; background: #fff;}
+.row1 {width: 176px; text-align: right;}
+.result-info2 .status {width: 30px; background: url(../images/ico_status.gif) -50px center no-repeat #fff;}
+.result-info2 .status-first {background: url(../images/ico_status.gif) 0px center no-repeat #fff;}
+.last td {color: #ff8c00; border-bottom: 1px solid #3EAFE1; background: #fff;}
+.result-info2 .status-check {background:url(../images/ico_status.gif) -150px center no-repeat #fff;}

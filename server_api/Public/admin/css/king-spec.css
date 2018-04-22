@@ -1,0 +1,89 @@
+@charset "utf-8";
+html,body,ul,li,ol,dl,dd,dt,p,h1,h2,h3,h4,h5,h6,form,fieldset,legend,img{margin:0;padding:0;}
+img{border:none; display: block;}
+ul, li, ol{list-style: none;}
+body, html {width: 100%; height: 100%; overflow-x: hidden;font-family: HeitiJ-Light,"SimSun","宋体","Arial Narrow",HELVETICA; font-size: 9pt;}
+a{text-decoration:none;}
+.king_ie_box {box-sizing: border-box; -moz-box-sizing: border-box;}
+.king_clear {clear: both;}
+.king_show {display: block;}
+.king_hide {display: none;}
+#king_wrap {min-width: 750px;background: #fff;}
+#king_wrap>div {width: 100%; min-height: 60px; margin-top: 20px;}
+#king_wrap>div#king-add-table {min-height: 145px;}
+#king_wrap>div label {display: inline-block; float: left; width: 100px; text-align: right;}
+#king_wrap>div label i {color: #f00;}
+#king_wrap>div #king-add-specs, #king_wrap>div #king-all-invents, #king_wrap>div #king-write-coding, #king_wrap>div #king-table {float: left; width: 565px; margin-left: 30px;}
+#king_wrap>div #king-add-specs, #king_wrap>div #king-table {background-color: #fff;border: 1px solid #e5e5e5;}
+#king_wrap>div #king-add-specs {min-height: 65px; padding: 10px 10px 10px 10px;}
+#king_wrap>div #king-all-invents {min-height: 68px;}
+#king_wrap>div #king-write-coding {min-height: 30px;}
+#king_wrap>div #king-table {min-height: 102px;padding: 0px 10px 20px 10px;display: table; min-width: 565px;}
+.king-click-list {width: 100%; height: 44px; background: #F8F8F8; padding: 7px 0 7px 10px;}
+.king-but {width: 98px; height: 30px; text-align: center; line-height: 30px; border: 1px solid #e5e5e5; cursor: pointer;}
+.king_add_list {position: relative; width: 100%; min-height: 62px; margin-bottom: 10px;}
+.king-click-close {/*display: block;*/ right: 15px; top: 15px; opacity: 0.6;}
+.king-close-list, .king-click-close {position: absolute;width: 15px; height: 15px;background: url(../images/download.png) center center no-repeat; background-size: cover;}
+.king-close-list {right: -5px; top: 1px;}
+.king-nowrite {display: inline-block; padding-left: 6px;padding-top: 8px;padding-bottom: 8px;width: 76px; height: 30px; background: #f8f8f8; float: left;-webkit-border-top-left-radius: 5px;-moz-border-top-left-radius: 5px;border-top-left-radius: 5px;-webkit-border-bottom-left-radius: 5px;-moz-border-bottom-left-radius: 5px;border-bottom-left-radius: 5px; border: none; /* behavior: url(PIE-1.0.0/PIE.htc); */}
+.king-nowrite-changeB {border: 1px solid #bbb;}
+.king-nowrite-change {border: 1px solid #5897FB; border-right: none;}
+.king-upOrdown {position: relative;display: block; float: left; width: 4%; height: 30px;background: #f8f8f8;  -webkit-border-top-right-radius: 5px;-moz-border-top-right-radius: 5px;border-top-right-radius: 5px;-webkit-border-bottom-right-radius: 5px;-moz-border-bottom-right-radius: 5px;border-bottom-right-radius: 5px;}
+.king-upOrdown-changeB {border: 1px solid #bbb;border-left: none;}
+.king-upOrdown-change {border: 1px solid #5897FB;border-left: none;}
+.king-toggle {display: block; width: 10px; height: 8px; position: absolute; top: 10px; left: 5px;}
+.king-tog-up {background: url(../images/king-up.png) center center no-repeat; background-size: cover;}
+.king-tog-down {background: url(../images/king-down.png) center center no-repeat; background-size: cover;}
+.king-click-list .king-checkbox {margin-top: 9px;margin-left: 5px;}
+.king-listB {z-index: 50; width: 97px; min-height: 45px;max-height: 250px; border: 1px solid #5897FB;background: #f8f8f8;padding: 3px; position: absolute; left: 10px; top: 34px;border-top: none;-webkit-border-bottom-left-radius: 5px;-moz-border-bottom-left-radius: 5px;border-bottom-left-radius: 5px;-webkit-border-bottom-right-radius: 5px;-moz-border-bottom-right-radius: 5px;border-bottom-right-radius: 5px;}
+.king-autoAdd {display: block; width: 100%; height: 28px; border: none; border: 1px solid #5897FB; padding: 5px 2px;}
+.king-listB ul {margin-top: 5px; width: 100%; min-height: 28px; max-height: 170px;overflow-x: hidden; overflow-y: auto;padding-right: 1px;}
+.king-listB ul li {width: 100%; height: 28px; line-height: 28px;padding-left: 6px;cursor: pointer;}
+.king-listB ul li:hover {background: #3875D7;}
+.king-add-listM {float: left;}
+.king-add-listM li {float: left;position: relative;}
+.king-listM {display: block; width: 80px;height: 28px;line-height: 28px; text-align: center; font-size: 12px; margin-left: 10px; margin-top: 6px;border: 1px solid #bbb;  -webkit-border-radius: 5px;-moz-border-radius: 5px;border-radius: 5px;}
+.king-addImg {position: relative;display: none; width: 80px; height: 95px;line-height: 95px; text-align: center;margin-top: 10px;margin-left: 10px;border: 1px solid #dcdcdc;background:#fff;font-size: 30px; font-weight: bold; color: #e5e5e5; cursor: pointer;}
+.king-addImg input {display: block; position: absolute;width: 100%; height: 100%; top: 0; left: 0;right: 0;bottom: 0;outline: none;filter:alpha(opacity=0); -moz-opacity:0;opacity: 0;}
+.king-add-title {position: relative;margin-top: 10px;}
+.king-add-title, .king-add-s {cursor: pointer;float: left;width: 55px;height: 25px; line-height: 25px; color: #5897FB; font-size: 12px;text-align: center;}
+.king-add-s {z-index: 30; }
+.king-add-guigez {z-index: 99999; width: 385px; height: 55px; border: 1px solid #ddd; background: #fff; position: absolute; left: -135px; top: 25px;}
+.arrow {left: 24px; top: 21px;}
+.king-small-jiao, .arrow {position: absolute; -webkit-transform: rotate(45deg);-moz-transform: rotate(45deg);-ms-transform: rotate(45deg);-o-transform: rotate(45deg);transform: rotate(45deg); width: 6px; height: 6px; background: #fff; border: 1px solid #ddd; border-right: none; border-bottom: none;}
+.king-small-jiao {top: 42px;left: 47px; z-index: 30;display: none;}
+.king-input-addGui {width: 230px; height: 38px; padding: 10px 8px; margin: 7.5px 0px 7.5px 0px ; outline: 0; border: 0; border: 1px solid #bbb;}
+.king-absolute {position: absolute; width: 230px;min-height: 28px; max-height: 125px;overflow-x: hidden; overflow-y: auto;left: 48px; top: 47px;background: #fff; border: 1px solid #bbb;}
+.king-absolute li {text-align: left; color: #777;padding-left: 15px; background: #fff;}
+.king-absolute li:hover {background: #5897FB;}
+.king-sure, .king-nosure {display: inline-block; width: 46px; height: 30px; margin-left: 5px; border: 1px solid #5897FB; line-height: 30px; text-align: center;}
+.king-sure {background: #5897FB; color:#fff;}
+.king-nosure {color: #000;}
+
+
+
+#king-write-coding input, .king-invents-num {display: inline-block; width: 104px; height: 32px; color: #999; padding: 6px 6px; border: 1px solid #ddd; -webkit-border-radius: 6px;-moz-border-radius: 6px;border-radius: 6px;/*  behavior:url(PIE-1.0.0/PIE.htc); */}
+#king-all-invents .king-checkbox, .king-click-list .king-checkbox {display: inline-block;}
+.king_middle {display: inline-block; margin-right: 4px; vertical-align:middle;margin-top:-2px;}
+.king-warm-red, .king-warm-word, .king-warm-red1 {opacity: 0.8;line-height: 14px;font-size: 12px;margin-top: 6px;margin-bottom: 0;}
+.king-warm-word {color: #999;}
+.king-warm-red, .king-warm-red1 {color: #f00;}
+#king-warm, #king-warm2 {display: none;color: #fff;position: absolute; text-align: center;}
+#king-warm {width: 460px;height: 50px;line-height: 50px;font-size: 16px;font-weight: bold; top: 20px; left: 400px;background: #f00;}
+#king-warm2 {width: 180px; height: 40px; line-height: 40px;font-size: 13px;top: 200px;left: 350px; background: #000;-webkit-border-radius: 6px;-moz-border-radius: 6px;border-radius: 6px;}
+/* 动态库存数量表格 */
+#king-add-table {display: none;}
+.table-sku-stock {width: 100%;background-color: #fff;text-align: left;border-collapse: collapse; border-spacing: 0;min-width: 565px;}
+table.table-sku-stock th {padding: 10px 8px; font-weight: normal;}
+.text-center {width: 74px; text-align: center;}
+.th-price {width: 75px;}
+.th-stock {width: 75px;}
+.th-code {width: 80px;}
+.th-right {width: 100px; text-align: right;}
+table.table-sku-stock td {border: 1px solid #e5e5e5; padding: 8px;}
+table.table-sku-stock td:first-of-type {border-left: none;}
+table.table-sku-stock td:last-of-type {border-right: none;}
+.js-batch-form {display: none;}
+.input-mini {height: 30px; padding: 4px 6px; border: 1px solid #ccc;vertical-align: middle;-webkit-border-radius: 4px;-moz-border-radius: 4px;border-radius: 4px;}
+.input_width_74 {width: 74px;}
+.input_width_104 {width: 104px;}

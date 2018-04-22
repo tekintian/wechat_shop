@@ -1,0 +1,44 @@
+@charset "utf-8";
+.tongji_1{padding: 3px 13px; margin:10px 0;}
+.tongji_1 li{height:30px; line-height:30px; float:left; margin-right:5px; font-size:16px; border: 1px solid #a4b2bd; cursor:pointer;}
+.tongji_1 .r1,.tongji_1 li:hover{background:#5c7aa0; color:#fff;}
+
+
+/*<!--blank prevent-->*/
+.XYTipsWindow .boxLoading { position: absolute; display: block; width: 90px; height: 30px; line-height: 30px; margin-left: -45px; margin-top: -15px; left: 50%; top: 50%; color: #f00; }
+.XYTipsWindow .boxLoading { width:28px; margin-left: -14px; background:url("images/loading.gif") no-repeat; text-indent: -999em; text-align: center; }
+.XYTipsWindow .boxTitle, .XYTipsWindow .boxTitle span, .XYTipsWindow .boxTitle span.hover, .XYTipsWindow .loadinglayer, .XYTipsWindow .tipslayer, .XYTipsWindow .arrowLeft, .XYTipsWindow .colseBtn, .XYTipsWindow .boxError em, .XYTipsWindow .dialogBtn, .XYTipsWindow .dialogBtn.hover { background-image: url("images/ico.png"); background-repeat: no-repeat; }
+.XYTipsWindow .boxTitle { position: relative; border: 1px solid #A6C9E1; border-bottom: none; background-position: 0 0; background-repeat: repeat-x; height: 30px; line-height: 30px; }
+.XYTipsWindow .boxTitle h3 { float: left; font-weight: normal; color: #666; font-size: 14px; margin: 0; text-indent: 10px; }
+.XYTipsWindow .boxTitle span { position: absolute; width: 10px; background-position: -80px -40px; text-indent: -10em; right: 10px; top: 10px; height: 16px; overflow: hidden; cursor: pointer; }
+.XYTipsWindow .boxTitle span.hover { background-position: -90px -40px; }
+.XYTipsWindow .loadinglayer { line-height: 40px; background-position: 0 -100px!important; }
+.XYTipsWindow .tipslayer { line-height: 20px; text-align: left; }
+.XYTipsWindow .arrowLeft { position: absolute; width: 8px; height: 16px; background-position: -20px -170px; text-indent: -9999em; z-index: 20591; overflow: hidden; }
+.XYTipsWindow .colseBtn { position: absolute; top: 5px; right: 5px; width: 8px; height: 8px; background-position: -55px -170px; text-indent: -9999em; cursor: pointer; z-index: 20591; overflow: hidden; }
+.XYTipsWindow .boxError { position: absolute; left: 50%; top: 50%; margin-left: -60px; margin-top: -15px; width: 120px; height: 30px; line-height: 30px; color: #f00; }
+.XYTipsWindow .boxError em { float: left; width:30px; height: 30px; background-position: -35px -140px; }
+.XYTipsWindow .dialogBtn { margin: 5px 5px 0 0; width:80px; height:35px; background-position: 0 -30px; border:none; color:#333; }
+.XYTipsWindow .dialogBtn.hover { background-position: 0 -65px; }
+.XYTipsWindow.shadow { box-shadow:2px 2px 5px #C0BBB5; -moz-box-shadow: 2px 2px 5px #C0BBB5; -webkit-box-shadow:2px 2px 5px #C0BBB5; }
+
+
+/*订单展示css  show.html*/
+.ord_show_1{color:#333; text-align:right; font-size:18px; margin-top:10px;}
+.ord_show_1 font{color:#F4C136; font-size:18px;}
+.ord_show_2{width:90%; margin:0 auto; line-height:25px; height:25px; border:0; border-bottom:1px solid #ccc; background:none;}
+.ord_show_3{border-bottom:1px solid #ccc; position:relative;}
+.ord_show_3 div{padding-right:15px; font-size:14px; line-height:35px; height:35px; float:left;}
+.ord_show_3 .f1{color:#0C0;}
+.ord_show_3 .f2{color:#C00;}
+.ord_show_3 .ord_show_4{position:absolute; right:0; top:0; height:30px; width:80px; text-align:center; line-height:35px; border:1px solid #ebebeb; padding:0; background:#ebebeb; color:#666; border-radius:3px; cursor:pointer;}
+.ord_show_4{position:absolute;}
+
+.ord_show_5{margin-top:10px;}
+
+
+/*订单统计css  order_count.html*/
+.tongji_1{padding: 3px 13px; margin:10px 0;}
+.overlay{-webkit-backface-visibility:hidden;}
+.tongji_1 li{height:30px; line-height:30px; float:left; margin-right:5px; font-size:16px; border: 1px solid #a4b2bd; cursor:pointer;}
+.tongji_1 .r1,.tongji_1 li:hover{background:#5c7aa0; color:#fff;}

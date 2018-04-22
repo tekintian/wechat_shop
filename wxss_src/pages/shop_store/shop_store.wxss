@@ -1,0 +1,278 @@
+/* pages/shop_store/shop_store.wxss */
+page {
+  height: 100%;
+  /*background: white*/
+}
+
+.list-tab {
+  height: 106rpx;
+  box-sizing: border-box;
+  padding: 5px 10px;
+}
+
+.list-tab ul {
+  display: flex;
+  height: 72rpx;
+  border: 1px solid #b6aaec;
+  border-radius: 12rpx;
+}
+
+.list-tab li {
+  flex: 1;
+  display: flex;
+  font-size: 14px;
+  justify-content: center;
+  align-items: center;
+  color: #b6aaec;
+}
+
+.list-tab .active {
+  background: #b6aaec;
+  color: #fff;
+}
+
+/*list-box*/
+
+.list-view {
+  border-top: 1px solid #ccc;
+}
+
+.list-box {
+  display: flex;
+  padding: 5px 10px;
+  border-bottom: 1px solid #aaa;
+}
+
+.list-images image {
+  width: 170rpx;
+  height: 170rpx;
+}
+
+.list-text {
+  font-size: 14px;
+  color: #666;
+  flex: 1;
+  background-size: 60rpx;
+}
+
+.list-text .name {
+  display: block;
+  height: 80rpx;
+  padding: 5px;
+}
+
+.list-text .txt {
+  padding: 5px;
+  color: #aaa;
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.list-text .price {
+  font-size: 18px;
+  color: red;
+}
+
+.swiper-box {
+  height: 100%;
+}
+
+.scroll-box {
+  height: 100%;
+}
+
+.addcart {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.addcart image {
+  width: 80rpx;
+  height: 80rpx;
+}
+.list{
+  background: #fff;
+  width: 100%;
+  padding-top: 15rpx;
+}
+.ban{
+  width: 46%;
+  padding: 10rpx ;
+  border: 2rpx solid #ccc;
+  display: inline-block;
+  margin-left:6rpx 
+}
+.ban image{
+  width: 100%;
+}
+.type{
+  font-size:30rpx;
+  font-weight: 700;
+  margin-left: 10rpx;
+}
+ .kkk{
+    font-size:28rpx;
+  /*font-weight: 700;*/
+  margin-left: 10rpx;
+}
+.commodity_screen {
+ width: 100%;
+ height: 100%;
+ position: fixed;
+ top: 0;
+ left: 0;
+ background: #000;
+ opacity: 0.2;
+ overflow: hidden;
+ z-index: 1000;
+ color: #fff;
+}
+.commodity_attr_box {
+ width: 100%;
+ overflow: hidden;
+ position: fixed;
+ bottom: 0;
+ left: 0;
+ z-index: 2000;
+ background: #fff;
+ padding-top: 20rpx;
+}
+.dian{
+    width:95%;
+padding:25rpx 10rpx;
+/*background: white*/
+
+}
+.log{
+    width: 21%;
+   display: inline-block;
+   height: 150rpx;
+   float: left;
+
+}
+.si{
+height: 150rpx;
+ width:  75%;
+display: inline-block;
+   line-height: 150rpx;
+   font-weight: 700;
+   margin-left: 17rpx;
+}
+
+
+/*供求*/
+.tab{ 
+ flex-direction: row; 
+ width: 100%;
+} 
+.tab-left{ 
+ width: 98%; 
+ line-height: 160%; 
+ font-size:38rpx;
+ border: solid 1px #ccc; 
+margin-left: 6rpx;
+} 
+.tab-left view{ 
+    text-align: center;
+    display:inline-block;
+    width: 31%;
+} 
+.tab-left .active{ 
+ color: #f00; 
+border-bottom: solid 1px red; 
+} 
+.tab-right{ 
+ line-height: 160%; 
+} 
+.tab-right .right-item{ 
+ /*padding: 15rpx; */
+ display: none; 
+} 
+.tab-right .right-item.active{ 
+ display: block; 
+ background: white;
+}
+.boxx{
+  width: 100%;
+  padding: 20rpx;
+  border-bottom:1px solid #F5F5F5 ;
+  padding-left: 0rpx;
+}
+.riqi{
+    font-size: 28rpx;
+    display:inline-block;
+    color: #ccc;
+    margin-left: 35rpx;
+    width:37%;
+    position: relative;
+    top: 11rpx;
+}
+.png{
+    width: 20%;
+    display: inline-block;
+    float: left;
+    line-height: 35rpx;
+}
+.png image{
+    width: 60rpx;
+    height: 60rpx;
+    border-radius: 50%;
+   margin-left:46rpx;
+
+}
+.qiang{
+    width: 50%;
+    display: inline-block;
+    text-align: right;
+}
+.dan{
+    font-size: 30rpx;
+    padding: 10rpx 20rpx;
+    /*padding: 10rpx;*/
+    border: 1px solid #FF4040;
+    border-radius:10rpx; 
+    background: #FF4040;
+    color: white
+}
+.fon{
+    display: inline-block;    
+    width: 70%;
+    font-size: 30rpx;
+  height: 60rpx;
+    line-height: 50rpx;
+}
+.one1{
+    margin-top: 40rpx;
+    text-align: center;
+}
+.one1 text{
+    padding:20rpx 250rpx;
+    /*border: 1px solid #666;*/
+    font-size: 35rpx;
+    font-weight: 700;
+    border-radius: 10rpx;
+    box-shadow: 2px 2px 2px #888888;
+    background: #FF4040;
+    color: white
+}
+.boxx{
+  text-indent: 40rpx;
+  font-size: 35rpx;
+}
+.pg{
+  width: 98%;
+display:inline;
+}
+.pg image{
+  width: 100%;
+}
+.cl{
+  padding: 15rpx;
+  padding-top: 0px;
+}
+.cll{
+  margin: 15rpx 0
+}

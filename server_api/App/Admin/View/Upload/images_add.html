@@ -1,0 +1,80 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<title>后台管理程序</title>
+<script>
+function submit_add(){
+	var file=document.getElementById('file');
+	if(file.value==''){
+		alert("请选择要上传的文件！");
+		return false;
+	}
+}
+</script>
+<style>
+*{margin:0; padding:0; overflow:hidden;}
+.div1{float:left; border:1px solid #ccc; position:relative; background:url(__PUBLIC__/admin/images/img_add.jpg) no-repeat center center;}
+.div2{width:{$width}px; height:{$height}px;}
+.div3{position:absolute; top:0; left:0; width:100%; height:100%; background:#333; color:#fff; background:rgba(0,0,0,0.7); font-size:18px; line-height:{$height}px; text-align:center; filter:alpha(opacity=60)}
+.div5{background:url(__PUBLIC__/admin/images/ajax-loader.gif) no-repeat center center #eee; display:none;}
+.div4{text-align:center; -webkit-transition-duration:200ms; opacity:0; cursor:pointer; -webkit-backface-visibility:hidden;}
+.div1:hover .div4{top:0; opacity:1;}
+#file{opacity:0; z-index:2; filter:alpha(opacity=0)}
+</style>
+<script type="text/javascript" src="__PUBLIC__/admin/js/jquery.js"></script>
+</head>
+<body>
+<form action="{:U('Upload/images_action')}" target="myframe" method="post" name="form_1" id="form_1" enctype="multipart/form-data" onsubmit="return submit_add()">
+   <div class="div1 div2">
+      <?php echo $img ? '<img src="'.__UPLOAD__.$img.'" class="div2" id="images"/>' : '<img src="'.__UPLOAD__.$img.'" class="div2" id="images" style="display:none;"/>' ?>
+      <div class="div3 div4">点击更改</div>
+      <input name="file" class="div3" id="file" type="file" onchange="load_from()" title="点击更改"/>
+      <div class="div3 div5" id="load"></div>
+      <input type="hidden" name="type" value="{$type}" />
+      <input type="hidden" id="images_string" value="{$images_string}" />
+   </div>
+</form>
+
+<iframe class="pro_2" name="myframe" id="myframe" src="" frameborder="0"></iframe>
+
+<script>
+// function load_from(){
+//   document.getElementById('load').style.display="block";
+//   document.getElementById('form_1').submit();
+//   var file=$('#file');
+//   if(file.value==''){
+// 		alert("请选择要上传的文件！");
+// 		return false;
+//   }else{
+//   	$.ajax({
+//   		type:'post',
+//   		url:'{:U("Upload/images_action")}',
+//   		data:{''},
+//   	})
+//   } 
+// }
+function load_from(){
+  document.getElementById('load').style.display="block";
+  document.getElementById('form_1').submit();
+}
+var id='<?php echo $id;?>';
+function html_return(data){
+	document.getElementById('load').style.display="none";
+	document.getElementById('file').value='';
+	data=eval(data);
+	if(data.returns){
+		var img = data.message;
+		document.getElementById('images_string').value=img;
+		img = img.split(',');
+		var this_img=document.getElementById('images');
+		this_img.src= '<?php echo __UPLOAD__; ?>' + img[0];
+		this_img.style.display="block";
+		id=='' ? window.parent.photo_update() : window.parent.document.getElementById(id).value=data.message;
+	}else{
+		alert(data.message);
+	}
+}
+</script>
+</body>
+</html>

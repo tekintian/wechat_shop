@@ -1,0 +1,615 @@
+$(function() {
+	var arryThis = [];
+	var arry = [];
+	var arrySecond1 = [];
+	var arrySecond2 = [];
+	var arrySecond3 = [];
+	var arryTime = 0;
+	/************************Grass数据回填**************************/
+	$('.king_add_list').each(function(k,v){
+		$(v).find('.king-add-listM li').each(function(k2,v2){
+			if(k==0){
+				arrySecond1.push($(v2).find('.king-listM').html());
+			}else if(k==1){
+				arrySecond2.push($(v2).find('.king-listM').html());
+			}else if(k==2){
+				arrySecond3.push($(v2).find('.king-listM').html());
+			}
+		});
+	});
+
+	$('#king-add-table,.table-sku-stock,.table-sku-stock tbody').show();
+	// var parents = $(this).parents('.king_add_list').attr('firstId');
+	// var thVal = $(this).parents('.king_add_list').find('.king-nowrite').val();
+	creatTable('1', '颜色');
+	var sku = eval($('#king-table').attr('data-sku'));
+	console.log(sku);
+	$('.table-sku-stock tbody tr').each(function(k,v){
+		// console.log(k,v);
+		$(v).find('.price').val(sku[k].fmt_price);
+		$(v).find('.kucun').val(sku[k].fmt_stock);
+		$(v).find('input[name="format[code][]"]').val(sku[k].importcode);
+	});
+	/************************Grass数据回填**************************/
+
+
+
+	/*判断总库存是否输入正确*/
+	$('.king-invents-num').on('blur', function() {
+		var _val = $(this).val();
+		var reg = /^[0-9]+$/;
+		if(!reg.test(_val)) {
+			$('.king-warm-red').show();
+		} else {
+			$('.king-warm-red').hide();
+		}
+	});
+	/*判断商家编码是否输入正确*/
+	$('#king-write-coding input').on('blur', function() {
+		var _val = $(this).val();
+		var reg = /^[0-9a-zA-Z]+$/;
+		if(!reg.test(_val)) {
+			$('.king-warm-red1').show();
+		} else {
+			$('.king-warm-red1').hide();
+		}
+	});
+	/*规格名称的操作===============================================================================================================START*/
+	/*实现点击添加规格项目：最多添加三项*/
+	var times = 0;
+	$('.king-but').on('click', function() {
+		$('.king_add_list').eq(times).show().attr('isCheck', 'check');
+		var cheLen = $('.king_add_list[isCheck]').length;
+		times++;
+		if(times == 3) {
+			times = 0;
+		}
+		if(cheLen == 3) {
+			$('.king-but').parent().hide();
+		}
+	});
+	/*实现鼠标移入移除删除图标显示与隐藏*/
+	$('.king_add_list').on('mouseover', function() {
+		$(this).find('.king-click-close').show();
+	});
+	$('.king_add_list').on('mouseout', function() {
+		$(this).find('.king-click-close').hide();
+	});
+	/*实现点击删除图标删除规格项目*/
+	var time = 0;
+	$('.king-click-close').on('click', function() {
+		$(this).parents('.king_add_list').hide().removeAttr('isCheck');
+		$(this).siblings('.king-checkbox').remove();
+		$(this).siblings('.king-nowrite').val('');
+		$(this).parent().siblings('.king-add-title').hide();
+		var cheLen = $('.king_add_list[isCheck]').length;
+		time++;
+		if(time == 3) {
+			time = 0;
+		}
+		if(cheLen < 3) {
+			$('.king-but').parent().show();
+		}
+		$(this).parent().next().empty();
+		var parentId = $(this).parents('.king_add_list').attr('firstId');
+		var len1 = arrySecond1.length;
+		var len2 = arrySecond2.length;
+		var len3 = arrySecond3.length;
+		deleteAll(parentId, len2, len3);
+		samePartSplice(parentId);
+		var len11 = arrySecond1.length;
+		var len12 = arrySecond2.length;
+		var len13 = arrySecond3.length;
+		if(len11==0&&len12==0&&len13==0) {
+			deleteAllAfter();
+		}
+		$(this).parents('.king-click-list').siblings('.king-add-listM').empty();
+	});
+	/*获取规格项名称*/
+	function getData() {
+		$.ajax({
+			type: "get",
+			url: "http://localhost/ipeap/admin/index.php?m=Public&a=getFormat&shopid=0",
+			dataType: "json",
+			success: function(d) {
+				var lens = d.data.length;
+				var len = $('.king-listB').length;
+				for(var i=0; i<len; i++) {
+					for(var j=0; j<lens; j++) {
+						var cont = d.data[j].name;
+						var _id = d.data[j].id;
+						$('.king-listB').eq(i).find('ul').append('<li class="king-addAndshow" isId="' + _id +'">'+ cont +'</li>');
+					}
+				}
+			}
+		});
+	}
+	/*点击切换规格项目名称列表的展开与收起*/
+	$('.king-upOrdown').on('click', function() {
+		$(this).parent().find('.king-listB').toggle();
+		var isClick = $(this).attr('isClick');
+		if(isClick == 'false') {
+			$(this).attr('isClick', 'true');
+			$(this).find('.king-toggle').removeClass('king-tog-down').addClass('king-tog-up');
+			$(this).removeClass('king-upOrdown-changeB').addClass('king-upOrdown-change');
+			$(this).prev().removeClass('king-nowrite-changeB').addClass('king-nowrite-change');
+			getData();
+		} else {
+			$(this).attr('isClick', 'false');
+			$(this).find('.king-toggle').removeClass('king-tog-up').addClass('king-tog-down');
+			$(this).removeClass('king-upOrdown-change').addClass('king-upOrdown-changeB');
+			$(this).prev().removeClass('king-nowrite-change').addClass('king-nowrite-changeB');
+			$('.king-listB ul li').remove('.king-addAndshow');
+		}
+	});
+	/*选择规格项：1.直接从一级请求列表中选择
+				  2.自己在输入框中输入选择
+	*/
+	$('.king-listB ul').on('click', 'li', function() {
+		var text = $(this).html();
+		var val1 = $('.king-nowrite').eq(0).val();
+		var val2 = $('.king-nowrite').eq(1).val();
+		var val3 = $('.king-nowrite').eq(2).val();
+		if(text == val1|| text == val2 || text == val3) {
+				$('#king-warm').text('规格名不能相同').fadeIn();
+				setTimeout(function() {
+					$('#king-warm').fadeOut().text('');
+				}, 2500);
+				return false;
+			} else {
+				var _id = $(this).attr('isId');
+				var parentId = $(this).parents('.king_add_list').attr('firstId');
+				var valNo = $(this).parents('.king-click-list').find('.king-nowrite').val();
+				if(valNo!=='' && text!==valNo) {
+					samePartSplice(parentId);
+					$(this).parents('.king-click-list').siblings('.king-add-listM').empty();
+				}
+				$(this).parents('.king-click-list').find('.king-nowrite').val(text).attr('isId', _id);
+				$(this).parents('.king-click-list').find('.king-nowrite').val(text).next().val(_id);
+				$(this).parents('.king-click-list').find('.king-upOrdown').attr('isClick', 'false');
+				$(this).parents('.king-click-list').find('.king-listB').hide();
+				$(this).parents('.king-click-list').find('.king-toggle').removeClass('king-tog-up').addClass('king-tog-down');
+				$(this).parents('.king-click-list').find('.king-upOrdown').removeClass('king-upOrdown-change').addClass('king-upOrdown-changeB');
+				$(this).parents('.king-click-list').find('.king-nowrite').removeClass('king-nowrite-change').addClass('king-nowrite-changeB');
+				$(this).parents('.king_add_list').find('.king-add-title').show();
+				$('.king-listB ul').empty();
+				$('.king-autoAdd').val('');
+			}
+	});
+	$('.king-autoAdd').keydown(function() {
+		$(this).next().empty();
+		$(this).next().append('<li class="king-input" isId="0"></li>');
+	});
+	$('.king-autoAdd').keyup(function() {
+		var _val = $(this).val();
+		if(_val == '') {
+			$(this).next().empty();
+			getData();
+		} else {
+			$(this).next().empty();
+			$(this).next().append('<li class="king-input" isId="0">'+ _val +'</li>');
+			get('shopid=0', _val);
+		}
+	});
+/*规格名称的操作===============================================================================================================END*/
+/*规格名称项相对应的数据=======================================================================================================START*/
+	/*获取与规格相对应的参数*/
+	function getDatas(id) {
+		$.ajax({
+			type: "get",
+			url: "http://localhost/ipeap/admin/index.php?m=Public&a=getFormatContent&fid="+ id,
+			dataType: "json",
+			success: function(d) {
+				var lens = d.data.length;
+				var len = $('.king-absolute').length;
+				if(lens == 0) {
+					for(var i=0; i<len; i++) {
+						$('.king-absolute').eq(i).append('<li class="king-addAndshowA">没有找到匹配项</li>');
+					}
+				} else {
+					for(var i=0; i<len; i++) {
+						for(var j=0; j<lens; j++) {
+							var cont = d.data[j].name;
+							$('.king-absolute').eq(i).attr('isId', id);
+							$('.king-absolute').eq(i).next().val(id);
+							$('.king-absolute').eq(i).append('<li class="king-addAndshowA">'+ cont +'</li>');
+						}
+					}
+				}
+			}
+		});
+	}
+	/*显示相应的数据*/
+	$('.king-add-guigez ul').on('click', 'li', function() {
+		var thVal = $(this).parents('.king_add_list').find('.king-nowrite').val();
+		/*firstId用途：删除一整列的标示*/
+		var firstId = $(this).parents('.king_add_list').attr('firstId');
+		arryThis.push(firstId);
+		var text = $(this).text();
+		var _len = arry.length;
+		for(var i=0; i<_len; i++) {
+			if(text == arry[i]) {
+				$('#king-warm').text('已经添加了相同的规格值').fadeIn();
+				setTimeout(function() {
+					$('#king-warm').fadeOut().text('');
+				}, 2500);
+				return false;
+			}
+		}
+		arryTime++;
+		arry.push(text);
+		$('.text-center[firstId="'+firstId+'"]').remove();
+		$('tr[firstId="'+ firstId+'"]').remove();
+		switch(firstId) {
+			case '1':
+				arrySecond1.push(text);
+				break;
+			case '2':
+				arrySecond2.push(text);
+				break;
+			case '3':
+				arrySecond3.push(text);
+				break;
+		}
+		creatTable(firstId, thVal);
+		$(this).parent().hide();
+		$('#king-add-table').show();
+		var formatHead = $(this).parents('.king_add_list').find('.king-nowrite').val();
+		$('.king-invents-num').attr('readonly', 'readonly');
+		$(this).parents('.king-add-guigez').hide();
+		$(this).parents('.king-add-guigez').siblings('.arrow').hide();
+		$(this).parents('.king_add_list').find('.king-add-listM').append('<li><span class="king-listM">'+text+'</span><i class="king-close-list" id="'+arryTime+'"></i><input type="hidden" name="format[format]['+formatHead+'][]" value="'+text+'" /></li>');
+	});
+	/*确认/关闭按钮*/
+	$('.king-add-s').on('click', function() {
+		$(this).siblings('.king-add-guigez').find('.king-absolute').empty();
+		var id = $(this).parents('.king_add_list').find('.king-nowrite').attr('isId');
+		getDatas(id);
+		$(this).siblings('.king-add-guigez').find('.king-absolute').show();
+		$(this).siblings('.king-add-guigez').show();
+		$(this).siblings('.arrow').show();
+		$(this).siblings('.king-add-guigez').find('.king-input-addGui').val('');
+	});
+	$('.king-nosure').on('click', function() {
+		$(this).parent().hide();
+		$(this).siblings('.king-absolute').empty();
+		$(this).parent().siblings('.arrow').hide();
+	});
+
+	/*搜寻符合要求的数据*/
+	$('.king-input-addGui').keydown(function(event) {
+		$(this).siblings('.king-absolute').empty();
+		$(this).siblings('.king-absolute').append('<li class="king-inputs"></li>');
+	});
+	$('.king-input-addGui').keyup(function(event) {
+		var id = $(this).next().attr('isid');
+		var _val = $('.king-input-addGui').val();
+		if(_val == '') {
+			$(this).next().empty();
+			getDatas(id);
+		} else {
+			$(this).next().empty();
+			$(this).siblings('.king-absolute').append('<li class="king-inputs">'+ _val +'</li>');
+			get('fid='+id, _val);
+		}
+	});
+	/*删除显示的数据块*/
+	$('.king-add-listM').on('click', '.king-close-list',function() {
+		var parents = $(this).parents('.king_add_list').attr('firstId');
+		var thVal = $(this).parents('.king_add_list').find('.king-nowrite').val();
+		var content = $(this).parent().find('.king-listM').text();
+		var id = parseInt($(this).attr('id'))-1;
+		if(id == 0) {
+			arry.shift();
+		} else {
+			arry.splice(id-1,1)
+		}
+		$(this).parents('li').remove();
+		deleteY(parents, content);
+		var len1 = arrySecond1.length;
+		var len2 = arrySecond2.length;
+		var len3 = arrySecond3.length;
+		if(len1==0&&len2==0&&len3==0) {
+			deleteAllAfter();
+		}
+		if(parents=='1'&&len1==0) {
+			deleteAll(parents, len2, len3);
+		} else if(parents=='2'&&len2==0) {
+			deleteAll(parents, len1, len3);
+		} else if(parents=='3'&&len3==0) {
+		console.log(len1, len2, len3);
+			deleteAll(parents, len1, len2);
+		} else {
+			$('.text-center[firstId="'+parents+'"]').remove();
+			creatTable(parents, thVal);
+		}
+
+	});
+/*规格名称项相对应的数据=======================================================================================================END*/
+	function get(eles, val) {
+		var url = "http://localhost/ipeap/admin/index.php?m=Public&a=getFormat&"+eles+"&name="+val;
+		$.ajax({
+			type: "get",
+			url: url,
+			dataType: "json",
+			success:function(d) {
+				if(!(d.data == undefined)) {
+					var _len = d.data.length;
+					var _value;
+					var _id;
+					for(var i=0; i<_len; i++) {
+						_value = d.data[i].name;
+						_id = d.data[i].id;
+						if(eles == 'shopid=0') {
+							var ele = $('<li class="king-addli" isId="'+ _id +'">'+ _value +'</li>');
+							$('.king-listB ul').append(ele);
+							if(val == _value) {
+								$('.king-input').remove();
+							}
+						} else {
+							var ele = $('<li class="king-addlis">'+ _value +'</li>');
+							$('.king-absolute').append(ele);
+							if(val == _value) {
+								$('.king-inputs').remove();
+							}
+						}
+					}
+				}
+			}
+		});
+	}
+/*表格的显示与隐藏*/
+function deleteAllAfter() {
+	$('#king-add-table').hide();
+	$('.king-invents-num').removeAttr('readonly');
+	$('.king-invents-num').val('0');
+}
+/**
+ * 实现功能: 清空数组的操作
+ * @param {Object} arry：数组
+ */
+function deleteArrayAll(array) {
+	var len = array.length;
+	array.splice(0, len);
+}
+/**
+ * 实现功能: 删除数组中的某一个已知数字的操作
+ * @param {Object} arrySecond：数组
+ */
+function splice(arrySecond) {
+	var lenn = arry.length;
+	var len = arrySecond.length;
+	for(var i=0; i<len; i++) {
+		for(var j=0; j<lenn; j++) {
+			if(arrySecond[i] == arry[j]) {
+				arry.splice(j, len);
+			}
+		}
+	}
+}
+function splice1(arrySecond, cont) {
+	var len = arrySecond.length;
+	var lenn = arry.length;
+	for(var i=0; i<len; i++) {
+		if(arrySecond[i] == cont) {
+			arrySecond.splice(i, 1);
+		}
+	}
+	for(var j=0; j<lenn; j++) {
+		if(arry[j] == cont) {
+			arry.splice(j, 1);
+		}
+	}
+}
+function samePartSplice(parentId) {
+	if(parentId == '1') {
+		splice(arrySecond1);
+		deleteArrayAll(arrySecond1);
+	}
+	if(parentId == '2') {
+		splice(arrySecond2);
+		deleteArrayAll(arrySecond2);
+	}
+	if(parentId == '3') {
+		splice(arrySecond3);
+		deleteArrayAll(arrySecond3);
+	}
+}
+function deleteY(parentId, cont) {
+	if(parentId == '1') {
+		splice1(arrySecond1, cont);
+	}
+	if(parentId == '2') {
+		splice1(arrySecond2, cont)
+	}
+	if(parentId == '3') {
+		splice1(arrySecond3, cont)
+	}
+}
+
+/**
+ * 实现功能: 创建表格
+ * @param {Object} firstId:1/2/3
+ * @param {Object} thVal: 表格头标题
+ */
+ function creatTable(firstId, thVal) {
+ 	var len1 = arrySecond1.length;
+ 	var len2 = arrySecond2.length;
+ 	var len3 = arrySecond3.length;
+ 	if(len2==0&&len3==0||len1==0&&len2==0||len1==0&&len3==0) {
+ 		$('.text-center').remove();
+ 		$('.th-price').before('<th class="text-center" firstId="'+firstId+'">'+thVal+'</th>');
+ 		$('.table-sku-stock tbody').empty();
+		var row = 1;
+		if(firstId == '1') {
+			creatOnly(firstId, row, len1, arrySecond1);
+		}
+		if(firstId == '2') {
+			creatOnly(firstId, row, len2, arrySecond2);
+		}
+		if(firstId == '3') {
+			creatOnly(firstId, row, len3, arrySecond3);
+		}
+		/*$('tfoot tr td').attr('colspan', '5');*/
+ 	} else if(len1==0||len2==0||len3==0) {
+ 		$('.table-sku-stock tbody').empty();
+ 		if(firstId == '1') {
+ 			if(len2 == 0) {
+ 				alert('111');
+ 				$('.text-center[firstId="'+3+'"]').before('<th class="text-center" firstId="'+firstId+'">'+thVal+'</th>');
+ 				var row = len3;
+ 				creatSecond(firstId, row, len1, len3, arrySecond1, arrySecond3);
+ 			} else {
+ 				$('.text-center[firstId="'+2+'"]').before('<th class="text-center" firstId="'+firstId+'">'+thVal+'</th>');
+ 				var row = len2;
+ 				creatSecond(firstId, row, len1, len2, arrySecond1, arrySecond2);
+ 			}
+ 		}
+ 		if(firstId == '2') {
+ 			if(len1 == 0) {
+ 				$('.text-center[firstId="'+3+'"]').before('<th class="text-center" firstId="'+firstId+'">'+thVal+'</th>');
+ 				var row = len3;
+ 				creatSecond(firstId, row, len2, len3, arrySecond2, arrySecond3);
+ 			} else {
+ 				$('.text-center[firstId="'+1+'"]').after('<th class="text-center" firstId="'+firstId+'">'+thVal+'</th>');
+ 				var row = len2;
+ 				creatSecond(firstId, row, len1, len2, arrySecond1, arrySecond2);
+ 			}
+ 		}
+ 		if(firstId == '3') {
+ 			$('.th-price').before('<th class="text-center" firstId="'+firstId+'">'+thVal+'</th>');
+ 			var row = len3;
+ 			if(len1 == 0) {
+ 				creatSecond(firstId, row, len2, len3, arrySecond2, arrySecond3);
+ 			} else {
+ 				creatSecond(firstId, row, len1, len3, arrySecond1, arrySecond3);
+ 			}
+ 		}
+ 		/*$('tfoot tr td').attr('colspan', '6');*/
+ 	} else if(len1!==0&&len2!==0||len1!==0&&len3!==0||len2!==0&&len3!==0) {
+ 		$('.table-sku-stock tbody').empty();
+ 		var row = len2*len3;
+ 		var rowT = len3;
+ 		if(firstId == '1') {
+ 			$('.text-center[firstId="'+2+'"]').before('<th class="text-center" firstId="'+firstId+'">'+thVal+'</th>');
+ 			creatThere(firstId, row, rowT, len1, len2, len3, arrySecond1, arrySecond2, arrySecond3);
+ 		}
+ 		if(firstId == '2') {
+ 			$('.text-center[firstId="'+1+'"]').after('<th class="text-center" firstId="'+firstId+'">'+thVal+'</th>');
+ 			creatThere(firstId, row, rowT, len1, len2, len3, arrySecond1, arrySecond2, arrySecond3);
+ 		}
+ 		if(firstId == '3') {
+ 			$('.th-price').before('<th class="text-center" firstId="'+firstId+'">'+thVal+'</th>');
+ 			creatThere(firstId, row, rowT, len1, len2, len3, arrySecond1, arrySecond2, arrySecond3);
+ 		}
+ 	}
+ 	/*$('tfoot tr td').attr('colspan', '7');*/
+ }
+function creatOnly(firstId, row, len, arrys) {
+
+	for(var i=0; i<len; i++) {
+		$('.table-sku-stock tbody').append('<tr firstId="'+ firstId +'"><td rowspan="'+row+'" firstId="'+firstId+'" secondId="'+ i +'">'+arrys[i]+'</td><td><input name="format[price][]" type="text" class="input-mini input_width_74 king_ie_box price"/></td><td><input name="format[stock][]" type="text" class="input-mini input_width_74 king_ie_box kucun"/></td><td><input name="format[code][]" type="text" class="input-mini input_width_104 king_ie_box" /></td></tr>');
+	}
+}
+function creatSecond(firstId, row, len1, len2, arrys1, arrys2) {
+	console.log(firstId, row, len1, len2, arrys1, arrys2)
+	for(var i=0; i<len1; i++) {
+		for(var j=0; j<len2; j++) {
+			if(j==0) {
+				$('.table-sku-stock tbody').append('<tr firstId="'+firstId+'"><td rowspan="'+row+'" firstId="1" secondId="'+i+'">'+arrys1[i]+'</td><td firstId="2">'+arrys2[j]+'</td><td><input name="format[price][]" type="text" class="input-mini input_width_74 king_ie_box price"/></td><td><input  name="format[stock][]"type="text" class="input-mini input_width_74 king_ie_box kucun"/></td><td><input  name="format[code][]"type="text" class="input-mini input_width_104 king_ie_box" /></td></tr>');
+			} else {
+				$('.table-sku-stock tbody').append('<tr firstId="'+firstId+'"><td firstId="2">'+arrys2[j]+'</td><td><input  name="format[price][]" type="text" class="input-mini input_width_74 king_ie_box price"/></td><td><input  name="format[stock][]" type="text" class="input-mini input_width_74 king_ie_box kucun"/></td><td><input  name="format[code][]" type="text" class="input-mini input_width_104 king_ie_box" /></td></tr>');
+			}
+		}
+	}
+}
+function creatThere(firstId, row, rowT, len1, len2, len3, arrys1, arrys2, arrys3) {
+	for(var i=0; i<len1; i++) {
+		for(var j=0; j<len2; j++) {
+			for(var z=0; z<len3; z++) {
+				if(j==0&&z==0) {
+					$('.table-sku-stock tbody').append('<tr firstId="'+firstId+'"><td rowspan="'+row+'" firstId="1" secondId="'+i+'">'+arrys1[i]+'</td><td rowspan="'+rowT+'" firstId="2">'+arrys2[j]+'</td><td firstId="3">'+arrys3[z]+'</td><td><input  name="format[price][]" type="text" class="input-mini input_width_74 king_ie_box price"/></td><td><input  name="format[stock][]" type="text" class="input-mini input_width_74 king_ie_box kucun"/></td><td><input  name="format[code][]" type="text" class="input-mini input_width_104 king_ie_box" /></td></tr>');
+				} else {
+					if(z==0) {
+						$('.table-sku-stock tbody').append('<tr firstId="'+firstId+'"><td rowspan="'+rowT+'" firstId="2">'+arrys2[j]+'</td><td firstId="3">'+arrys3[z]+'</td><td><input name="format[price][]"  type="text" class="input-mini input_width_74 king_ie_box price"/></td><td><input  name="format[stock][]" type="text" class="input-mini input_width_74 king_ie_box kucun" /></td><td><input  name="format[code][]" type="text" class="input-mini input_width_104 king_ie_box" /></td></tr>');
+					} else {
+						$('.table-sku-stock tbody').append('<tr firstId="'+firstId+'"><td firstId="3">'+arrys3[z]+'</td><td><input name="format[price][]" type="text" class="input-mini input_width_74 king_ie_box price"/></td><td><input  name="format[stock][]" type="text" class="input-mini input_width_74 king_ie_box kucun"/></td><td><input  name="format[code][]" type="text" class="input-mini input_width_104 king_ie_box" /></td></tr>');
+					}
+				}
+			}
+		}
+	}
+}
+/*删除表格*/
+function deleteAll(parentId, len2, len3) {
+	var parentIdN = parseInt(parentId);
+	$('thead tr th:nth-child('+parentIdN+')').remove();
+	if(parentIdN == 1) {
+		$('tbody tr td[firstId=1]').remove();
+	}
+	if(parentIdN == 2) {
+		$('tbody tr td[firstId=2]').remove();
+		if(len3 == 0) {
+			$('tbosy tr td[firstId=1]').attr('rowspan', '1');
+		} else {
+			$('tbosy tr td[firstId=1]').attr('rowspan', len3);
+		}
+	}
+	if(parentIdN == 3) {
+		$('tbody tr td[firstId=3]').remove();
+		if(len2 == 0) {
+			$('tbosy tr td[firstId=1]').attr('rowspan', '1');
+		} else {
+			$('tbosy tr td[firstId=1]').attr('rowspan', len2);
+		}
+	}
+}
+/*判断价格与库存的状态来显示提示*/
+var word = ['价格最小为0.01', '请输入一个数字'];
+var word1 = ['库存不能为空', '请输入一个数字'];
+showWarm('.price', word);
+showWarm('.kucun', word1);
+function showWarm(goal, words) {
+	$('tbody').on('blur', goal, function() {
+		var value = $(this).val();
+		var reg = /^[0-9]+$/;
+		if(value == '') {
+			$('#king-warm2').text('').fadeIn()
+			$('#king-warm2').text(words[0]).fadeIn();
+			$(this).val('');
+			setTimeout(function() {
+				$('#king-warm2').fadeOut().text('');
+			}, 1000);
+
+		} else {
+			if(!reg.test(value)) {
+				$('#king-warm2').text('').fadeIn()
+				$('#king-warm2').text(words[1]).fadeIn();
+				$(this).val('');
+				setTimeout(function() {
+					$('#king-warm2').fadeOut().text('');
+				}, 1000);
+			}
+		}
+	});
+}
+all();
+function all() {
+	$('tbody').on('blur', '.kucun', function() {
+		var len = $('.kucun').length;
+		var number = 0;
+		for(var i=0; i<len; i++) {
+			var value = $('.kucun').eq(i).val();
+			var num;
+			if(value == '') {
+				num = 0;
+			} else {
+				num = parseInt(value);
+			}
+			number += num;
+			$('.king-invents-num').val(number);
+		}
+
+	})
+}
+});

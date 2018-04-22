@@ -1,0 +1,49 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<title>后台管理</title>
+<link href="__PUBLIC__/admin/css/main.css" rel="stylesheet" type="text/css" />
+<script type="text/javascript" src="__PUBLIC__/admin/js/jquery.js"></script>
+<script type="text/javascript" src="__PUBLIC__/admin/js/action.js"></script>
+</head>
+<body>
+
+<div class="aaa_pts_show_1">【 综合管理 】</div>
+
+<div class="aaa_pts_show_2">
+    
+    <div class="aaa_pts_3">
+      <div>
+         <a href="?">全国省份</a> -> {$nav}
+      </div>
+      <table class="pro_3">
+         <tr class="tr_1">
+           <td style="width:80px;">id</td>
+           <td>名称</td>
+           <td>上一级省/市</td>
+            <td style="width:25%;">操作</td>
+         </tr>
+         <tbody id="news_option">
+         <!-- 遍历 -->
+         <volist name="city" id="v" empty="没有啦！">
+          <tr>
+           <td>{$v.id}</td>
+           <td>{$v.name}</td>
+               <td>{$v.priv}</td>
+           <td class="obj_1">
+            <a href="?id={$v.id}">下级县市</a> | 
+            <a href="{:U('More/city_add')}?tid={$v.id}">添加下级县市</a> | 
+            <a href="{:U('More/city_add')}?tid={$v.tid}&id={$v.id}">修改</a> | 
+            <a href="javascript:del_id_url({$v.id});">删除</a>
+           </td>
+          </tr>
+          </volist>
+          <!-- 遍历 -->
+         </tbody>
+      </table>      
+    </div>
+    
+</div>
+</body>
+</html>

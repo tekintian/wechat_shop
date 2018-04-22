@@ -1,0 +1,37 @@
+<div class="aaa_pts_left_1" onclick="left_open(this,'user')">店铺管理</div>
+<div class="aaa_pts_left_3" style="display:none;" id="user">
+   <ul class="aaa_pts_left_2">
+     <li><a href="{:U('Shangchang/password')}" target="iframe">修改密码</a></li>
+     <li><a href="{:U('Shangchang/add')}" target="iframe">修改店铺</a></li>
+     <li><a href="{:U('Post/post')}" target="iframe">快递设置</a></li>
+   </ul>
+</div>
+
+
+
+<div class="aaa_pts_left_1" onclick="left_open(this,'product')">产品管理</div>
+<div class="aaa_pts_left_3" style="display:none;" id="product">
+ <ul class="aaa_pts_left_2">
+   <li>
+       <a href="{:U('Product/add')}" target="iframe">添加产品</a>
+   </li>
+   <li>
+       <a href="{:U('Product/index')}" target="iframe">产品管理</a>
+   </li>
+ </ul>
+</div>
+
+<div class="aaa_pts_left_1" onclick="left_open(this,'order')">订单管理</div>
+<div class="aaa_pts_left_3" style="display:none;" id="order">
+   <ul class="aaa_pts_left_2">
+     <li><a href="{:U('Order/index')}" target="iframe">全部订单</a></li>
+     <li><a href="{:U('Order/order_count')}" target="iframe">销售统计</a></li>
+   </ul>
+</div>
+
+<div class="aaa_pts_left_1" onclick="left_open(this,'access')">数据统计</div>
+<div class="aaa_pts_left_3" style="display:none;" id="access">
+   <ul class="aaa_pts_left_2">
+     <li><a href="{:U('Order/order_count')}" target="iframe">销售统计</a></li>
+   </ul>
+</div>

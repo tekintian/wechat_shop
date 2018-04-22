@@ -1,0 +1,40 @@
+
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<title>后台管理</title>
+<link href="__PUBLIC__/admin/css/main.css" rel="stylesheet" type="text/css" />
+
+</head>
+<body>
+
+<div class="aaa_pts_show_1">【 首页图标管理 】</div>
+
+<div class="aaa_pts_show_2">
+
+    <div class="aaa_pts_3">
+      <form action="{:U('saveimg')}" method="post" onsubmit="return ac_from();" enctype="multipart/form-data">
+      <ul class="aaa_pts_5">
+         <li><div style="color:#c00; font-size:14px; padding-left:20px;">图标尺寸 100*100 (png，jpg，jpeg)</div></li>
+         <li data-index="0">
+            <div class="d1">图标:</div>
+            <div>
+              <?php if ($info['photo']) { ?>
+                <img src="__DATA__/<?php echo $info['photo']; ?>" width="70" height="70" /><br /><br />
+              <?php } ?>
+              <input type="file" name="file" id="photo" />
+            </div>
+         </li>
+         <li>
+          <input type="submit" name="submit" value="提交" class="aaa_pts_web_3" border="0">
+          <input type="hidden" name="id" value="{$info.id}">
+         </li>
+      </ul>
+      </form>
+         
+    </div>
+    
+</div>
+</body>
+</html>

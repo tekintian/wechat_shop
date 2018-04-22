@@ -1,0 +1,19 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<title>后台管理</title>
+<link href="__PUBLIC__/admin/css/main.css" rel="stylesheet" type="text/css" />
+<script type="text/javascript" src="__PUBLIC__/admin/js/jquery.js"></script>
+<script type="text/javascript" src="__PUBLIC__/admin/js/action.js"></script>
+</head>
+<body>
+	<P><a href="{:U('Inout/sssss')}" >导出测试并生成excel</a></P><br/>
+        <form action="{:U('Inout/aaaa')}" method="post" enctype="multipart/form-data">
+            <input type="file" name="import"/>
+			<input type="hidden" name="table" value="tablename"/>
+            <input type="submit" value="导入"/>
+        </form>
+
+</body>
+</html>

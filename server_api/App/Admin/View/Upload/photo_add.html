@@ -1,0 +1,101 @@
+<?php
+$aaa_pts_qx=1;
+include('../../inc/lscy3_admin.php');
+include('../../inc/ImageResize_class.php');
+
+if($_POST['submit']==true){
+  $type=$_GET['type'] == '' ? 'img' : $_GET['type'];
+  $file=$_FILES['file'];
+  $id=$_GET['id'];
+  $width=$_GET['width'];
+  $height=$_GET['height'];
+  
+  $suffix = strtolower(substr($file['name'],-3));
+  $valid_suffix = $_GET['type']=='' ? array('png','gif','jpg') : array('.'.$_GET['type']);
+  
+  $dir=$_POST['dir']=='' ? '../../'.'UploadFiles' : '../../'.$_POST['dir'];
+  
+  try
+  {
+	 
+	 if(!in_array($suffix,$valid_suffix) || $id==''){
+		 throw new Exception('不支持该格式的文件上传！');
+		 }
+		 
+     if($file['size']>2048000){
+		  throw new Exception("上传文件大小不能超过2m");
+	  }
+
+      //上传目录
+	  define('dir',$dir.'/'.date("Ymd"));
+	  $v=is_dir(dir) ? 1 : @mkdir(dir,0777);
+	  if(!$v){
+		  throw new Exception('目录创建失败！');
+	  }
+	  
+	  //上传文件名称
+	  $name=date('His').'.'.$suffix;
+	  $url=dir.'/'.$name;
+	  
+	  //移动文件
+	  $v=@move_uploaded_file($file['tmp_name'],$url);
+	  if(!$v){
+		  throw new Exception($file['tmp_name']);
+	  }else{
+		  $img=new ImageResize();
+		  $ok=$img->load($url);
+		  if(!$ok){
+			 throw new Exception('错误的图片格式！');
+			}
+		  if($width!='' && $width!=$img->_width){
+			// throw new Exception('图片的尺寸不符合要求，请按照长:'.$width.'、宽:'.$height.'上传！');
+			  }
+		  if($height!='' && $height!=$img->_height){
+			// throw new Exception('图片的尺寸不符合要求，请按照长:'.$width.'、宽:'.$height.'上传！');
+			  }
+		  $img->destroy();
+		  
+		  echo '<script>
+				   parent.document.getElementById("'.$id.'").value="'.str_replace('../../','',$url).'"
+				</script>
+				
+				<style>*{margin:0;padding:0;}</style>
+				<font style="font-size:12px; color:#666;">上传成功</font> 
+				<a href="javascript:history.go(-1)" style="font-size:12px; color:#666; text-decoration:none;">重新上传</a>
+				'; 
+	   }
+	  
+  }
+  catch(Exception $e)
+  {
+	  echo '<script>
+	           alert("'.$e->getMessage().'");
+			   history.go(-1);
+	        </script>';
+  }
+ return;
+}
+?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<title>后台管理程序</title>
+<script>
+function submit_add(){
+	var file=document.getElementById('file');
+	if(file.value==''){
+		alert("请选择要上传的文件！");
+		return false;
+	}
+}
+</script>
+</head>
+<body>
+<form action="?type=<?php echo $_GET['type'] ?>&id=<?php echo $_GET['id'] ?>&width=<?php echo $_GET['width'] ?>&height=<?php echo $_GET['height'] ?>" method="post" name="form_1" enctype="multipart/form-data" onsubmit="return submit_add()">
+   <input name="file" id="file" type="file" style="width:196px; height:21px; background:#f5f4f4; border:1px solid #a4b2bd; position:absolute; top:0; left:0; overflow:hidden; display:block;"/>
+   <input type="hidden" name="name" value="<?php echo $_GET['name']; ?>"/>
+   <input type="submit" name="submit" value="上 传" style="width:80px; height:22px; border:1px solid #a4b2bd; position:absolute; top:0; left:205px;display:block; cursor:pointer;" border="0"/>
+</form>
+</body>
+</html>

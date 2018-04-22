@@ -1,0 +1,132 @@
+
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<title>后台管理</title>
+<link href="__PUBLIC__/admin/css/main.css" rel="stylesheet" type="text/css" />
+<script type="text/javascript" src="__PUBLIC__/admin/js/jquery1.8.js"></script>
+<script src="__PUBLIC__/admin/js/jquery.flot.js"></script>
+<script src="__PUBLIC__/admin/js/excanvas.min.js"></script>
+<style>
+.tongji_1{padding: 3px 13px; margin:10px 0;}
+.tongji_1 li{height:30px; line-height:30px; float:left; margin-right:5px; font-size:16px; border: 1px solid #a4b2bd; cursor:pointer;}
+.tongji_1 .r1,.tongji_1 li:hover{background:#5c7aa0; color:#fff;}
+</style>
+</head>
+<body>
+
+<div class="aaa_pts_show_1">【 商品销售统计 】</div>
+
+<div class="aaa_pts_show_2">
+    
+    <div>
+       <div class="aaa_pts_4">会员注册概况</div>
+    </div>
+    <div class="aaa_pts_3">
+
+      <ul class="aaa_pts_show_6">
+        <li>今天订单数：<font>
+		       {$order_today}
+        </font></li>
+        <li>昨天订单数：<font>
+		       {$order_yesterday}
+        </font></li>
+        <li>总订单数：{$order_total}</li>
+      </ul>
+    
+    </div>
+    
+</div>
+
+
+<div class="aaa_pts_show_2">
+    
+    <div>
+       <div class="aaa_pts_4">销售数据趋势</div>
+    </div>
+    <div class="aaa_pts_3">
+        
+       <ul class="tongji_1">
+          <li class="aaa_pts_4 <?php echo $type!='m' ? 'r1' : NULL; ?>" onclick="location='?id=<?php echo $id ?>&type=d'">日视图</li>
+          <li class="aaa_pts_4 <?php echo $type=='m' ? 'r1' : NULL; ?>"  onclick="location='?id=<?php echo $id ?>&type=m'">月视图</li>
+       </ul>
+    
+       <div id="tongji" style="width:100%; height:250px; overflow:visible;"></div>
+    </div>
+    
+</div>
+
+<script>
+var data = [],data_2=[];
+data.push(
+	{
+		"label":"订单数",
+		"data": [<?php echo trim($data1,','); ?>],
+		points: { show: true },
+		color: '#66CC33'
+	}
+);
+
+function tongji_view(){
+    var options = {
+        lines: { show: true },
+        points: { show: true },
+		grid: {backgroundColor: { colors: ['#fff', '#eee'] },hoverable: true},
+		yaxis: {ticks: 3,min: 0},
+        xaxis: { tickDecimals: 0, tickSize: 1}		
+    };
+	
+    $.plot($("#tongji"), data, options);
+}
+tongji_view();
+$(window).on('resize',function(){
+	tongji_view();
+	request_data();
+	});
+
+$('#tongji').on('plothover', function (event, pos, item) {
+  if (item) {
+    if(previousPoint != item.datapoint){
+      previousPoint = item.datapoint;
+      $('#tooltip').remove();
+	  item.datapoint[0]>=data[0].data.length-2 ? item.pageX-=80 : null;
+      showTooltip(item.pageX, item.pageY ,'订单数: '+data[0].data[item.datapoint[0]][1]);
+	}
+  } else {
+    $('#tooltip').remove();
+    previousPoint = null;
+  }
+});
+
+var inter = setInterval(function(){
+  if(!$('.tickLabel').length>0){
+	  return;
+	  }
+  clearInterval(inter);
+  request_data();
+	},50);
+
+function request_data(){
+  var $day_String=[<?php echo trim($day_String,','); ?>];
+    $('.tickLabel').each(function(index, element) {
+        $(this).html($day_String[index]);
+    });
+}
+
+function showTooltip(x, y, contents) {
+  $('<div id="tooltip">' + contents + '</div>').css( {
+    position: 'absolute',
+    display: 'none',
+    top: y + 5,
+    left: x + 5,
+    border: '1px solid #fdd',
+    padding: '2px',
+    backgroundColor: '#fee',
+    opacity: 0.80
+  }).appendTo('body').fadeIn(200);
+}
+
+</script>
+</body>
+</html>

@@ -1,0 +1,32 @@
+
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<title>后台管理</title>
+<link href="__PUBLIC__/admin/css/main.css" rel="stylesheet" type="text/css" />
+<script type="text/javascript" src="__PUBLIC__/admin/js/action.js"></script>
+</head>
+<body>
+
+<div class="aaa_pts_show_1">【 管理首页 】</div>
+
+<div class="aaa_pts_show_2">
+    
+    <div>
+       <div class="aaa_pts_4">商铺信息</div>
+    </div>
+    <div class="aaa_pts_3">
+      <ul class="aaa_pts_show_6">
+        <li>商铺名称：<font><?php echo $_SESSION['admininfo']['name'] ?></font></li>
+        <li>商铺级别：<font></font></li>
+        <li>创建日期：<font class="r1" style="color:#090"><?php echo date('Y-m-d',$_SESSION['admininfo']['addtime']); ?></font></li>
+        <li>联系电话：<font class="r1"><?php echo $_SESSION['admininfo']['tel'] ?></font></li>
+        <li>负 责 人：<font class="r1"><?php echo $_SESSION['admininfo']['uname'] ?></font></li>
+      </ul>
+    </div>
+    
+</div>
+
+</body>
+</html>

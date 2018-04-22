@@ -1,0 +1,52 @@
+<?php
+include('../../../inc/lscy3_admin.php');
+include('../nav/nav.php');
+$id=(int)$_GET['id'];
+$type=$_GET['type'];
+$tuijian=$_GET['tuijian']!=NULL ? (int)$_GET['tuijian'] : '';
+$name=htmlentities_u8($_GET['name']);
+$level=(int)$_GET['level'];
+$sheng=(int)$_GET['sheng'];
+$city=(int)$_GET['city'];
+$quyu=(int)$_GET['quyu'];
+
+$tsql="select * from aaa_pts_shangchang where 1";
+
+//搜索
+$name!='' ? $tsql.=" and name like '%$name%'" : null;
+$level>0 ? $tsql.=" and level=$level" : null;
+$tuijian!=='' ? $tsql.=" and type=$tuijian" : null;
+//地区搜索
+if($quyu>0){
+	$tsql.=" and quyu=$quyu";
+}elseif($city>0){
+	$tsql.=" and city=$city";
+}elseif($sheng>0){
+	$tsql.=" and sheng=$sheng";
+}
+
+define('rows',20);
+$count=mysql_num_rows(mysql_query($tsql));
+$rows=ceil($count/rows);
+
+$page=(int)$_GET['page'];
+$page<0?$page=0:'';
+$limit=$page*rows;
+$sql=mysql_query($tsql.=" order by sort desc,id asc limit $limit,".rows);
+$i = 0;
+while($v=mysql_fetch_array($sql)){
+	$json[$i]['id'] = $v['id'];
+	$json[$i]['name'] = $v['name'];
+    $json[$i]['logo'] = $v['logo']=='' ? '../../../images/no-user-photo.png' : $address_location.$v['logo'];
+	$json[$i]['address'] = $v['address'];
+	$json[$i]['amounts'] = '12138';
+	$json[$i]['distance'] = 988;
+}
+
+echo json_encode($json);
+
+
+
+
+
+?>

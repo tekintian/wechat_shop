@@ -1,0 +1,70 @@
+@charset "utf-8";
+/*公用提示信息*/
+html,body{height:100%;margin:0}
+.test{text-align:center;margin-top:60px;}
+.test button{width:200px;height:40px;margin:5px 0;}
+
+
+/*主要CSS*/
+#mask_layer{
+	background-color:#000;
+	-ms-filter:"progid:DXImageTransform.Microsoft.Alpha(opacity=50)";  
+	filter: alpha(opacity=50);  
+	-moz-opacity: 0.5;  
+	-khtml-opacity: 0.5;  
+	opacity: 0.5; 
+	z-index:1000;
+	position:fixed;
+	_position:absolute; /*IE6*/
+	top:0;left:0;
+	width:100%;height:100%;	
+}
+#scs_alert{
+	position:fixed;
+	_position:absolute; /*IE6*/
+	z-index:99999;
+	top:50%;left:50%;
+	margin-left:-144px;
+	margin-top:-76px;
+	text-align:left;
+	width:289px;
+}
+#alert_top{height:20px;background:url(../images/scs_alert.png) no-repeat 0 -73px}
+#alert_bg{background:url(../images/scs_bg.png) repeat-y 0 0;text-align:center;*+height:1%}
+#alert_bg:after {content: ".";display: block;height: 0;clear: both;visibility: hidden;}
+#alert_foot{height:13px;background:url(../images/scs_alert.png) no-repeat 0 -93px}
+
+#confirm_ok,#confirm_cancel,#alert_ok{
+	width:89px;
+	height:32px;
+	display:block;
+	float:left;
+	text-align:center;
+	overflow:hidden;
+	text-decoration:none;
+	line-height:30px;
+	margin:5px 10px 5px 0;
+	background:url(../images/scs_alert.png) no-repeat 0 -39px;
+	color:#fff;
+	font-family:微软雅黑,宋体;
+	font-size:16px;
+}
+#confirm_ok{margin-left:47px;_margin-left:25px;}
+#alert_ok{margin-left:97px;_margin-left:50px;}
+#confirm_ok:hover,#confirm_cancel:hover,#alert_ok:hover{background-position:-89px -39px}
+#confirm_ok:active,#confirm_cancel:active,#alert_ok:active{background-position:-178px -39px}
+#inco_ok,#inco_warn,#inco_error,#inco_confirm{
+	width:37px;height:37px;
+	background:url(../images/scs_alert.png) no-repeat 0 0;
+}
+#inco_error{background-position:-41px 0}
+#inco_warn{background-position:-82px 0}
+#inco_confirm{background-position:-123px 0}
+#alert_txt{
+	text-align:left;
+	color:#fff;
+	font-family:微软雅黑,宋体;
+	font-size:16px;
+}
+
+#alert_bg table{margin-left: 20px;}

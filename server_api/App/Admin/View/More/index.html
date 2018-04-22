@@ -1,0 +1,315 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<title>后台管理</title>
+<link href="__PUBLIC__/admin/css/main.css" rel="stylesheet" type="text/css" />
+<script type="text/javascript" src="__PUBLIC__/admin/js/jquery.js"></script>
+<script type="text/javascript" src="__PUBLIC__/admin/js/action.js"></script>
+<!--blank prevent-->
+<style type="text/css">
+.XYTipsWindow .boxLoading { z-index:99999999; position: absolute;display: block; width: 90px; height: 30px; line-height: 30px; margin-left: -45px; margin-top: -15px; left: 10%; top: 10%; color: #f00; }
+.XYTipsWindow .boxLoading { width:28px; margin-left: -14px; background:url("images/loading.gif") no-repeat; text-indent: -999em; text-align: center; }
+.XYTipsWindow .boxTitle, .XYTipsWindow .boxTitle span, .XYTipsWindow .boxTitle span.hover, .XYTipsWindow .loadinglayer, .XYTipsWindow .tipslayer, .XYTipsWindow .arrowLeft, .XYTipsWindow .colseBtn, .XYTipsWindow .boxError em, .XYTipsWindow .dialogBtn, .XYTipsWindow .dialogBtn.hover { background-image: url("__PUBLIC__/admin/images/ico.png"); background-repeat: no-repeat; }
+.XYTipsWindow .boxTitle { position: relative; border: 1px solid #A6C9E1; border-bottom: none; background-position: 0 0; background-repeat: repeat-x; height: 30px; line-height: 30px; }
+.XYTipsWindow .boxTitle h3 { float: left; font-weight: normal; color: #666; font-size: 14px; margin: 0; text-indent: 10px; }
+.XYTipsWindow .boxTitle span { position: absolute; width: 10px; background-position: -80px -40px; text-indent: -10em; right: 10px; top: 10px; height: 16px; overflow: hidden; cursor: pointer; }
+.XYTipsWindow .boxTitle span.hover { background-position: -90px -40px; }
+.XYTipsWindow .loadinglayer { line-height: 40px; background-position: 0 -100px!important; }
+.XYTipsWindow .tipslayer { line-height: 20px; text-align: left; }
+.XYTipsWindow .arrowLeft { position: absolute; width: 8px; height: 16px; background-position: -20px -170px; text-indent: -9999em; z-index: 20591; overflow: hidden; }
+.XYTipsWindow .colseBtn { position: absolute; top: 5px; right: 5px; width: 8px; height: 8px; background-position: -55px -170px; text-indent: -9999em; cursor: pointer; z-index: 20591; overflow: hidden; }
+.XYTipsWindow .boxError { position: absolute; left: 50%; top: 50%; margin-left: -60px; margin-top: -15px; width: 120px; height: 30px; line-height: 30px; color: #f00; }
+.XYTipsWindow .boxError em { float: left; width:30px; height: 30px; background-position: -35px -140px; }
+.XYTipsWindow .dialogBtn { margin: 5px 5px 0 0; width:80px; height:35px; background-position: 0 -30px; border:none; color:#333; }
+.XYTipsWindow .dialogBtn.hover { background-position: 0 -65px; }
+.XYTipsWindow.shadow { box-shadow:2px 2px 5px #C0BBB5; -moz-box-shadow: 2px 2px 5px #C0BBB5; -webkit-box-shadow:2px 2px 5px #C0BBB5; }
+</style>
+ <script type="text/javascript" src="__PUBLIC__/admin/js/jquery.XYTipsWindow.min.2.8.js"></script>
+
+ <script type="text/javascript">
+ $(document).ready(function() {
+	$(".bannerset").click(function(){
+		rel = $(this).attr('rel');
+		place = $(this).attr('place');
+		$.XYTipsWindow({
+			___title:"banner编辑",
+			___content:"iframe:{:U('Guanggao/add')}?id="+rel+"&place="+place,
+			___width:"1000",
+			___height:"800",
+			___showbg:true,
+			___drag:"___boxTitle"
+
+		});
+	});
+	
+	$(".catset").click(function(){
+		rel = $(this).attr('rel');
+		option = $(this).attr('option');
+		$.XYTipsWindow({
+			___title:"新闻栏目设置",
+			___content:"iframe:{:U('More/new_option')}?id="+rel+"&option="+option,
+			___width:"1000",
+			___height:"800",
+			___showbg:true,
+			___drag:"___boxTitle"
+		});
+	});
+	
+	$(".catrecedit").click(function(){
+		rel = $(this).attr('rel');
+		$.XYTipsWindow({
+			___title:"编辑推荐分类",
+			___content:"iframe:{:U('Category/add')}?cid="+rel,
+			___width:"1000",
+			___height:"800",
+			___showbg:true,
+			___drag:"___boxTitle",
+			scrolling:"yes"
+		});
+	});
+
+	$(".catrec").click(function(){
+		rel = $(this).attr('rel');
+		$.XYTipsWindow({
+			___title:"设置推荐分类",
+			___content:"iframe:{:U('Category/index')}?action_id="+rel,
+			___width:"1000",
+			___height:"800",
+			___showbg:true,
+			___drag:"___boxTitle"
+		});
+	});
+	
+	$(".productrec").click(function(){
+		rel = $(this).attr('rel');
+		$.XYTipsWindow({
+			___title:"设置推荐产品",
+			___content:"iframe:{:U('Product/index')}?action_id="+rel,
+			___width:"1000",
+			___height:"800",
+			___showbg:true,
+			___drag:"___boxTitle"
+		});
+	});
+	
+	$(".producerrec").click(function(){
+		rel = $(this).attr('rel');
+		$.XYTipsWindow({
+			___title:"设置推荐商铺",
+			___content:"iframe:{:U('Shangchang/index')}?action_id="+rel,
+			___width:"1000",
+			___height:"800",
+			___showbg:true,
+			___drag:"___boxTitle"
+		});
+	});
+ })
+ </script>
+ <!-- end blank prevent -->
+
+
+
+</head>
+<body>
+<style>
+.aaa_pts_web_3_2{margin:0;}
+.pxp_1{min-width:150px; margin-right:15px; margin-bottom:15px; border:1px solid #999; padding:3px; min-height:105px;}
+.pxp_1 .img1{width:350px;}
+.pxp_1 .img2{width:35px; display:block; margin:5px auto;}
+.pxp_1 .img3{width:150px}
+.pxp_1 .img4{width:80px}
+.pxp_1 .d1{text-align:center; float:none; width:100% !important; text-indent: 0 !important; padding:5px 0;}
+.pxp_1 .dx2{width:93px; height:66px; margin:0 auto; float: none;}
+.pxp_1 .dx2 div{width:100% !important; text-align:center; color:#fff; font-size:14px;}
+</style>
+<div class="aaa_pts_show_1">【 栏目管理 】</div>
+
+<div class="aaa_pts_show_2">
+    
+    <div>
+       <div class="aaa_pts_4" style="width:263px;"><a href="index">APP首页设置</a><font style="color:red">&nbsp /pc首页在广告管理/</font></div>
+    </div>
+    <div class="aaa_pts_3">
+      <form action="?id=<?php echo $id; ?>" method="post">
+      <ul class="aaa_pts_5">
+         
+         <li>
+           <strong style="font-size:16px; color:#0c0;">头部banner设置</strong>
+         </li>
+         <li>
+         <!-- 广告遍历 -->
+         	<volist name="guanggao" id="v" empty="暂时没有广告，赶紧进行添加吧！">
+			<div class="pxp_1">
+				<div class="d1"><img src="{$v.photo}" class="img1"></div>
+				 <div class="d1">
+				     <input type="button" value="编辑" class="aaa_pts_web_3 aaa_pts_web_3_2" border="0" onclick="win_open('{:U('Guanggao/add')}?id={$v.id}',1050)">
+				     <input type="button" value="内部编辑" class="aaa_pts_web_3 aaa_pts_web_3_2 bannerset" border="0" rel="{$v.id}" place="">
+				 <input type="button" value="删除" class="aaa_pts_web_3 aaa_pts_web_3_2" border="0" onclick="del_banner('{$v.id}','')">
+				 </div>
+	         </div>
+	       </volist>
+	     <!-- 广告遍历 -->
+         </li>
+         <li style="border-bottom:1px solid #CCC; padding-bottom:10px;">
+           <input type="button" value="添加banner" class="aaa_pts_web_3 aaa_pts_web_3_2" border="0" onclick="win_open('{:U('Guanggao/add')}',1050)">
+         </li>
+		 <li>
+           <strong style="font-size:16px; color:#0c0;">中部banner设置</strong>
+         </li>
+         <li>
+		 <!-- 广告遍历 -->
+         	<volist name="center_banber" id="v" empty="暂时没有广告，赶紧进行添加吧！">
+			<div class="pxp_1">
+				<div class="d1"><img src="{$v.photo}" class="img1"></div>
+				 <div class="d1">
+				     <input type="button" value="编辑" class="aaa_pts_web_3 aaa_pts_web_3_2" border="0" onclick="win_open('{:U('Guanggao/add')}?id={$v.id}&place=center',1050)">
+				     <input type="button" value="内部编辑" class="aaa_pts_web_3 aaa_pts_web_3_2 bannerset" border="0" rel="{$v.id}" place="center">
+				 <input type="button" value="删除" class="aaa_pts_web_3 aaa_pts_web_3_2" border="0" onclick="del_banner('{$v.id}','center')">
+				 </div>
+	         </div>
+	       </volist>
+	     <!-- 广告遍历 -->
+         </li>
+         <li style="border-bottom:1px solid #CCC; padding-bottom:10px;">
+           <input type="button" value="添加banner" class="aaa_pts_web_3 aaa_pts_web_3_2" border="0" onclick="win_open('{:U('Guanggao/add')}?place=center',1050)">
+         </li>
+         
+		 
+		 <li>
+           <strong style="font-size:16px; color:#0c0;">底部banner设置</strong>
+         </li>
+         <li>
+		 <!-- 广告遍历 -->
+         	<volist name="bottom_banber" id="v" empty="暂时没有广告，赶紧进行添加吧！">
+			<div class="pxp_1">
+				<div class="d1"><img src="{$v.photo}" class="img1"></div>
+				 <div class="d1">
+				     <input type="button" value="编辑" class="aaa_pts_web_3 aaa_pts_web_3_2" border="0" onclick="win_open('{:U('Guanggao/add')}?id={$v.id}&place=bottom',1050)">
+				     <input type="button" value="内部编辑" class="aaa_pts_web_3 aaa_pts_web_3_2 bannerset" border="0" rel="{$v.id}" place="bottom">
+				 <input type="button" value="删除" class="aaa_pts_web_3 aaa_pts_web_3_2" border="0" onclick="del_banner('{$v.id}','bottom')">
+				 </div>
+	         </div>
+	       </volist>
+	     <!-- 广告遍历 -->
+         </li>
+         <li style="border-bottom:1px solid #CCC; padding-bottom:10px;">
+           <input type="button" value="添加banner" class="aaa_pts_web_3 aaa_pts_web_3_2" border="0" onclick="win_open('{:U('Guanggao/add')}?place=bottom',1050)">
+         </li>
+         <li>
+           <strong style="font-size:16px; color:#0c0;">新闻栏目设置</strong>
+         </li>
+         <li>
+         	<!-- 新闻栏目设置遍历 -->
+		     <volist name="config" id="v" empty="暂时没有新闻栏目设置，赶紧进行添加吧！">
+			     <div class="pxp_1">
+		             <div class="dx2" style="background:#{$v.val};">
+					    <div><img src="{$v.key}"  class="img2"></div>
+						<div>{$v.pid}</div>
+					 </div>
+					 <div class="d1">
+					     <input type="button" value="编辑" class="aaa_pts_web_3 aaa_pts_web_3_2" border="0" onclick="win_open('{:U('More/new_option')}?id={$v.id}',1050)">
+	   			 		 <input type="button" value="内部编辑" class="aaa_pts_web_3 aaa_pts_web_3_2 catset" rel="{$v.id}" border="0">
+					 </div>
+		         </div>
+		     </volist>
+		     <div class="pxp_1">
+		             <div class="dx2" style="background:#{$config_more.val};">
+					    <div><img src="{$config_more.key}"  class="img2"></div>
+						<div>{$config_more.pid}</div>
+					 </div>
+					 <div class="d1">
+					     <input type="button" value="编辑" class="aaa_pts_web_3 aaa_pts_web_3_2" border="0" onclick="win_open('{:U('More/new_option')}?id={$config_more.id}&option=more',1050)">
+	   			 		 <input type="button" value="内部编辑" class="aaa_pts_web_3 aaa_pts_web_3_2 catset" rel="{$config_more.id}" border="0" option="more">
+					 </div>
+		     </div>
+		     <!-- 新闻栏目设置遍历 -->
+         </li>
+         
+         <li>
+           <strong style="font-size:16px; color:#0c0;">推荐分类</strong>
+         </li>
+         <li>
+         <!-- 推荐分类遍历 -->
+         <volist name="hot_category" id="v" empty="暂时没有推荐分类，赶紧进行添加吧！">
+			<div class="pxp_1">
+	             <div class="d1">
+				    <img src="{$v.bz_1}" class="img2 img3">
+					<div class="d1">{$v.name}</div>
+				 </div>
+				 <div class="d1">
+				     <input type="button" value="编辑" class="aaa_pts_web_3 aaa_pts_web_3_2" border="0" onclick="win_open('{:U('Category/add')}?cid={$v.id}',1050)">
+				     <input type="button" value="内部编辑" class="aaa_pts_web_3 aaa_pts_web_3_2 catrecedit" border="0" rel="{$v.id}">
+				 </div>
+	         </div>
+		 </volist>
+		 <!-- 推荐分类遍历 -->
+         </li>
+         <li style="border-bottom:1px solid #CCC; padding-bottom:10px;">
+           <input type="button" value="设置推荐分类" class="aaa_pts_web_3 aaa_pts_web_3_2" style="width:200px;" border="0" onclick="win_open('{:U('Category/index')}?action_id=2',1050)">
+           <input type="button" value="内部设置推荐分类" class="aaa_pts_web_3 aaa_pts_web_3_2 catrec" style="width:200px;" border="0" rel="2">
+           <font style="color:#c00">推荐规则 ， 被推荐的分类排在前面</font>
+         </li>
+         
+         <li>
+           <strong style="font-size:16px; color:#0c0;">推荐产品</strong>
+         </li>
+         <li>
+         <!-- 推荐产品遍历 -->
+         <volist name="hot_product" id="v" empty="暂时没有推荐产品，赶紧进行添加吧！">
+			<div class="pxp_1">
+				 <div class="d1">
+					<img src="{$v.logo}" class="img2 img4" style="width:200px;height:200px;">
+					<div class="d1">{$v.name}</div>
+				 </div>
+				<div class="d1">
+					<input type="button" value="编辑" class="aaa_pts_web_3 aaa_pts_web_3_2" border="0" onclick="win_open('{:U('Product/add')}?action=tuijian&id={$v.id}',1050)">
+				</div>
+			 </div>
+		 </volist>
+		 <!-- 推荐产品遍历 -->
+         </li>
+         <li style="border-bottom:1px solid #CCC; padding-bottom:10px;">
+           <input type="button" value="设置推荐的产品" class="aaa_pts_web_3 aaa_pts_web_3_2" style="width:200px;" border="0" onclick="win_open('{:U('Product/index')}?action_id=2',1400,800)">
+           <input type="button" value="内部设置推荐的产品" class="aaa_pts_web_3 aaa_pts_web_3_2 productrec" style="width:200px;" border="0" rel="2">
+
+           <font style="color:#c00">推荐规则 ，被推荐的产品将出现在首页</font>
+         </li>
+         
+         <li>
+           <strong style="font-size:16px; color:#0c0;">推荐商家</strong>
+         </li>
+         <li>
+		 <!-- 推荐商家遍历 -->
+		 <volist name="hot_shop" id="v" empty="暂时没有推荐商家，赶紧进行添加吧！">
+		 	<div class="pxp_1">
+	             <div class="d1">
+				    <img src="{$v.logo}" class="img2 img4">
+					<div class="d1">{$v.name}</div>
+				 </div>
+	         </div>
+		 </volist>
+		 <!-- 推荐商家遍历 -->
+         </li>
+         <li style="border-bottom:1px solid #CCC; padding-bottom:10px;">
+           <input type="button" value="设置推荐商家" class="aaa_pts_web_3 aaa_pts_web_3_2" style="width:200px;" border="0" onclick="win_open('{:U('Shangchang/index')}?action_id=2',1400,800)">
+           <input type="button" value="内部设置推荐商家" class="aaa_pts_web_3 aaa_pts_web_3_2 producerrec" style="width:200px;" border="0" rel="2">
+           <font style="color:#c00">推荐规则 ， 被推荐的商家排在前面</font>
+         </li>
+         
+         <li><input type="submit" name="submit" value="更新首页" class="aaa_pts_web_3" border="0" style="margin-left:0; width:120px;"></li>
+      </ul>
+      </form>
+         
+    </div>
+    
+</div>
+<script>
+function del_banner(id,place){
+   if(confirm('确认删除吗？')){
+	   $.get('{:U("Guanggao/index")}?id='+id+'&type=del&place='+place+'',{},function(){history.go(0)});
+	}
+}
+</script>
+</body>
+</html>

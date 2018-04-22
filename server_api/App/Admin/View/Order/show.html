@@ -1,0 +1,213 @@
+<!DOCTYPE HTML>
+<html>
+<head>
+    <meta charset="utf-8">
+    <meta name="renderer" content="webkit|ie-comp|ie-stand">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+    <meta name="viewport" content="width=device-width,initial-scale=1,minimum-scale=1.0,maximum-scale=1.0,user-scalable=no" />
+    <meta http-equiv="Cache-Control" content="no-siteapp" />
+    <link rel="Bookmark" href="/favicon.ico" >
+    <link rel="Shortcut Icon" href="/favicon.ico" />
+    <!--[if lt IE 9]>
+    <script type="text/javascript" src="__PUBLIC__/admin/lib/html5shiv.js"></script>
+    <script type="text/javascript" src="__PUBLIC__/admin/lib/respond.min.js"></script>
+    <![endif]-->
+    <link rel="stylesheet" type="text/css" href="__PUBLIC__/admin/static/h-ui/css/H-ui.min.css" />
+    <link rel="stylesheet" type="text/css" href="__PUBLIC__/admin/static/h-ui.admin/css/H-ui.admin.css" />
+    <link rel="stylesheet" type="text/css" href="__PUBLIC__/admin/lib/Hui-iconfont/1.0.8/iconfont.css" />
+    <link rel="stylesheet" type="text/css" href="__PUBLIC__/admin/static/h-ui.admin/skin/default/skin.css" id="skin" />
+    <link rel="stylesheet" type="text/css" href="__PUBLIC__/admin/static/h-ui.admin/css/style.css" />
+    <!--[if IE 6]>
+    <script type="text/javascript" src="__PUBLIC__/admin/lib/DD_belatedPNG_0.0.8a-min.js" ></script>
+    <script>DD_belatedPNG.fix('*');</script>
+    <![endif]-->
+    <script type="text/javascript" src="__PUBLIC__/admin/js/jquery.js"></script>
+    <script type="text/javascript" src="__PUBLIC__/admin/js/action.js"></script>
+
+    <title>订单详情</title>
+</head>
+<body>
+<nav class="breadcrumb"><i class="Hui-iconfont">&#xe67f;</i> 首页 <span class="c-gray en">&gt;</span> 订单管理 <span class="c-gray en">&gt;</span> 订单详情 <a class="btn btn-success radius r" style="line-height:1.6em;margin-top:3px" href="javascript:location.replace(location.href);" title="刷新" ><i class="Hui-iconfont">&#xe68f;</i></a></nav>
+<div class="page-container">
+    <div class="text-c">
+        <input type="text" class="input-text" style="width:250px" placeholder="品牌名称" id="name" value="<?php echo $name;?>">
+        <button type="button" class="btn btn-success" id="" name="" onclick="product_option(0);"><i class="Hui-iconfont">&#xe665;</i> 搜索</button>
+    </div>
+    <br>
+    <table class="table table-border table-bordered table-bg">
+        <thead>
+
+        <tr class="text-c">
+            <th width="150">产品名称</th>
+            <th width="40">产品价格</th>
+            <th width="40">数量</th>
+            <th width="40">总价</th>
+            <th width="60">产品属性</th>
+        </tr>
+        </thead>
+
+
+        <volist name='order_pro' id="pro">
+            <tr id="concent_tr_{$pro.id}" class="text-c">
+                <td>{$pro.name}</td>
+                <td>￥ {$pro.price}</td>
+                <td>{$pro.num}</td>
+                <td><font style="color:#c00;">￥ <?php echo number_format($pro['price']*$pro['num'],2); ?></font></td>
+                <td>{$pro.pro_buff}</td>
+            </tr>
+        </volist>
+    </table>
+
+    <br>
+
+    <div style="border-bottom:1px solid #b9c9d6;">
+        <ul style="margin-top:15px;  padding-bottom:5px; width:500px; float:left;">
+            <li style="font-size:15px; color:#000;">收货地址信息：</li>
+            <li style="padding-top:5px;">
+                <div>收货人：<?php echo $order_info['receiver']; ?></div>
+                <div>联系电话：<?php echo $order_info['tel']; ?></div>
+                <div>邮政编码：<?php echo $order_info['code']; ?></div>
+                <div>收货地址：<?php echo $order_info['address_xq']; ?></div>
+            </li>
+        </ul>
+        <ul style="margin-top:15px; padding-bottom:5px; width:300px; float:left;">
+            <li style="font-size:15px; color:#000;">买家留言：</li>
+            <li style="padding:5px 0 0 0; padding-top:5px; color:#090; font-size:14px;">
+                <?php echo $order_info['remark']; ?>
+            </li>
+            <li style="font-size:15px; color:#000;">邮费信息：</li>
+            <li style="padding:5px 0 0 0; color:#090; font-size:14px;">
+                <?php if ($post_info) {
+             	echo $post_info['price']."（".$post_info['name']."）"."<br />".$order_info['post_remark'];
+                }else {
+                echo "卖家包邮";
+                } ?>
+            </li>
+        </ul>
+        <ul style="margin-top:15px; padding-bottom:5px; width:300px; float:left;">
+            <li style="font-size:15px; color:#000;">物流信息：</li>
+            <li>
+                暂无
+            </li>
+        </ul>
+    </div>
+
+    <div>
+    <div class="ord_show_5">
+
+        <br>
+        <div style="color:#c00; line-height:20px;font-size: 14px">发送待收货短信通知，要求订单状态必须为“待收货”,表示卖家已经发货。</div>
+        发货快递：<input id="kuaidi_name" value="<?php echo $order_info['kuaidi_name'];?>" />
+        <br>
+        快递单号：<input id="kuaidi_num" value="<?php echo $order_info['kuaidi_num'];?>"/>
+
+        <br>
+
+                状态修改：
+                <select id="zt_order_update">
+                    <option value="">全部状态</option>
+                    <?php foreach ($order_status as $key => $val) { ?>
+                    <option value="<?php echo $key; ?>" <?php if($order_info['status']==$key) { ?>selected="selected"<?php } ?> >- <?php echo $val; ?></option>
+                    <?php } ?>
+                </select>
+        <br>
+            <font>订单价格:</font> ￥ <?php echo number_format($order_info['price'],2); ?>
+
+        <br><br>
+        <input type="button" value="提交" style="" onclick="sms_message()" class="btn btn-success"/>
+        <br>
+        <input type="hidden" value="<?php echo $order_info['status']; ?>" name="o_status" id="o_status">
+    </div>
+    </div>
+
+
+
+    <?php if($order_info['back']>0){ ?>
+    <div class="ord_show_1">
+        <div class="ord_show_6" style="float:left;margin-top:10px">
+            退款原因：<span style="color:#c00;"><?php echo $order_info['back_remark'];?></span>
+        </div>
+    </div>
+    <?php } ?>
+
+
+</div>
+<!--_footer 作为公共模版分离出去-->
+<script type="text/javascript" src="__PUBLIC__/admin/lib/jquery/1.9.1/jquery.min.js"></script>
+<script type="text/javascript" src="__PUBLIC__/admin/lib/layer/2.4/layer.js"></script>
+<script type="text/javascript" src="__PUBLIC__/admin/static/h-ui/js/H-ui.min.js"></script>
+<script type="text/javascript" src="__PUBLIC__/admin/static/h-ui.admin/js/H-ui.admin.js"></script> <!--/_footer 作为公共模版分离出去-->
+
+<!--请在下方写此页面业务相关的脚本-->
+<script type="text/javascript" src="__PUBLIC__/admin/lib/My97DatePicker/4.8/WdatePicker.js"></script>
+<script type="text/javascript" src="__PUBLIC__/admin/lib/datatables/1.10.0/jquery.dataTables.min.js"></script>
+<script type="text/javascript" src="__PUBLIC__/admin/lib/laypage/1.2/laypage.js"></script>
+
+
+<script>
+    //删除订单
+    /*function order_show_updata(id,type){
+     if(id=='' || id==null)return;
+     var $val='';
+     if(type!='del'){
+     $val=document.getElementById('pro_beizhu_'+id).value;
+     }
+
+     $.post('include/order_beizhu.php',{"id":id,"beizhu":$val,"type":type},function(data){
+     if(data=='1'){
+     alert('操作成功！');
+     if(type=='del'){window.close(); window.opener.history.go(0);}
+     }else{
+     alert("操作失败");
+     }
+     });
+     }*/
+
+    //保存快递名称，快递单号
+    function sms_message(){
+        try{
+            //if(!confirm('确定发送订单发货短信吗？')) return;
+            //获取订单当前状态
+            var o_status = $('#o_status').val();
+            //获取订单选择状态
+            var order_status = $('#zt_order_update').val();
+            //选择状态不能比当前状态小，已付款的订单不能变成未付款
+            //if (order_status && order_status!=40 && order_status<o_status) {return;};
+            //获取快递名称
+            var kuaidi_name = $('#kuaidi_name').val();
+            if(kuaidi_name.length<1 && order_status==30) throw ('快递名称不能为空！');
+            //获取快递单号
+            var kuaidi_num = $('#kuaidi_num').val();
+            if(kuaidi_num.length<1 && order_status==30) throw ('运单号不能为空！');
+
+            if (!order_status && kuaidi_num.length<1 && kuaidi_name.length<1) {
+                throw ('请输入快递信息或选择订单状态！');
+            };
+
+            $.ajax({
+                type: "POST",
+                url: "{:U('sms_up')}",
+                data:{'order_status':order_status,'kuaidi_name':kuaidi_name,'kuaidi_num':kuaidi_num,'oid':<?php echo $order_info['id'];?>},
+            dataType: "json",
+                success: function (data) {
+                if(data.returns){
+                    alert('提交成功！');
+                    window.reload();
+                }else{
+                    alert(data.message);
+                }
+
+            },
+            error: function (msg) {
+                alert ('网络连接失败！');
+            }
+        });
+
+        }catch(e){
+            alert(e);
+        }
+    }
+</script>
+
+</body>
+</html>

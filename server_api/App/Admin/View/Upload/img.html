@@ -1,0 +1,92 @@
+<?php
+$aaa_pts_qx=1;
+include('../../inc/lscy3_admin.php');
+
+$width=$_GET['width']-6;
+$height=$_GET['height']-6;
+$id=$_GET['id'];
+$img=$_GET['img'];
+$images_string=$_GET['images_string'];
+$type=$_GET['type'];
+?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<title>后台管理程序</title>
+<script>
+function submit_add(){
+	var file=document.getElementById('file');
+	if(file.value==''){
+		alert("请选择要上传的文件！");
+		return false;
+	}
+}
+</script>
+<style>
+*{margin:0; padding:0; overflow:hidden;}
+.div1{float:left; border:1px solid #ccc; position:relative; background:url(../img/img_add.jpg) no-repeat center center;}
+.div2{width:<?php echo $width ?>px; height:<?php echo $height ?>px;}
+.div3{position:absolute; top:0; left:0; width:100%; height:100%; background:#333; color:#fff; background:rgba(0,0,0,0.7); font-size:18px; line-height:<?php echo $height ?>px; text-align:center; filter:alpha(opacity=60)}
+.div5{background:url(../img/ajax-loader.gif) no-repeat center center #eee; display:none;}
+.div4{text-align:center; -webkit-transition-duration:200ms; opacity:0; cursor:pointer; -webkit-backface-visibility:hidden;}
+.div1:hover .div4{top:0; opacity:1;}
+#file{opacity:0; z-index:2; filter:alpha(opacity=0)}
+</style>
+</head>
+<body>
+<form action="pic.php?width=<?php echo $width ?>&height=<?php echo $height ?>" target="myframe" method="post" name="form_1" id="form_1" enctype="multipart/form-data" onsubmit="return submit_add()">
+   <div class="div1 div2">
+      <?php echo $img ? '<img src="'.$address_url.$img.'" class="div2" id="images"/>' : '<img src="'.$address_url.$img.'" class="div2" id="images" style="display:none;"/>' ?>
+      <div class="div3 div4">点击更改</div>
+      <input name="file" class="div3" id="file" type="file" onchange="load_from()" title="点击更改"/>
+      <div class="div3 div5" id="load"></div>
+      <input type="hidden" name="type" value="<?php echo $type ?>" />
+      <input type="hidden" id="images_string" value="<?php echo $img ?>" />
+   </div>
+</form>
+<iframe class="pro_2" name="myframe" id="myframe" src="" frameborder="0"></iframe>
+<script>
+function load_from(){
+  document.getElementById('load').style.display="block";
+  document.getElementById('form_1').submit();
+}
+var id='<?php echo $id; ?>';
+function html_return(data){
+	document.getElementById('load').style.display="none";
+	document.getElementById('file').value='';
+	data=eval(data);
+	if(data.returns){
+		var img = data.message;
+		document.getElementById('images_string').value=img;
+		img = img.split(',');
+		var this_img=document.getElementById('images');
+		this_img.src= '<?php echo $address_location ?>' + img[0];
+		this_img.style.display="block";
+		if(id == 'img1'){
+			//alert(123);exit();
+			window.parent.photo_update();
+		}
+		if(id == 'img2'){
+			id=='img2' ? window.parent.photo_update2() : window.parent.document.getElementById(id).value=data.message;
+		}
+		if(id == 'img3'){
+			id=='img3' ? window.parent.photo_update3() : window.parent.document.getElementById(id).value=data.message;
+		}
+		if(id == 'img4'){
+			id=='img4' ? window.parent.photo_update4() : window.parent.document.getElementById(id).value=data.message;
+		}
+		if(id == 'banner1'){
+			id=='banner1' ? window.parent.photo_update5() : window.parent.document.getElementById(id).value=data.message;
+		}
+		if(id == 'banner2'){
+			id=='banner2' ? window.parent.photo_update6() : window.parent.document.getElementById(id).value=data.message;
+		}
+		
+	}else{
+		alert(data.message);
+	}
+}
+</script>
+</body>
+</html>

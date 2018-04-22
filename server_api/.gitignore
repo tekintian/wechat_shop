@@ -1,0 +1,8 @@
+Thunbs.db
+.idea
+*.log
+/App/Runtime/
+/Data/app/
+/Data/cacha/
+!*.md
+!/vendor

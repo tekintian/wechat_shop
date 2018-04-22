@@ -1,0 +1,18 @@
+﻿html{ background:url(../img/login_copy.png) top center no-repeat}
+input {outline: none; display:list-item;}
+body{background:url(../img/login_bg.png) top left repeat-x; padding:0; margin:0; font-size:12px; font-family:'宋体'}
+form{ margin:0; padding:0; text-align:center}
+.header { background:url(../img/login_top_bg.jpg) top center no-repeat; width:980px; height:148px; margin:0 auto;}
+.main{ width:700px ; margin:20px auto; height:260px}
+.left{ width:370px;  float:left; background:url(../img/login_split.png) center right no-repeat}
+.right{ float:left;background:url(../img/login_header.png) 47px 30px no-repeat; padding:100px 0 0 50px; text-align:left; width:280px}
+.right ul{ padding:0; margin:0; list-style:none; width:220px;}
+.right ul li{ margin-bottom:12px; float:left; height:30px;}
+.right ul li label{ display:inline-block; width:70px; line-height:30px;}
+.right ul li select{ width:140px; height:21px;}
+.right ul li input{ border:solid 1px #ccc; width:135px; padding:2px 2px 3px 2px; font-family:Arial; font-weight:bold;}
+.right ul li .hover{background:url(../img/loginbtn_hover.png); width:61px; height:25px; border:0px; cursor:pointer; line-height:23px; float:left; margin:0 5px;}
+.right ul li .button{ background:url(../img/loginbtn.png); width:61px; height:25px; border:none; cursor:pointer; margin-right:14px; line-height:23px; float:left; margin:0 5px;}
+.right ul .r1{width:70px;}
+.right ul .r2{width:150px;}
+.clear{clear:both}

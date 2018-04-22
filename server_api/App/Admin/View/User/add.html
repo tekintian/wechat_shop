@@ -1,0 +1,125 @@
+
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<title>后台管理</title>
+<link href="__PUBLIC__/admin/css/main.css" rel="stylesheet" type="text/css" />
+<script type="text/javascript" src="__PUBLIC__/admin/js/jquery.js"></script>
+<script type="text/javascript" src="__PUBLIC__/admin/js/action.js"></script>
+</head>
+<body>
+
+<div class="aaa_pts_show_1">【 会员信息管理 】</div>
+
+<div class="aaa_pts_show_2">
+    
+    <div>
+       <div class="aaa_pts_4"><a href="index">普通会员管理</a></div>
+       <div class="aaa_pts_4"><a href="add">添加普通会员</a></div>
+    </div>
+    <div class="aaa_pts_3">
+      <form action="{:U('User/add')}?id={$id}" method="post" onsubmit="return ac_from();">
+      <ul class="aaa_pts_5">
+         <li>
+            <div class="d1">登陆名称:</div>
+            <div>
+              <input class="inp_1" name="name" id="name" value="{$userinfo.name}"/>
+            </div>
+         </li>
+         <li>
+            <div class="d1">用户权限:</div>
+            <div>
+              <select class="inp_1" name="qx" id="qx">
+                 <!-- 权限遍历 category id=6 就是普通会员后续要改进一下表的结构 -->
+
+                    <option value="6">普通会员</option>
+  
+                 <!-- 权限遍历 -->
+              </select>
+            </div>
+         </li>
+         <li>
+            <div class="d1">用户密码:</div>
+            <div>
+              <input class="inp_1" name="password" id="password"  type="password" />
+            </div>
+         </li>
+         <li>
+            <div class="d1">用户姓名:</div>
+            <div>
+              <input class="inp_1" name="uname" id="uname" value="{$userinfo.uname}"/> &nbsp;&nbsp;&nbsp;请设置2个字符以上
+            </div>
+         </li>
+         <li>
+            <div class="d1">用户性别:</div>
+            <div>
+               <input type="radio" name="sex" value="0" <?php echo $userinfo['sex']!=1 ? 'checked="checked"' : null?>/> 男  &nbsp;
+               <input type="radio" name="sex" value="1" <?php echo $userinfo['sex']==1 ? 'checked="checked"' : null?> /> 女
+            </div>
+         </li>
+         <li>
+            <div class="d1">手机号码:</div>
+            <div>
+              <input class="inp_1" name="tel" id="tel" value="{$userinfo.tel}"/>&nbsp;&nbsp;&nbsp;请输入数字或电话
+            </div>
+         </li>
+         <li>
+            <div class="d1">用户邮箱:</div>
+            <div>
+              <input class="inp_1" name="email" id="email" value="{$userinfo.email}"/>&nbsp;&nbsp;&nbsp;例如：leren@xxx.com
+            </div>
+         </li>
+         <li>
+            <div class="d1">注册时间:</div>
+            <div>
+              <input class="inp_1" name="addtime" id="addtime" value="<?php echo $userinfo['addtime']!='' ? date("Y-m-d H:i",$userinfo['addtime']) : null; ?>"/>&nbsp;&nbsp;&nbsp;可以留空
+            </div>
+         </li>
+         <li><input type="submit" name="submit" value="提交" class="aaa_pts_web_3" border="0"></li>
+      </ul>
+      </form>
+         
+    </div>
+    
+</div>
+<script>
+function ac_from(){
+  var name=document.getElementById('name').value;
+  if(name.length<3){
+	  alert('用户名长度不能少于3');
+	  return false;
+	  }
+  
+  var uname=document.getElementById('uname').value;
+  if(uname.length<3){
+	  alert('用户昵称长度不能少于3');
+	  return false;
+	  }
+  
+  if(!<?php echo $id; ?>){
+	  var password=document.getElementById('password').value;
+	  if(password.length<6){
+		  alert('密码长度不能少于6');
+		  return false;
+		  }  
+  }
+  
+  var tel=document.getElementById("tel").value;
+  var regx=/^1[34578]\d{9}$/;
+  if (!regx.test(tel)) {
+      alert("手机号码不合法，请输入正确的手机号码");
+	  return false;
+  }
+ 
+  var email=document.getElementById("email").value;
+  var regx=/^([a-zA-Z0-9_\.\-])+\@(([a-zA-Z0-9\-])+\.)+([a-zA-Z0-9]{2,4})+$/;
+  if (!regx.test(email)) {
+      alert("邮箱格式不正确");
+    return false;
+  }
+   
+}
+</script>
+</body>
+</html>

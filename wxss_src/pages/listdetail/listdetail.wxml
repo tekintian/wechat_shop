@@ -1,0 +1,31 @@
+<view class="list">
+    <block wx:for="{{shopList}}" wx:key="*this" data-id="{{item.id}}">
+        <view class="ban">
+            <navigator url="../product/detail?productId={{item.id}}" class="cover flex-wrp">
+                <image class="banner" src="{{item.photo_x}}" mode="widthFix"></image>
+          <view class="act-item ellipsis">
+              <text class="type">{{item.name}}</text>
+            </view>
+              <view class="act-item ellipsis" >
+                <text class="kkk">{{item.intro}}</text>
+            </view>
+            <view class="act-item ellipsis" >
+                <text style="color:red">¥ {{item.price_yh}}</text>
+            </view>
+              <view class="act-item ellipsis" >
+                <text style="color:#999999;font-size:25rpx">已有{{item.shiyong}}人购买</text>
+            </view>
+            </navigator>
+        </view> 
+        <view class="commodity_screen" bindtap="hideModal" wx:if="{{showModalStatus}}">fsaffffff</view>
+<view animation="{{animationData}}" class="commodity_attr_box" wx:if="{{showModalStatus}}"></view> 
+    </block>
+<view class="clear mt10" bindtap="getMore">点击查看更多</view>    
+</view>
+
+
+
+
+
+
+

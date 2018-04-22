@@ -1,0 +1,445 @@
+/**index.wxss**/
+
+.page {
+  font-family: '微软雅黑';
+  background-color: #fff;
+}
+
+.swiper-item {
+  display: block;
+  height: 150px;
+}
+
+.slide-image {
+  width: 100%;
+  height: 150px;
+}
+
+.nav {
+  background: #fff;
+  padding: 15px 0;
+  width: 100%;
+  /*margin: 10px 0;*/
+  display: -webkit-box;
+  display: -webkit-flex;
+  display: -ms-flexbox;
+  display: flex;
+  text-align: center;
+  font-size: 12px;
+  color: #666;
+}
+
+.nav image {
+  width: 120rpx;
+  height: 120rpx;
+  display: block;
+  text-align: center;
+  margin: 0 auto;
+  margin-bottom: 5px;
+  border-radius: 15px;
+}
+
+.cont {
+  width: 100%;
+  background: #fff;
+  padding-top: 10rpx;
+}
+.co {
+  width: 100%;
+  background: #fff;
+  padding-top: 10rpx;
+  padding-bottom: 20rpx;
+}
+.co .title {
+  font-size: 32rpx;
+  color: #333;
+  line-height: 20px;
+  margin: 0;
+  height: 20px;
+  padding: 1% 5% 0 5%;
+  font-weight: 700;
+  overflow:hidden;
+text-overflow:ellipsis;
+display:-webkit-box;
+-webkit-line-clamp:1;
+-webkit-box-orient:vertical;
+
+}
+.cont .pr {
+margin-bottom:10px;
+background:#fff;
+display:inline-block;
+width:46%;
+border:1px solid #EDEDED;
+margin-left:18rpx;
+
+}
+
+.prr {
+  margin-bottom: 10px;
+  background: #fff;
+  display: inline-block;
+  width: 45%;
+  margin-left: 26rpx;
+}
+
+.cont_image {
+  width: 100%;
+  height: 285rpx;
+}
+
+.photo{
+  height:345rpx;
+  width:345rpx;
+}
+
+.cont .title {
+  font-size: 28rpx;
+  color: #333;
+  line-height: 20px;
+  margin: 0;
+  height: 40px;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  display: -webkit-box;
+  -webkit-line-clamp: 2;
+  -webkit-box-orient: vertical;
+  padding: 1% 5% 0 5%;
+
+}
+
+.cont .tit {
+  /*height: 80rpx;*/
+  font-size: 12px;
+  color: #333;
+  line-height: 20px;
+  margin: 0;
+  max-height: 40px;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  display: -webkit-box;
+  -webkit-line-clamp: 2;
+  -webkit-box-orient: vertical;
+  padding: 1% 5% 0 5%;
+  /*color: #ccc*/
+}
+
+.gmxx {
+  padding-left:20rpx; 
+  width:74%;
+
+}
+
+.gmx {
+text-align: left;
+  width: 50%; font-size: 26rpx;
+  margin-right:10rpx; text-decoration:line-through;
+
+color: #999}
+.ku{
+  text-align: right;
+  width: 50%; font-size: 26rpx;
+  margin-right:10rpx;
+}
+.gmh{
+  float:left;  padding: 1% 5% 5% 5%;
+}
+.gmxx .jiage {
+  font-size: 14px;
+  color: #d9002f;
+  /*padding-top: 10px; */
+}
+.gmx .xiaoliang {
+  font-size: 26rpx;
+}
+.gmh .xiaoliang {
+  font-size: 25rpx;
+ 
+  overflow: hidden;
+  text-overflow: ellipsis;
+  display: -webkit-box;
+  -webkit-line-clamp: 3;
+  -webkit-box-orient:vertical;
+  /*height: 96rpx;*/
+  color: gray;
+}
+
+.gmxx button {
+  border-radius: 0;
+  background: #dd2727;
+  text-align: center;
+  color: #fff;
+  font-size: 14px;
+  width: 30%;
+  text-shadow: 0 2px 3px rgba(0, 0, 0, 0.2);
+  font-family: '\5FAE\8F6F\96C5\9ED1', arial, "\5b8b\4f53";
+}
+
+.name {
+  padding: 10px;
+  text-align: center;
+  font-weight: 700;
+  background: #fff;
+  font-size: 37rpx;
+}
+
+.na {
+  padding: 10px;
+  text-align: center;
+  font-weight: 700;
+  background: #fff;
+  font-size: 37rpx;
+}
+
+.shan {
+  text-decoration: line-through;
+  font-size: 30rpx;
+  margin-top: 11rpx;
+  color: #ccc;
+}
+
+/*滑动*/
+
+.sc {
+  white-space: nowrap;
+  height: 350rpx;
+  background: #fff;
+}
+
+.miu {
+  width: 30%;
+  height: 100%;
+  display: inline-block;
+  margin: 24rpx;
+  margin-right: 0px;
+}
+
+.ie {
+width:88%;
+height:196rpx;
+border: 1px solid #ccc;
+}
+
+.mi {
+  display: block;
+  height: 10%;
+  text-align: center;
+  font-weight: 700;
+  padding: 10rpx 0;
+  font-size: 28rpx;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.ma {
+  font-size: 27rpx;
+  display: block;
+  text-align: center;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.list {
+  background: #fff;
+  width: 100%;
+}
+
+.ban {
+  width: 46%;
+  padding: 10rpx;
+  border: 2rpx solid #ccc;
+  display: inline-block;
+  margin-left: 6rpx;
+}
+
+.ban image {
+  width: 100%;
+}
+
+.ellipsis text {
+  font-size: 30rpx;
+  font-weight: 700;
+  margin-left: 10rpx;
+}
+
+.df_1 {
+  width: 25%;
+}
+
+/*定位*/
+
+.er {
+  height: 88rpx;
+  display: inline-block;
+  width: 100%;
+  background: #EDEDED;
+}
+
+.im {
+  width: 27rpx;
+  height: 30rpx;
+  display: inline-block;
+  overflow: hidden;
+  position: relative;
+  top: 5rpx;
+}
+
+.dingwei {
+  width: 23%;
+  display: inline-block;
+  float: left;
+  font-size: 30rpx;
+  margin-top: 28rpx;
+  margin-bottom: 20rpx;
+}
+
+.sb {
+  display: inline-block;
+  height: 70rpx;
+  margin: 0 15rpx;
+  width: 85%;
+  background: #f5f5f5;
+  line-height: 70rpx;
+  border-radius: 10rpx;
+  text-align: center;
+  margin-left: 30rpx;
+}
+
+.dingwei text {
+  text-align: center;
+}
+
+/*搜索*/
+
+.sousuo {
+  display: inline-block;
+  width: 96%;
+  margin-left: 15rpx;
+}
+
+.weui-search-bar {
+  margin-top: 13rpx;
+  position: relative;
+  display: -webkit-box;
+  display: -webkit-flex;
+  display: flex;
+  box-sizing: border-box;
+}
+
+.weui-search-bar__box {
+  position: relative;
+  padding-left: 30px;
+  padding-right: 30px;
+  width: 100%;
+  box-sizing: border-box;
+  z-index: 1;
+  display: block;
+  height: 63rpx;
+  line-height: 63rpx;
+}
+
+.weui-search-bar__form {
+  position: relative;
+  -webkit-box-flex: 1;
+  -webkit-flex: auto;
+  flex: auto;
+  border-radius: 14rpx;
+  background: #fff;
+  border: 1rpx solid #e6e6ea;
+}
+
+.weui-search-bar__input {
+  height: 65rpx;
+  line-height: 65rpx;
+  font-size: 28rpx;
+  text-align: center
+}
+
+.weui-icon-search_in-box {
+  position: absolute;
+  left: 20rpx;
+  top: 19rpx;
+}
+
+icon {
+  vertical-align: middle;
+}
+
+.weui-search-bar__cancel-btn {
+  margin-left: 10px;
+  line-height: 28px;
+  color: #09bb07;
+  white-space: nowrap;
+}
+
+.suo {
+  width: 100%;
+  height: 89rpx;
+  margin-top: 20rpx;
+}
+
+.you {
+  width: 100%;
+  height: 132rpx;
+  padding: 25rpx 0;
+}
+
+.you image {
+  width: 100%;
+  height: 100%;
+}
+
+.xian {
+  width: 100%;
+  height: 20rpx;
+  background:#EDEDED;
+}
+
+.mt10 {
+  margin: 0 auto;
+  text-align: center;
+  height: 70rpx;
+  width: 450rpx;
+  line-height: 70rpx;
+  border-radius: 10rpx;
+  border: 1px solid #999;
+  font-size: 30rpx;
+  margin-top: 30rpx;
+}
+
+
+.zixun{
+ height:154rpx;
+}
+.zixun image{
+width: 45%;
+
+
+}
+.ooo{
+  margin-right: 20rpx;
+float: right ;height: 96%;
+}
+.jjj{
+  margin-left: 20rpx;
+float:left;
+height: 96%;
+}
+
+.k{
+ position: relative;
+top:52rpx;
+right:282rpx;
+opacity: 0;
+}
+.gs{
+  float: left;
+  position: relative;
+  top: -96rpx;
+  left: 40rpx;
+  display: flex;
+  opacity: 0;
+}
+
