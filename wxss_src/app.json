@@ -17,7 +17,8 @@
     "pages/category/index",     
     "pages/ritual/ritual",   
     "pages/rituall/rituall", 
-    "pages/shop_store/shop_store"
+    "pages/shop_store/shop_store",
+    "pages/crouse/detail"
 
 
       ],

@@ -26,5 +26,13 @@
         </view>
       </navigator>
     </view>
+
+    <view class="cont">
+      <navigator class="pr" url="../crouse/detail?id={{item.id}}" hover-class="changestyle" wx:for="{{course}}">
+        <image class="photo" src="{{item.photo}}"></image>
+        <view class="title">{{item.title}}</view>
+      </navigator>
+    </view>
+
     <view class="clear mt10" bindtap="getMore">点击查看更多</view>
   </view>

@@ -4,7 +4,7 @@ Page( {
   data: {
     userInfo: {},
     orderInfo:{},
-    projectSource: 'https://github.com/liuxuanqiang/wechat-weapp-mall',
+    projectSource: 'https://github.com/tekintian/wechat_shop',
     userListInfo: [ {
         icon: '../../images/iconfont-dingdan.png',
         text: '我的订单',
@@ -63,6 +63,7 @@ Page( {
       },
       success: function (res) {
         //--init data        
+       
         var status = res.data.status;
         if(status==1){
           var orderInfo = res.data.orderInfo;

@@ -1,13 +1,13 @@
 // app.js
 App({
   d: {
-    hostUrl: 'https://wxshop.yunnan.ws/index.php',
+    hostUrl: 'https://wxshop.yunnan.ws',
     hostImg: 'https://wxshop.yunnan.ws',
     hostVideo: 'https://wxshop.yunnan.ws',
     userId: 1,
     appId:"",
     appKey:"",
-    ceshiUrl:'https://wxshop.yunnan.ws/index.php',
+    ceshiUrl:'https://wxshop.yunnan.ws',
   },
   onLaunch: function () {
     //调用API从本地缓存中获取数据
