@@ -17,7 +17,7 @@
     后台登录地址： youname.com/index.php/admin  用户名是admin，密码是123456
 
 
-服务端源码：https://github.com/tekintian/wechat_shop/server_api
+服务端源码：https://github.com/tekintian/wechat_shop/tree/master/server_api
 
 
 # 小程序源码目录 wxss_src
@@ -32,7 +32,7 @@ wxss_src/app.js
 wxss_src/config.js 
 
 
-小程序源码：https://github.com/tekintian/wechat_shop/wxss_src
+小程序源码：https://github.com/tekintian/wechat_shop/tree/master/wxss_src
 
 
 
