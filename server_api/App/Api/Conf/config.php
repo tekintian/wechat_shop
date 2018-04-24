@@ -3,7 +3,7 @@
 header("Content-Type:text/html; charset=utf-8");
 error_reporting(0);
 
-define('SELF_ROOT','https://xxx.xxxx.com/');
+define('SELF_ROOT','https://wxshop.yunnan.ws/');
 //define('SELF_ROOT','/');
 
 $urkn= SELF_ROOT."Data/app/";
@@ -23,7 +23,7 @@ return array(
     // 'DB_USER'               =>  'r6hpk2l184',      // 用户名
     // 'DB_PWD'                =>  'leren888_win',//'1234QWERasdf',          // 密码
     'key'         =>   15222,//这个key是神奇的，网站源版代码解决支付问题的区分符
-    'URL_MODEL'   =>0,
+    'URL_MODEL' =>2,
 
     'app_name'   =>'小程序',
 
@@ -58,7 +58,7 @@ return array(
         'key' => '',
 
         //这里是异步通知页面url，提交到项目的Pay控制器的notifyurl方法；
-        'notify_url'=>'https://xxx.xxxx.com/index.php/Api/Wxpay/notify',
+        'notify_url'=>'https://wxshop.yunnan.ws/Api/Wxpay/notify',
 
     ),
 );
