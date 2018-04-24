@@ -16,7 +16,7 @@
         <text>没有可用订单/(ㄒoㄒ)/~~</text>
     </view>
 
-    <view class="shop df" wx:for="{{orderList0}}">        
+    <view class="shop df" wx:for="{{orderList0}}"  wx:key="id">        
         <image class="sh_slt" src="{{item.photo_x}}"></image>
         <view class="df_1">            
             <view class="sp_text">
@@ -42,7 +42,7 @@
         <view class="font_14"><image class="scimg" src="/images/search_no.png"></image></view>
         <text>没有可用订单/(ㄒoㄒ)/~~</text>
     </view>
-    <view class="shop df" wx:for="{{orderList1}}">
+    <view class="shop df" wx:for="{{orderList1}}" wx:key="id">
         <image class="sh_slt" src="{{item.photo_x}}"></image>
         <view class="df_1">            
             <view class="sp_text">
@@ -64,7 +64,7 @@
             <view class="font_14"><image class="scimg" src="/images/search_no.png"></image></view>
             <text>没有可用订单/(ㄒoㄒ)/~~</text>
         </view>
-        <view class="shop df" wx:for="{{orderList2}}">        
+        <view class="shop df" wx:for="{{orderList2}}"  wx:key="id">        
         <image class="sh_slt" src="{{item.photo_x}}"></image>
         <view class="df_1">            
             <view class="sp_text">
@@ -87,7 +87,7 @@
         <view class="font_14"><image class="scimg" src="/images/search_no.png"></image></view>
         <text>没有可用订单/(ㄒoㄒ)/~~</text>
     </view>
-    <view class="shop df" wx:for="{{orderList3}}">   
+    <view class="shop df" wx:for="{{orderList3}}"  wx:key="id">   
         <image class="sh_slt" src="{{item.photo_x}}"></image>
         <view class="df_1">            
             <view class="sp_text">
@@ -109,7 +109,7 @@
         <text>没有可用订单/(ㄒoㄒ)/~~</text>
     </view>
 
-    <view class="shop df" wx:for="{{orderList4}}">
+    <view class="shop df" wx:for="{{orderList4}}"  wx:key="id">
         <image class="sh_slt" src="{{item.photo_x}}"></image>
         <view class="df_1">            
             <view class="sp_text">

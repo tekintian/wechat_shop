@@ -4,7 +4,7 @@
 // |---单页管理(wxs_web)
 // |---用户反馈(wxs_fankui)
 // |---首页设置
-// |------首页banner(wxs_guanggao)
+// |------首页banner(wxs_focus)
 // |------新闻栏目设置(wxs_config)
 // |------推荐分类(wxs_category)
 // |------推荐产品(wxs_product)

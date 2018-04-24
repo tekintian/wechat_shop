@@ -1,3 +1,5 @@
 /*.sublime-workspace
 .phpintel
 /server_api/App/Common/Conf/db.php
+/ssl/*.key
+/ssl/*.pem

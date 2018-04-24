@@ -1,14 +1,14 @@
 <?php
 namespace Admin\Controller;
 use Think\Controller;
-class GuanggaoController extends PublicController{
+class FocusController extends PublicController{
 
 	/*
 	*
 	* 构造函数，用于导入外部文件和公共方法
 	*/
 	public function _initialize(){
-		$this->guanggao = M('guanggao');
+		$this->focus = M('focus');
 	}
 
 	/*
@@ -26,7 +26,7 @@ class GuanggaoController extends PublicController{
 		}
 
 		//分页
-		$count   = $this->guanggao->where($condition)->count();// 查询满足要求的总记录数
+		$count   = $this->focus->where($condition)->count();// 查询满足要求的总记录数
 		$Page    = new \Think\Page($count,20);// 实例化分页类 传入总记录数和每页显示的记录数(25)
 
 		//头部描述信息，默认值 “共 %TOTAL_ROW% 条记录”
@@ -43,7 +43,7 @@ class GuanggaoController extends PublicController{
 
 		$show  = $Page->show();// 分页显示输出
 
-		$adv_list = $this->guanggao->where($condition)->limit($Page->firstRow.','.$Page->listRows)->order('addtime desc')->select();		
+		$adv_list = $this->focus->where($condition)->limit($Page->firstRow.','.$Page->listRows)->order('addtime desc')->select();		
 
 		$this->assign('adv_list',$adv_list);
 		$this->assign('page',$show);
@@ -61,7 +61,7 @@ class GuanggaoController extends PublicController{
 		if (intval($_GET['adv_id'])) {
 			$adv_id = intval($_GET['adv_id']);
 		
-			$adv_info = $this->guanggao->where('id='.intval($adv_id))->find();
+			$adv_info = $this->focus->where('id='.intval($adv_id))->find();
 			if (!$adv_info) {
 				$this->error('没有找到相关信息.');
 				exit();
@@ -78,10 +78,10 @@ class GuanggaoController extends PublicController{
 	*/
 	public function save(){
 		//构建数组
-		/*if (!$this->guanggao->create()) {
-			$this->error($this->guanggao->getError());
+		/*if (!$this->focus->create()) {
+			$this->error($this->focus->getError());
 		}*/
-		$this->guanggao->create();
+		$this->focus->create();
 		//上传广告图片
 		if (!empty($_FILES["file"]["tmp_name"])) {
 			//文件上传
@@ -89,14 +89,14 @@ class GuanggaoController extends PublicController{
 		    if(!is_array($info)) {// 上传错误提示错误信息
 		        $this->error($info);
 		    }else{// 上传成功 获取上传文件信息
-			    $this->guanggao->photo = 'UploadFiles/'.$info['savepath'].$info['savename'];
+			    $this->focus->photo = 'UploadFiles/'.$info['savepath'].$info['savename'];
 			    //生成国定大小的缩略图
 			    /*$path_url = './Data/UploadFiles/'.$info['savepath'].$info['savename'];
 			    $image = new \Think\Image();
 			    $image->open($path_url);
 			    $image->thumb(310, 120,\Think\Image::IMAGE_THUMB_FIXED)->save($path_url);*/
 			    if (intval($_POST['adv_id'])) {
-					$check_url = $this->guanggao->where('id='.intval($_POST['adv_id']))->getField('photo');
+					$check_url = $this->focus->where('id='.intval($_POST['adv_id']))->getField('photo');
 					$url = "Data/".$check_url;
 					if (file_exists($url) && $check_url) {
 						@unlink($url);
@@ -107,11 +107,11 @@ class GuanggaoController extends PublicController{
 
 		//保存数据
 		if (intval($_POST['adv_id'])) {
-			$result = $this->guanggao->where('id='.intval($_POST['adv_id']))->save();
+			$result = $this->focus->where('id='.intval($_POST['adv_id']))->save();
 		}else{
 			//保存添加时间
-			$this->guanggao->addtime = time();
-			$result = $this->guanggao->add();
+			$this->focus->addtime = time();
+			$result = $this->focus->add();
 		}
 		//判断数据是否更新成功
 		if ($result) {
@@ -128,14 +128,14 @@ class GuanggaoController extends PublicController{
 	public function del(){
 		//获取广告id，查询数据库是否有这条数据
 		$adv_id = intval($_GET['did']);
-		$check_info = $this->guanggao->where('id='.intval($adv_id))->find();
+		$check_info = $this->focus->where('id='.intval($adv_id))->find();
 		if (!$check_info) {
 			$this->error('系统繁忙，请时候再试！');
 			exit();
 		}
 
 		//修改对应的删除状态
-		$up = $this->guanggao->where('id='.intval($adv_id))->delete();
+		$up = $this->focus->where('id='.intval($adv_id))->delete();
 		if ($up) {
 			$url = "Data/".$check_info['photo'];
 			if (file_exists($url)) {

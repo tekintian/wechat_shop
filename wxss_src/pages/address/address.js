@@ -21,7 +21,7 @@ Page({
     var adds = e.detail.value;
     var cartId = this.data.cartId;
     wx.request({
-      url: app.d.ceshiUrl + '/Api/Address/add_adds',
+      url: app.d.apiUrl + 'Address/add_adds',
       data: {
         user_id:app.d.userId,
         receiver: adds.name,
@@ -73,7 +73,7 @@ Page({
     })
     //获取省级城市
     wx.request({
-      url: app.d.ceshiUrl + '/Api/Address/get_province',
+      url: app.d.apiUrl + 'Address/get_province',
       data: {},
       method: 'POST',
       success: function (res) {
@@ -113,7 +113,7 @@ Page({
     });
     var that = this;
     wx.request({
-      url: app.d.ceshiUrl + '/Api/Address/get_city',
+      url: app.d.apiUrl + 'Address/get_city',
       data: {sheng:e.detail.value},
       method: 'POST', // OPTIONS, GET, HEAD, POST, PUT, DELETE, TRACE, CONNECT
       header: {// 设置请求的 header
@@ -156,7 +156,7 @@ Page({
     })
     var that = this;
     wx.request({
-      url: app.d.ceshiUrl + '/Api/Address/get_area',
+      url: app.d.apiUrl + 'Address/get_area',
       data: {
         city:e.detail.value,
         sheng:this.data.sheng
@@ -199,7 +199,7 @@ Page({
     });
     var that = this;
     wx.request({
-      url: app.d.ceshiUrl + '/Api/Address/get_code',
+      url: app.d.apiUrl + 'Address/get_code',
       data: {
         quyu:e.detail.value,
         city:this.data.city

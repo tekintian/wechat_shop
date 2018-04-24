@@ -153,10 +153,10 @@ class LoginController extends PublicController {
 			exit();
 		}
 
-		if (!$appid || !$secret) {
-			echo json_encode(array('status'=>0,'err'=>'非法操作！'.__LINE__));
-			exit();
-		}
+		// if (!$appid || !$secret) {
+		// 	echo json_encode(array('status'=>0,'err'=>'非法操作！'.__LINE__));
+		// 	exit();
+		// }
 
 		$get_token_url = 'https://api.weixin.qq.com/sns/jscode2session?appid='.$appid.'&secret='.$secret.'&js_code='.$code.'&grant_type=authorization_code';
 		$ch = curl_init();

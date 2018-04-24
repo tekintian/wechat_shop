@@ -1,13 +1,13 @@
 // app.js
 App({
   d: {
-    hostUrl: 'https://wxshop.yunnan.ws',
-    hostImg: 'https://wxshop.yunnan.ws',
-    hostVideo: 'https://wxshop.yunnan.ws',
+    hostUrl: 'https://wxshop.yunnan.ws/api/',
+    hostImg: 'https://wxshop.yunnan.ws/api/',
+    hostVideo: 'https://wxshop.yunnan.ws/api/',
     userId: 1,
     appId:"",
     appKey:"",
-    ceshiUrl:'https://wxshop.yunnan.ws',
+    apiUrl:'https://wxshop.yunnan.ws/api/',
   },
   onLaunch: function () {
     //调用API从本地缓存中获取数据
@@ -45,7 +45,7 @@ App({
     //用户的订单状态
     var that = this;
     wx.request({
-      url: that.d.ceshiUrl + '/Api/Login/getsessionkey',
+      url: that.d.apiUrl + 'Login/getsessionkey',
       method:'post',
       data: {
         code: code
@@ -80,7 +80,7 @@ App({
     var that = this;
     var user = that.globalData.userInfo;
     wx.request({
-      url: that.d.ceshiUrl + '/Api/Login/authlogin',
+      url: that.d.apiUrl + 'Login/authlogin',
       method:'post',
       data: {
         SessionId: user.sessionId,

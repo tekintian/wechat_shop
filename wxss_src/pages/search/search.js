@@ -14,7 +14,7 @@ Page({
   onLoad:function(options){
     var that = this;
     wx.request({
-      url: app.d.ceshiUrl + '/Api/Search/index',
+      url: app.d.apiUrl + 'Search/index',
       method:'post',
       data: {uid:app.d.userId},
       header: {
@@ -116,7 +116,7 @@ Page({
   searchProductData:function(){
     var that = this;
     wx.request({
-      url: app.d.ceshiUrl + '/Api/Search/searches',
+      url: app.d.apiUrl + 'Search/searches',
       method:'post',
       data: {
         keyword:that.data.searchValue,

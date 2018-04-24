@@ -8,10 +8,10 @@ class IndexController extends PublicController {
     public function index(){
     	//如果缓存首页没有数据，那么就读取数据库
     	/***********获取首页顶部轮播图************/
-    	$ggtop=M('guanggao')->order('sort desc,id asc')->field('id,name,photo')->limit(10)->select();
-		foreach ($ggtop as $k => $v) {
-			$ggtop[$k]['photo']=__DATAURL__.$v['photo'];
-			$ggtop[$k]['name']=urlencode($v['name']);
+    	$focus=M('focus')->order('sort desc,id asc')->field('id,name,photo')->limit(10)->select();
+		foreach ($focus as $k => $v) {
+			$focus[$k]['photo']=__DATAURL__.$v['photo'];
+			$focus[$k]['name']=urlencode($v['name']);
 		}
     	/***********获取首页顶部轮播图 end************/
 
@@ -21,14 +21,6 @@ class IndexController extends PublicController {
         $brand = M('brand')->where('1=1')->field('id,name,photo')->limit(20)->select();
         foreach ($brand as $k => $v) {
             $brand[$k]['photo'] = __DATAURL__.$v['photo'];
-        }
-
-        //======================
-        //首页培训课程
-        //======================
-        $course = M('course')->where('del=0')->order('id desc')->field('id,title,intro,photo')->select();
-        foreach ($course as $k => $v) {
-            $course[$k]['photo'] = __DATAURL__.$v['photo'];
         }
 
     	//======================
@@ -42,29 +34,14 @@ class IndexController extends PublicController {
         //======================
         //首页分类 自己组建数组
         //======================
-        $indeximg = M('indeximg')->where('1=1')->order('id asc')->field('photo')->select();
-        $procat = array();
-        $procat[0]['name'] = '新闻资讯';
-        $procat[0]['imgs'] = __DATAURL__.$indeximg[0]['photo'];
-        $procat[0]['link'] = 'other';
-        $procat[0]['ptype'] = 'news';
+        $indeximg = M('indeximg')->order('sort asc')->select();
 
-        $procat[1]['name'] = '教学优势';
-        $procat[1]['imgs'] = __DATAURL__.$indeximg[1]['photo'];
-        $procat[1]['link'] = 'other';
-        $procat[1]['ptype'] = 'jxys';
+        foreach ($indeximg as $k => $v) {
+            $indeximg[$k]['photo'] = __DATAURL__.$v['photo'];
+        }
 
-        $procat[2]['name'] = '学员风采';
-        $procat[2]['imgs'] = __DATAURL__.$indeximg[2]['photo'];
-        $procat[2]['link'] = 'other';
-        $procat[2]['ptype'] = 'xyfc';
 
-        $procat[3]['name'] = '关于我们';
-        $procat[3]['imgs'] = __DATAURL__.$indeximg[3]['photo'];
-        $procat[3]['link'] = 'other';
-        $procat[3]['ptype'] = 'gywm';
-
-    	echo json_encode(array('ggtop'=>$ggtop,'procat'=>$procat,'prolist'=>$pro_list,'brand'=>$brand,'course'=>$course));
+    	echo json_encode(array('focus'=>$focus,'procat'=>$indeximg,'prolist'=>$pro_list,'brand'=>$brand));
     	exit();
     }
 

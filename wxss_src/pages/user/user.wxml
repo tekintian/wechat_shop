@@ -67,28 +67,7 @@
 
 <contact-button>
 </contact-button>
-<contact-button>
-</contact-button>
-<contact-button>
-</contact-button>
-<contact-button>
-</contact-button>
-<contact-button>
-</contact-button>
-<contact-button>
-</contact-button>
-<contact-button>
-</contact-button>
-<contact-button>
-</contact-button>
-<contact-button>
-</contact-button>
-<contact-button>
-</contact-button>
-<contact-button>
-</contact-button>
-<contact-button>
-</contact-button>
+
     <span class="font_14 c33">联系客服</span>
     <span class="fl_r c9 font_12 l_h20" hover-class="none"> ></span>
     </view>

@@ -8,7 +8,7 @@ Page({
     var vid = e.currentTarget.dataset.vid;
     var uid = app.d.userId;
     wx.request({
-      url: app.d.ceshiUrl + '/Api/Voucher/get_voucher',
+      url: app.d.apiUrl + 'Voucher/get_voucher',
       method:'post',
       data: {vid:vid,uid:uid},
       header: {
@@ -41,7 +41,7 @@ Page({
     // 页面初始化 options为页面跳转所带来的参数
     var that = this;
     wx.request({
-      url: app.d.ceshiUrl + '/Api/Voucher/index',
+      url: app.d.apiUrl + 'Voucher/index',
       method:'post',
       data: {},
       header: {

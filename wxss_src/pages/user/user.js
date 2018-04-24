@@ -53,7 +53,7 @@ Page( {
     //获取用户订单数据
     var that = this;
     wx.request({
-      url: app.d.ceshiUrl + '/Api/User/getorder',
+      url: app.d.apiUrl + 'User/getorder',
       method:'post',
       data: {
         userId:app.d.userId,

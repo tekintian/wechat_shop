@@ -95,7 +95,7 @@ Page({
   loadProductDetail:function(){
     var that = this;
     wx.request({
-      url: app.d.ceshiUrl + '/Api/Product/index',
+      url: app.d.apiUrl + 'Product/index',
       method:'post',
       data: {
         pro_id: that.data.productId,
@@ -350,7 +350,7 @@ Page({
   addFavorites:function(e){
     var that = this;
     wx.request({
-      url: app.d.ceshiUrl + '/Api/Product/col',
+      url: app.d.apiUrl + 'Product/col',
       method:'post',
       data: {
         uid: app.d.userId,
@@ -389,7 +389,7 @@ Page({
   addShopCart:function(e){ //添加到购物车
     var that = this;
     wx.request({
-      url: app.d.ceshiUrl + '/Api/Shopping/add',
+      url: app.d.apiUrl + 'Shopping/add',
       method:'post',
       data: {
         uid: app.d.userId,

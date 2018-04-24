@@ -15,7 +15,7 @@ Page({
   loadProductDetail:function(){
     var that = this;
     wx.request({
-      url: app.d.ceshiUrl + '/Api/Order/order_details',
+      url: app.d.apiUrl + 'Order/order_details',
       method:'post',
       data: {
         order_id: that.data.orderId,

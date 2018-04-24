@@ -3,7 +3,7 @@
 
 使用数据库管理工具 adminer 导入数据 wechat_shop.sql
 
-    1、App/Common/Conf/db.php 数据库连接参数修改；
+    1、更名App/Common/Conf/db.sample.php 为db.php 并修改数据库连接参数为你自己创建的；
 
     2、App/Api/Conf/config.php 微信小程序的appid、secret、mchid、key、notify_url，SELF_ROOT的参数修改；
 

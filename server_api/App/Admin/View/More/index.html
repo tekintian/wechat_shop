@@ -34,7 +34,7 @@
 		place = $(this).attr('place');
 		$.XYTipsWindow({
 			___title:"banner编辑",
-			___content:"iframe:{:U('Guanggao/add')}?id="+rel+"&place="+place,
+			___content:"iframe:{:U('focus/add')}?id="+rel+"&place="+place,
 			___width:"1000",
 			___height:"800",
 			___showbg:true,
@@ -139,11 +139,11 @@
          </li>
          <li>
          <!-- 广告遍历 -->
-         	<volist name="guanggao" id="v" empty="暂时没有广告，赶紧进行添加吧！">
+         	<volist name="focus" id="v" empty="暂时没有广告，赶紧进行添加吧！">
 			<div class="pxp_1">
 				<div class="d1"><img src="{$v.photo}" class="img1"></div>
 				 <div class="d1">
-				     <input type="button" value="编辑" class="aaa_pts_web_3 aaa_pts_web_3_2" border="0" onclick="win_open('{:U('Guanggao/add')}?id={$v.id}',1050)">
+				     <input type="button" value="编辑" class="aaa_pts_web_3 aaa_pts_web_3_2" border="0" onclick="win_open('{:U('focus/add')}?id={$v.id}',1050)">
 				     <input type="button" value="内部编辑" class="aaa_pts_web_3 aaa_pts_web_3_2 bannerset" border="0" rel="{$v.id}" place="">
 				 <input type="button" value="删除" class="aaa_pts_web_3 aaa_pts_web_3_2" border="0" onclick="del_banner('{$v.id}','')">
 				 </div>
@@ -152,7 +152,7 @@
 	     <!-- 广告遍历 -->
          </li>
          <li style="border-bottom:1px solid #CCC; padding-bottom:10px;">
-           <input type="button" value="添加banner" class="aaa_pts_web_3 aaa_pts_web_3_2" border="0" onclick="win_open('{:U('Guanggao/add')}',1050)">
+           <input type="button" value="添加banner" class="aaa_pts_web_3 aaa_pts_web_3_2" border="0" onclick="win_open('{:U('focus/add')}',1050)">
          </li>
 		 <li>
            <strong style="font-size:16px; color:#0c0;">中部banner设置</strong>
@@ -163,7 +163,7 @@
 			<div class="pxp_1">
 				<div class="d1"><img src="{$v.photo}" class="img1"></div>
 				 <div class="d1">
-				     <input type="button" value="编辑" class="aaa_pts_web_3 aaa_pts_web_3_2" border="0" onclick="win_open('{:U('Guanggao/add')}?id={$v.id}&place=center',1050)">
+				     <input type="button" value="编辑" class="aaa_pts_web_3 aaa_pts_web_3_2" border="0" onclick="win_open('{:U('focus/add')}?id={$v.id}&place=center',1050)">
 				     <input type="button" value="内部编辑" class="aaa_pts_web_3 aaa_pts_web_3_2 bannerset" border="0" rel="{$v.id}" place="center">
 				 <input type="button" value="删除" class="aaa_pts_web_3 aaa_pts_web_3_2" border="0" onclick="del_banner('{$v.id}','center')">
 				 </div>
@@ -172,7 +172,7 @@
 	     <!-- 广告遍历 -->
          </li>
          <li style="border-bottom:1px solid #CCC; padding-bottom:10px;">
-           <input type="button" value="添加banner" class="aaa_pts_web_3 aaa_pts_web_3_2" border="0" onclick="win_open('{:U('Guanggao/add')}?place=center',1050)">
+           <input type="button" value="添加banner" class="aaa_pts_web_3 aaa_pts_web_3_2" border="0" onclick="win_open('{:U('focus/add')}?place=center',1050)">
          </li>
          
 		 
@@ -185,7 +185,7 @@
 			<div class="pxp_1">
 				<div class="d1"><img src="{$v.photo}" class="img1"></div>
 				 <div class="d1">
-				     <input type="button" value="编辑" class="aaa_pts_web_3 aaa_pts_web_3_2" border="0" onclick="win_open('{:U('Guanggao/add')}?id={$v.id}&place=bottom',1050)">
+				     <input type="button" value="编辑" class="aaa_pts_web_3 aaa_pts_web_3_2" border="0" onclick="win_open('{:U('focus/add')}?id={$v.id}&place=bottom',1050)">
 				     <input type="button" value="内部编辑" class="aaa_pts_web_3 aaa_pts_web_3_2 bannerset" border="0" rel="{$v.id}" place="bottom">
 				 <input type="button" value="删除" class="aaa_pts_web_3 aaa_pts_web_3_2" border="0" onclick="del_banner('{$v.id}','bottom')">
 				 </div>
@@ -194,7 +194,7 @@
 	     <!-- 广告遍历 -->
          </li>
          <li style="border-bottom:1px solid #CCC; padding-bottom:10px;">
-           <input type="button" value="添加banner" class="aaa_pts_web_3 aaa_pts_web_3_2" border="0" onclick="win_open('{:U('Guanggao/add')}?place=bottom',1050)">
+           <input type="button" value="添加banner" class="aaa_pts_web_3 aaa_pts_web_3_2" border="0" onclick="win_open('{:U('focus/add')}?place=bottom',1050)">
          </li>
          <li>
            <strong style="font-size:16px; color:#0c0;">新闻栏目设置</strong>
@@ -307,7 +307,7 @@
 <script>
 function del_banner(id,place){
    if(confirm('确认删除吗？')){
-	   $.get('{:U("Guanggao/index")}?id='+id+'&type=del&place='+place+'',{},function(){history.go(0)});
+	   $.get('{:U("focus/index")}?id='+id+'&type=del&place='+place+'',{},function(){history.go(0)});
 	}
 }
 </script>

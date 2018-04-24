@@ -19,7 +19,7 @@ bindMinus: function(e) {
     console.log(num);
     var cart_id = e.currentTarget.dataset.cartid;
     wx.request({
-      url: app.d.ceshiUrl + '/Api/Shopping/up_cart',
+      url: app.d.apiUrl + 'Shopping/up_cart',
       method:'post',
       data: {
         user_id: app.d.userId,
@@ -71,7 +71,7 @@ bindPlus: function(e) {
     console.log(num);
     var cart_id = e.currentTarget.dataset.cartid;
     wx.request({
-      url: app.d.ceshiUrl + '/Api/Shopping/up_cart',
+      url: app.d.apiUrl + 'Shopping/up_cart',
       method:'post',
       data: {
         user_id: app.d.userId,
@@ -210,7 +210,7 @@ removeShopCard:function(e){
       content: '你确认移除吗',
       success: function(res) {
         res.confirm && wx.request({
-          url: app.d.ceshiUrl + '/Api/Shopping/delete',
+          url: app.d.apiUrl + 'Shopping/delete',
           method:'post',
           data: {
             cart_id: cardId,
@@ -247,7 +247,7 @@ removeShopCard:function(e){
   loadProductData:function(){
     var that = this;
     wx.request({
-      url: app.d.ceshiUrl + '/Api/Shopping/index',
+      url: app.d.apiUrl + 'Shopping/index',
       method:'post',
       data: {
         user_id: app.d.userId

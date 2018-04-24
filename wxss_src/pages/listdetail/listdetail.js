@@ -55,7 +55,7 @@ getMore:function(e){
   var that = this;
   var page = that.data.page;
   wx.request({
-      url: app.d.ceshiUrl + '/Api/Product/get_more',
+      url: app.d.apiUrl + 'Product/get_more',
       method:'post',
       data: {
         page:page,
@@ -112,7 +112,7 @@ onLoad: function (options) {
     })
     //ajax请求数据
     wx.request({
-      url: app.d.ceshiUrl + '/Api/Product/lists',
+      url: app.d.apiUrl + 'Product/lists',
       method:'post',
       data: {
         cat_id:cat_id,

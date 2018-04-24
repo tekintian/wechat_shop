@@ -2,7 +2,7 @@ var app = getApp();
 
 Page({
   data: {
-    imgUrls: [],
+    focus: [],
     indicatorDots: true,
     autoplay: true,
     interval: 5000,
@@ -16,8 +16,7 @@ Page({
     // 滑动
     imgUrl: [],
     kbs:[],
-    lastcat:[],
-    course:[]
+    lastcat:[]
   },
 //跳转商品列表页   
 listdetail:function(e){
@@ -50,28 +49,6 @@ suo:function(e){
       }
     })
   },
-//后四个分类跳转
-other: function(e){
-  var ptype =e.currentTarget.dataset.ptype;
-  var title =e.currentTarget.dataset.text;
-  if(ptype=='news'){
-    wx.navigateTo({
-      url: '../inf/inf'
-    });
-  }else if(ptype=='jxys'){
-    wx.navigateTo({
-      url: '../synopsis/synopsis?title=教学优势&wedId=2'
-    });
-  }else if(ptype=='xyfc'){
-    wx.navigateTo({
-      url: '../student_style/student_style'
-    });
-  }else if(ptype=='gywm'){
-    wx.navigateTo({
-      url: '../synopsis/synopsis?title=关于我们&wedId=1'
-    });
-  }
-},
 
 //品牌街跳转商家详情页
 jj:function(e){
@@ -111,7 +88,7 @@ getMore:function(e){
   var that = this;
   var page = that.data.page;
   wx.request({
-      url: app.d.ceshiUrl + '/Api/Index/getlist',
+      url: app.d.apiUrl + 'Index/getlist',
       method:'post',
       data: {page:page},
       header: {
@@ -166,25 +143,23 @@ getMore:function(e){
   onLoad: function (options) {
     var that = this;
     wx.request({
-      url: app.d.ceshiUrl + '/Api/Index/index',
+      url: app.d.apiUrl + 'Index/index',
       method:'post',
       data: {},
       header: {
         'Content-Type':  'application/x-www-form-urlencoded'
       },
       success: function (res) {  
-        var ggtop = res.data.ggtop;
+        var focus = res.data.focus;
         var procat = res.data.procat;
         var prolist = res.data.prolist;
         var brand = res.data.brand;
-        var course = res.data.course;
         //that.initProductData(data);
         that.setData({
-          imgUrls:ggtop,
+          focus:focus,
           proCat:procat,
           productData:prolist,
-          brand: brand,
-          course: course
+          brand: brand
         });
         //endInitData
       },

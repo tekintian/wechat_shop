@@ -44,7 +44,7 @@ removeOrder:function(e){
       content: '你确定要取消订单吗？',
       success: function(res) {
         res.confirm && wx.request({
-          url: app.d.ceshiUrl + '/Api/Order/orders_edit',
+          url: app.d.apiUrl + 'Order/orders_edit',
           method:'post',
           data: {
             id: orderId,
@@ -91,7 +91,7 @@ recOrder:function(e){
       content: '你确定已收到宝贝吗？',
       success: function(res) {
         res.confirm && wx.request({
-          url: app.d.ceshiUrl + '/Api/Order/orders_edit',
+          url: app.d.apiUrl + 'Order/orders_edit',
           method:'post',
           data: {
             id: orderId,
@@ -132,7 +132,7 @@ recOrder:function(e){
   loadOrderList: function(){
     var that = this;
     wx.request({
-      url: app.d.ceshiUrl + '/Api/Order/index',
+      url: app.d.apiUrl + 'Order/index',
       method:'post',
       data: {
         uid:app.d.userId,
@@ -187,7 +187,7 @@ recOrder:function(e){
 loadReturnOrderList:function(){
     var that = this;
     wx.request({
-      url: app.d.ceshiUrl + '/Api/Order/order_refund',
+      url: app.d.apiUrl + 'Order/order_refund',
       method:'post',
       data: {
         uid:app.d.userId,
@@ -294,7 +294,7 @@ loadReturnOrderList:function(){
       return false;
     }
     wx.request({
-      url: app.d.ceshiUrl + '/Api/Wxpay/wxpay',
+      url: app.d.apiUrl + 'Wxpay/wxpay',
       data: {
         order_id: order_id,
         order_sn: order_sn,

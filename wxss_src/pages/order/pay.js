@@ -28,7 +28,7 @@ Page({
   loadProductDetail:function(){
     var that = this;
     wx.request({
-      url: app.d.ceshiUrl + '/Api/Payment/buy_cart',
+      url: app.d.apiUrl + 'Payment/buy_cart',
       method:'post',
       data: {
         cart_id: that.data.cartId,
@@ -108,7 +108,7 @@ Page({
     //创建订单
     var that = this;
     wx.request({
-      url: app.d.ceshiUrl + '/Api/Payment/payment',
+      url: app.d.apiUrl + 'Payment/payment',
       method:'post',
       data: {
         uid: that.data.userId,
@@ -157,7 +157,7 @@ Page({
   //调起微信支付
   wxpay: function(order){
       wx.request({
-        url: app.d.ceshiUrl + '/Api/Wxpay/wxpay',
+        url: app.d.apiUrl + 'Wxpay/wxpay',
         data: {
           order_id:order.order_id,
           order_sn:order.order_sn,

@@ -23,7 +23,7 @@ Page({
     // 页面初始化 options为页面跳转所带来的参数
     var that = this;
     wx.request({
-      url: app.d.ceshiUrl + '/Api/User/voucher',
+      url: app.d.apiUrl + 'User/voucher',
       method:'post',
       data: {uid:app.d.userId},
       header: {

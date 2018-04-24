@@ -16,7 +16,7 @@ Page({
     onLoad: function (option){
         var that = this;
         wx.request({
-            url: app.d.ceshiUrl + '/Api/Category/index',
+            url: app.d.apiUrl + 'Category/index',
             method:'post',
             data: {},
             header: {
@@ -65,7 +65,7 @@ Page({
         });
         console.log(currType);
         wx.request({
-            url: app.d.ceshiUrl + '/Api/Category/getcat',
+            url: app.d.apiUrl + 'Category/getcat',
             method:'post',
             data: {cat_id:currType},
             header: {

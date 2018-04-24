@@ -1,6 +1,6 @@
 <!--pages/cart/cart.wxml-->
 <view class="page">
-  <view class="shop df" wx:for="{{productData}}">
+  <view class="shop df" wx:for="{{productData}}" wx:key="id">
         <image class="sh_slt" src="{{item.ImgUrl}}"></image>
         <view class="df_1">            
             <view class="sp_text">
@@ -23,7 +23,7 @@
 </view>
 <view class="container carts-list">
 <!--勾-->
-     <view wx:for="{{carts}}" class="carts-item" data-title="{{item.pro_name}}" id="{{item.id}}">
+     <view wx:for="{{carts}}" class="carts-item" data-title="{{item.pro_name}}" id="{{item.id}}"  wx:key="id">
          <icon wx:if="{{item.selected}}" type="success_circle"    size="20" bindtap="bindCheckbox" data-index="{{index}}"/>
          <icon wx:else type="circle" size="20" bindtap="bindCheckbox" data-index="{{index}}"/>
      <!--img-->

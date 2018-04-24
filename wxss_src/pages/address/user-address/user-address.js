@@ -14,7 +14,7 @@ Page({
     var cartId = options.cartId;
     console.log(app.d.userId);
     wx.request({
-      url: app.d.ceshiUrl + '/Api/Address/index',
+      url: app.d.apiUrl + 'Address/index',
       data: {
         user_id:app.d.userId,
       },
@@ -54,7 +54,7 @@ Page({
     var that = this;
     var addrId = e.currentTarget.dataset.id;
     wx.request({
-      url: app.d.ceshiUrl + '/Api/Address/set_default',
+      url: app.d.apiUrl + 'Address/set_default',
       data: {
         uid:app.d.userId,
         addr_id:addrId
@@ -106,7 +106,7 @@ Page({
       content: '你确认移除吗',
       success: function(res) {
         res.confirm && wx.request({
-          url: app.d.ceshiUrl + '/Api/Address/del_adds',
+          url: app.d.apiUrl + 'Address/del_adds',
           data: {
             user_id:app.d.userId,
             id_arr:addrId
@@ -144,7 +144,7 @@ Page({
     var that = this;
     // 页面初始化 options为页面跳转所带来的参数
     wx.request({
-      url: app.d.ceshiUrl + '/Api/Address/index',
+      url: app.d.apiUrl + 'Address/index',
       data: {
         user_id:app.d.userId,
       },
