@@ -67,7 +67,7 @@ server {
     deny all;
   }
   #禁止上传/静态目录的脚本权限
-  location ~* .*\/(upload|static|uploads|images)\/.*\.(php|php5|phps|asp|aspx|jsp)$ {
+  location ~* .*\/(Data|public|static|uploads|images)\/.*\.(php|php5|phps|asp|aspx|jsp)$ {
      deny all;
   }
   # access_log
