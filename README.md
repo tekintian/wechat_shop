@@ -40,7 +40,7 @@
 
 	cgi.fix_pathinfo=0
 
-##Tengine/nginx配置文件示例
+## Tengine/nginx配置文件示例
 ```conf
 server {
     listen    80;
