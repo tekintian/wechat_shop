@@ -4,3 +4,4 @@
 /ssl/*.key
 /ssl/*.pem
 /*.psd
+/_config.yml
