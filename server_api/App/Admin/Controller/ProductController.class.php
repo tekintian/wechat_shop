@@ -312,7 +312,10 @@ class ProductController extends PublicController{
 	//说明：产品 设置推荐
 	//***************************
 	public function set_tj(){
+		pp($pro_id);
 		$pro_id = intval($_REQUEST['pro_id']);
+		
+
 		$tj_update=M('product')->field('shop_id,type')->where('id='.intval($pro_id).' AND del=0')->find();
 		if (!$tj_update) {
 			$this->error('产品不存在或已下架删除！');

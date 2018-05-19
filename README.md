@@ -5,34 +5,31 @@
 
 ## 小程序服务端 server_api 部署方法
 
-	使用数据库管理工具 adminer 导入数据 wechat_shop.sql
-
-	PS: 注意，你的PHP一定要开启path_info模式和url rewrite的支持;
+- PS: 注意，你的服务器一定要支持url rewrite模式，且PHP版本最好是 PHP5.6 ， 支持PHP7.0;
 
 ### 部署步骤 
 
-1. 修改App/Common/Conf/db.php 里面的数据库连接参数为你自己的；
+1. 上传 server_api 目录下的所有代码到你的服务器并运行   yourname.com/adminer.php 使用你的mysql账号登录后 导入数据 wechat_shop.sql.gz 【会自动创建数据库和导入演示数据】
 
- - 只需要修改下面几项就可以
+2. 修改App/Common/Conf/db.php 里面的数据库连接参数为你自己的；
 
+ - 只需要修改你的数据库用户名和密码即可
 ```conf
-     'DB_NAME'               =>  'wechat_shop',          // 数据库名
-    'DB_PORT'               =>  '3357',        // 端口  
-    'DB_HOST'               =>  '172.17.0.1', // 服务器地址
-    'DB_USER'               =>  'wechat_shop',      // 用户名
-    'DB_PWD'                =>  '888888',      //'123456',          // 密码
+'DB_USER'               =>  'root',      // 用户名
+'DB_PWD'                =>  '123456',      //数据库用户密码
 ```
 
-2. App/Api/Conf/config.php 微信小程序的appid、secret、mchid、key、notify_url，SELF_ROOT的参数修改；
+3. App/Api/Conf/config.php 微信小程序的appid、secret、mchid、key、notify_url，SELF_ROOT的参数修改；
 
-3. ThinkPHP\Library\Vendor\wxpay\lib\WxPay.Config.php  微信小程序的appid、appsecret、mchid、key参数修改；
+4. ThinkPHP\Library\Vendor\wxpay\lib\WxPay.Config.php  微信小程序的appid、appsecret、mchid、key参数修改；
 
-4. ThinkPHP\Library\Vendor\WeiXinpay\lib\WxPay.Config.php  微信小程序的appid、appsecret、mchid、key、notify_url参数修改；
+5. ThinkPHP\Library\Vendor\WeiXinpay\lib\WxPay.Config.php  微信小程序的appid、appsecret、mchid、key、notify_url参数修改；
 
-5. App/Api/Controller/WxPayController.class.php 50行修改链接
+6. App/Api/Controller/WxPayController.class.php 50行修改链接
 
+7. 必须开启 URL Rewrite才能使用本系统
 
-- 后台登录地址： youname.com/index.php/admin  用户名是admin，密码是123456
+- 后台登录地址： youname.com/Admin/Login/index.html  用户名是admin，密码是123456
 
 
 ## PHP开启pathinfo模式支持方法
@@ -73,6 +70,19 @@ server {
   # access_log
   access_log  /home/wwwlogs/wxshop.dd_access.log  combined;
 }
+```
+
+## Apache URL Rewrite配置示例
+.htaccess 文件
+```htaccess
+<IfModule mod_rewrite.c>
+  Options +FollowSymlinks
+  RewriteEngine On
+
+  RewriteCond %{REQUEST_FILENAME} !-d
+  RewriteCond %{REQUEST_FILENAME} !-f
+  RewriteRule ^(.*)$  /index.php?s=$1 [QSA,PT,L]
+</IfModule>
 ```
 
 
