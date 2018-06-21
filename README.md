@@ -3,13 +3,16 @@
 - [API服务端源码](server_api)
 - [微信小程序端源码](wxss_src)
 
+- [API服务端演示快照](docs/admin_snapshot.md)
+- [微信小程序端演示快照](docs/wxshop_snapshot.md)
+
 ## 小程序服务端 server_api 部署方法
 
 - PS: 注意，你的服务器一定要支持url rewrite模式，且PHP版本最好是 PHP5.6 ， 支持PHP7.0;
 
 ### 部署步骤 
 
-1. 上传 server_api 目录下的所有代码到你的服务器并运行   yourname.com/adminer.php 使用你的mysql账号登录后 导入数据 wechat_shop.sql.gz 【会自动创建数据库和导入演示数据】
+1. 上传 server_api 目录下的所有代码到你的服务器并运行   yourname.com/adminer.php 使用你的mysql账号登录后 导入数据 docs\wechat_shop.sql.gz 【会自动创建数据库和导入演示数据】
 
 2. 修改App/Common/Conf/db.php 里面的数据库连接参数为你自己的；
 
