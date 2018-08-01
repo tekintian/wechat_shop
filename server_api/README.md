@@ -1,4 +1,10 @@
-# 小程序服务端 server_api
+# wechatshop 微信小程序商城完整版
+
+- [API服务端源码](server_api)
+- [微信小程序端源码](wxss_src)
+
+- [API服务端演示快照](docs/admin_snapshot.md)
+- [微信小程序端演示快照](docs/wxshop_snapshot.md)
 
 ## 小程序服务端 server_api 部署方法
 
@@ -6,7 +12,7 @@
 
 ### 部署步骤 
 
-1. 上传 server_api 目录下的所有代码到你的服务器并运行   yourname.com/adminer.php 使用你的mysql账号登录后 导入数据 wechat_shop.sql.gz 【会自动创建数据库和导入演示数据】
+1. 上传 server_api 目录下的所有代码到你的服务器并运行   yourname.com/adminer.php 使用你的mysql账号登录后 导入数据 docs\wechat_shop.sql.gz 【会自动创建数据库和导入演示数据】
 
 2. 修改App/Common/Conf/db.php 里面的数据库连接参数为你自己的；
 
@@ -32,7 +38,7 @@
 ## PHP开启pathinfo模式支持方法
 打开你的php.ini配置文件，找到 cgi.fix_pathinfo 将前面的 ; 注释去掉, 后面的值改为0
 
-  cgi.fix_pathinfo=0
+	cgi.fix_pathinfo=0
 
 ## Tengine/nginx配置文件示例
 ```conf
@@ -81,3 +87,26 @@ server {
   RewriteRule ^(.*)$  /index.php?s=$1 [QSA,PT,L]
 </IfModule>
 ```
+
+
+## 小程序源码目录 wxss_src
+
+- 小程序配置方法：
+
+wxss_src/app.js
+配置 hostUrl、 ceshiUrl 为你安装的服务端的URL地址
+
+
+- 腾讯云解决方案分配的域名
+wxss_src/config.js 
+
+
+小程序源码：https://github.com/tekintian/wechat_shop/tree/master/wxss_src
+
+
+
+## PS: 
+	本项目为学习项目，基础代码来源网络，在此之上做了功能模块的增强和安全方面的修复，欢迎for.......... 欢迎 star!
+
+
+
