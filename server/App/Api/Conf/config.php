@@ -52,7 +52,7 @@ return array(
 
 
         'appid' =>'wx0946fb221324672a',			//微信appid
-        'secret'=>'', //微信secret
+        'secret'=>'e0af411166ce758409a5d9f1cab7b58f', //微信secret
 
         'mchid' => '',
         'key' => '',
