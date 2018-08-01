@@ -1,13 +1,13 @@
 // app.js
 App({
   d: {
-    hostUrl: 'https://wxshop.yunnan.ws/api/',
-    hostImg: 'https://wxshop.yunnan.ws/api/',
-    hostVideo: 'https://wxshop.yunnan.ws/api/',
+    hostUrl: 'https://www.41833233.cn/api/',
+    hostImg: 'https://www.41833233.cn/api/',
+    hostVideo: 'https://www.41833233.cn/api/',
     userId: 1,
-    appId:"",
+    appId:"wx0946fb221324672a",
     appKey:"",
-    apiUrl:'https://wxshop.yunnan.ws/api/',
+    apiUrl:'https://www.41833233.cn/api/',
   },
   onLaunch: function () {
     //调用API从本地缓存中获取数据
@@ -54,7 +54,7 @@ App({
         'Content-Type':  'application/x-www-form-urlencoded'
       },
       success: function (res) {
-        //--init data        
+        //--init data
         var data = res.data;
         if(data.status==0){
           wx.showToast({
@@ -93,7 +93,7 @@ App({
         'Content-Type':  'application/x-www-form-urlencoded'
       },
       success: function (res) {
-        //--init data        
+        //--init data
         var data = res.data.arr;
         var status = res.data.status;
         if(status!=1){

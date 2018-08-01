@@ -51,7 +51,7 @@ return array(
     'weixin'=>array(
 
 
-        'appid' =>'1257213537',			//微信appid
+        'appid' =>'wx0946fb221324672a',			//微信appid
         'secret'=>'', //微信secret
 
         'mchid' => '',
