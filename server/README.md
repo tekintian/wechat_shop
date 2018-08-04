@@ -4,21 +4,52 @@
 
   1) apache
 
-    开启URL Rewrite:
-    bin/apache/apache2.4.33/conf/httpd.conf: 修改AllowOverride None为AllowOverride all
+    yum install -y httpd
+    yum install -y mod_ssl openssl
+
+    /etc/httpd/conf.d/ssl.conf:
+      DocumentRoot "/var/www/html"
+      ServerName www.41833233.cn
+      ServerAlias 41833233.cn
+
+      SSLCertificateFile "/etc/httpd/conf/ssl/41833233.cn.crt"
+      SSLCertificateKeyFile "/etc/httpd/conf/ssl/41833233.cn.key"
+
+    /etc/httpd/conf/httpd.conf:
+      Include conf.modules.d/*.conf
+      LoadModule rewrite_module modules/mod_rewrite.so
+
+      AllowOverride all
+
+    systemctl start httpd.service
+    systemctl enable httpd.service
 
   2) mariadb
 
-    设置数据库密码:
-    bin/mariadb/mariadb10.2.14/my.ini: 修改;password = your_password为password = 123456
+    vi /etc/yum.repos.d/MariaDB.repo
 
-    禁止匿名用户:
-    bin/mariadb/mariadb10.2.14/my.ini: 修改;skip-grant-tables为skip-grant-tables
+    [mariadb]
+    name = MariaDB
+    baseurl = http://yum.mariadb.org/10.2/centos7-amd64
+    gpgkey=https://yum.mariadb.org/RPM-GPG-KEY-MariaDB
+    gpgcheck=1
+
+    yum install -y MariaDB-server MariaDB-client
+
+    systemctl start mariadb
+    systemctl enable mariadb
+
+    mysql_secure_installation
 
   3) php(PHP版本最好是PHP5.6, 支持PHP7.0)
 
+    rpm -Uvh https://mirror.webtatic.com/yum/el7/epel-release.rpm
+    rpm -Uvh https://mirror.webtatic.com/yum/el7/webtatic-release.rpm
+
+    yum install -y php56w php56w-opcache php56w-xml php56w-mcrypt php56w-gd php56w-devel php56w-mysql php56w-intl php56w-mbstring
+
     开启pathinfo模式支持:
-    bin/php/php5.6.35/php.ini: 修改;cgi.fix_pathinfo=1为cgi.fix_pathinfo=0
+    php.ini: cgi.fix_pathinfo=0
 
   4) 后台server_api配置
 
@@ -27,7 +58,7 @@
       上传server_api目录下的所有代码到你的服务器并运行yourname.com/adminer.php, 使用你的mysql账号登录后导入数据docs/wechat_shop.sql.gz【会自动创建数据库和导入演示数据】
 
     (2) 拷贝server_api下的文件到www目录下
-    
+
     (2) 修改App/Common/Conf/db.php里面的数据库连接参数为你自己的
 
       - 只需要修改你的数据库用户名和密码即可
