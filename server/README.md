@@ -1,130 +1,55 @@
-# 小程序服务端 server_api
+# 小程序服务端 server
 
-## 小程序服务端 server_api 部署方法
+## 环境搭建
 
   1) apache
 
-    yum install -y httpd
-    yum install -y mod_ssl openssl
+    yum install -y httpd mod_ssl
+
+    vi /etc/selinux/config:
+      SELINUX=disabled
+
+    systemctl stop firewalld
+    systemctl disable firewalld
 
     /etc/httpd/conf.d/ssl.conf:
-      DocumentRoot "/var/www/html"
-      ServerName www.41833233.cn
-      ServerAlias 41833233.cn
-
-      SSLCertificateFile "/etc/httpd/conf/ssl/41833233.cn.crt"
-      SSLCertificateKeyFile "/etc/httpd/conf/ssl/41833233.cn.key"
+      SSLCertificateFile /etc/pki/tls/certs/41833233.cn/41833233.cn.crt
+      SSLCertificateKeyFile /etc/pki/tls/certs/41833233.cn/41833233.cn.key
 
     /etc/httpd/conf/httpd.conf:
+      AllowOverride all
+
+      DirectoryIndex index.html index.php
+
       Include conf.modules.d/*.conf
       LoadModule rewrite_module modules/mod_rewrite.so
-
-      AllowOverride all
 
     systemctl start httpd.service
     systemctl enable httpd.service
 
   2) mariadb
 
-    vi /etc/yum.repos.d/MariaDB.repo
-
-    [mariadb]
-    name = MariaDB
-    baseurl = http://yum.mariadb.org/10.2/centos7-amd64
-    gpgkey=https://yum.mariadb.org/RPM-GPG-KEY-MariaDB
-    gpgcheck=1
-
-    yum install -y MariaDB-server MariaDB-client
+    yum install -y mariadb mariadb-server
 
     systemctl start mariadb
     systemctl enable mariadb
 
     mysql_secure_installation
 
-  3) php(PHP版本最好是PHP5.6, 支持PHP7.0)
+  3) php
 
-    rpm -Uvh https://mirror.webtatic.com/yum/el7/epel-release.rpm
-    rpm -Uvh https://mirror.webtatic.com/yum/el7/webtatic-release.rpm
-
-    yum install -y php56w php56w-opcache php56w-xml php56w-mcrypt php56w-gd php56w-devel php56w-mysql php56w-intl php56w-mbstring
+    yum install -y php php-mysql
 
     开启pathinfo模式支持:
     php.ini: cgi.fix_pathinfo=0
 
-  4) 后台server_api配置
+## 后台部署
 
-    (1) 导入数据
+  1) 拷贝server下的文件到/var/www/html目录下
 
-      上传server_api目录下的所有代码到你的服务器并运行yourname.com/adminer.php, 使用你的mysql账号登录后导入数据docs/wechat_shop.sql.gz【会自动创建数据库和导入演示数据】
+    cd /var/www/html
+    mkdir App/Runtime
+    chmod -R 0777 App/Runtime
 
-    (2) 拷贝server_api下的文件到www目录下
-
-    (2) 修改App/Common/Conf/db.php里面的数据库连接参数为你自己的
-
-      - 只需要修改你的数据库用户名和密码即可
-      ```conf
-      'DB_USER'               =>  'root',      // 用户名
-      'DB_PWD'                =>  '123456',      //数据库用户密码
-      ```
-
-    (3) 修改配置文件参数
-
-      App/Api/Conf/config.php: 微信小程序的appid, secret, mchid, key, notify_url, SELF_ROOT
-
-      ThinkPHP/Library/Vendor/wxpay/lib/WxPay.Config.php: 微信小程序的appid, appsecret, mchid, key
-
-      ThinkPHP/Library/Vendor/WeiXinpay/lib/WxPay.Config.php: 微信小程序的appid, appsecret, mchid, key, notify_url
-
-      App/Api/Controller/WxPayController.class.php: 50行修改链接
-
-    (4) 后台登录地址: youname.com/Admin/Login/index.html
-      用户名是admin, 密码是123456
-
-## Tengine/nginx配置文件示例
-  ```conf
-  server {
-      listen    80;
-      #你的域名，根据实际情况修改
-      server_name  wxshop.yunnan.ws;
-      #你的server_api文件夹位置，，根据实际情况修改
-      root    /home/wechat_shop/server_api;
-      #模式页面配置
-      index index.html index.php index.htm;
-    #这个是你的php的执行配置，根据实际情况修改
-    location ~ [^/]\.php(/|$) {
-      #fastcgi_pass remote_php_ip:9000;
-      fastcgi_pass unix:/dev/shm/php-cgi.sock;
-      fastcgi_index index.php;
-      include fastcgi.conf;
-      }
-    #rewrite配置，很重要，如果你不知道你在做什么，请勿修改！！！
-    if (!-e $request_filename) {
-      rewrite "^/(.*)"  /index.php?s=/$1 last;
-      break;
-    }
-    #禁止访问.ht文件配置
-    location ~ /\.ht {
-      deny all;
-    }
-    #禁止上传/静态目录的脚本权限
-    location ~* .*\/(Data|public|static|uploads|images)\/.*\.(php|php5|phps|asp|aspx|jsp)$ {
-       deny all;
-    }
-    # access_log
-    access_log /home/wwwlogs/wxshop.dd_access.log combined;
-  }
-  ```
-
-## Apache URL Rewrite配置示例
-  .htaccess 文件
-
-  ```htaccess
-  <IfModule mod_rewrite.c>
-    Options +FollowSymlinks
-    RewriteEngine On
-
-    RewriteCond %{REQUEST_FILENAME} !-d
-    RewriteCond %{REQUEST_FILENAME} !-f
-    RewriteRule ^(.*)$  /index.php?s=$1 [QSA,PT,L]
-  </IfModule>
-  ```
+  2) 后台配置
+  
