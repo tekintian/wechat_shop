@@ -62,8 +62,8 @@ Page( {
         'Content-Type':  'application/x-www-form-urlencoded'
       },
       success: function (res) {
-        //--init data        
-       
+        //--init data
+
         var status = res.data.status;
         if(status==1){
           var orderInfo = res.data.orderInfo;
@@ -87,7 +87,7 @@ Page( {
   },
   onShareAppMessage: function () {
     return {
-      title: '小程序商城',
+      title: '送菜娃商城',
       path: '/pages/index/index',
       success: function (res) {
         // 分享成功

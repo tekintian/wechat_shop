@@ -18,7 +18,7 @@ Page({
     kbs:[],
     lastcat:[]
   },
-//跳转商品列表页   
+//跳转商品列表页
 listdetail:function(e){
     console.log(e.currentTarget.dataset.title)
     wx.navigateTo({
@@ -34,7 +34,7 @@ listdetail:function(e){
       }
     })
   },
-//跳转商品搜索页  
+//跳转商品搜索页
 suo:function(e){
     wx.navigateTo({
       url: '../search/search',
@@ -94,7 +94,7 @@ getMore:function(e){
       header: {
         'Content-Type':  'application/x-www-form-urlencoded'
       },
-      success: function (res) {  
+      success: function (res) {
         var prolist = res.data.prolist;
         if(prolist==''){
           wx.showToast({
@@ -149,7 +149,7 @@ getMore:function(e){
       header: {
         'Content-Type':  'application/x-www-form-urlencoded'
       },
-      success: function (res) {  
+      success: function (res) {
         var focus = res.data.focus;
         var procat = res.data.procat;
         var prolist = res.data.prolist;
@@ -174,7 +174,7 @@ getMore:function(e){
   },
   onShareAppMessage: function () {
     return {
-      title: '小程序商城',
+      title: '送菜娃商城',
       path: '/pages/index/index',
       success: function(res) {
         // 分享成功
