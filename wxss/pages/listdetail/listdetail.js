@@ -4,7 +4,7 @@ Page({
     current: 0,
     shopList: [],
     ptype:'',
-    title:'小程序商城',
+    title:'送菜娃商城',
     page:2,
     catId:0,
     brandId: 0
@@ -66,7 +66,7 @@ getMore:function(e){
       header: {
         'Content-Type':  'application/x-www-form-urlencoded'
       },
-      success: function (res) {  
+      success: function (res) {
         var prolist = res.data.pro;
         if(prolist==''){
           wx.showToast({
