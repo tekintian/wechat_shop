@@ -26,7 +26,6 @@ if ( ! function_exists('pp')) {
         } else {
             echo $arr;
         }
-        die;
     }
 }
 
