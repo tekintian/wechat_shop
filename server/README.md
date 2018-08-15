@@ -13,8 +13,8 @@
     systemctl disable firewalld
 
     /etc/httpd/conf.d/ssl.conf:
-      SSLCertificateFile /etc/pki/tls/certs/41833233.cn/41833233.cn.crt
-      SSLCertificateKeyFile /etc/pki/tls/certs/41833233.cn/41833233.cn.key
+      SSLCertificateFile /etc/pki/tls/certs/hbsscw.com/hbsscw.com.crt
+      SSLCertificateKeyFile /etc/pki/tls/certs/hbsscw.com/hbsscw.com.key
 
     /etc/httpd/conf/httpd.conf:
       AllowOverride all
@@ -52,4 +52,4 @@
     chmod -R 0777 App/Runtime
 
   2) 后台配置
-  
+
