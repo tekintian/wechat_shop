@@ -58,7 +58,7 @@ return array(
         'key' => '',
 
         //这里是异步通知页面url，提交到项目的Pay控制器的notifyurl方法；
-        'notify_url'=>'https://41833233.cn/Api/Wxpay/notify',
+        'notify_url'=>'https://hbsscw.com/Api/Wxpay/notify',
 
     ),
 );

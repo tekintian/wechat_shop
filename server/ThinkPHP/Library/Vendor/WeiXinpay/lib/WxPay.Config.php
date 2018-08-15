@@ -25,7 +25,7 @@ class WxPayConfig
     const MCHID = '';
     const KEY = '';
     const APPSECRET = '';
-    const NOTIFY_URL = 'https://41833233.cn/index.php/Api/Wxpay/notify';
+    const NOTIFY_URL = 'https://hbsscw.com/index.php/Api/Wxpay/notify';
 	
 	//=======【证书路径设置】=====================================
 	/**
