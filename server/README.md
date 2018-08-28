@@ -15,6 +15,7 @@
     /etc/httpd/conf.d/ssl.conf:
       SSLCertificateFile /etc/pki/tls/certs/scwhbs.com/scwhbs.com.crt
       SSLCertificateKeyFile /etc/pki/tls/certs/scwhbs.com/scwhbs.com.key
+      SSLCertificateChainFile /etc/pki/tls/certs/scwhbs.com/scwhbs.com-chain.crt
 
     /etc/httpd/conf/httpd.conf:
       AllowOverride all
