@@ -1,13 +1,13 @@
 // app.js
 App({
   d: {
-    hostUrl: 'https://hbsscw.com/api/',
-    hostImg: 'https://hbsscw.com/api/',
-    hostVideo: 'https://hbsscw.com/api/',
+    hostUrl: 'https://scwhbs.com/api/',
+    hostImg: 'https://scwhbs.com/api/',
+    hostVideo: 'https://scwhbs.com/api/',
     userId: 1,
     appId:"wx5afa288e60d81f0e",
     appKey:"",
-    apiUrl:'https://hbsscw.com/api/',
+    apiUrl:'https://scwhbs.com/api/',
   },
   onLaunch: function () {
     //调用API从本地缓存中获取数据

@@ -13,8 +13,8 @@
     systemctl disable firewalld
 
     /etc/httpd/conf.d/ssl.conf:
-      SSLCertificateFile /etc/pki/tls/certs/hbsscw.com/hbsscw.com.crt
-      SSLCertificateKeyFile /etc/pki/tls/certs/hbsscw.com/hbsscw.com.key
+      SSLCertificateFile /etc/pki/tls/certs/scwhbs.com/scwhbs.com.crt
+      SSLCertificateKeyFile /etc/pki/tls/certs/scwhbs.com/scwhbs.com.key
 
     /etc/httpd/conf/httpd.conf:
       AllowOverride all
