@@ -104,7 +104,7 @@ class ProductController extends PublicController {
 		//$uid=I('request.uid');
 		$uid=1;
 		//获得产品信息
-		$pro = M('product')->field('id,shop_id,photo_x,name,price,price_yh')->where('id='.intval($pro_id).' AND del=0 AND is_down=0')->find();
+		$pro = M('product')->field('id,shop_id,photo_x,name,price,price_yh,company')->where('id='.intval($pro_id).' AND del=0 AND is_down=0')->find();
 		$pro['photo_x']=__DATAURL__.$pro['photo_x'];
 		if(!$pro){
 			echo json_encode(array('status'=>0,'err'=>'商品不存在或已下架！'));
@@ -217,6 +217,7 @@ class ProductController extends PublicController {
  			$json['photo_x']=__DATAURL__.$v['photo_x'];
  			$json['price']=$v['price'];
  			$json['price_yh']=$v['price_yh'];
+			$json['company']=$v['company'];
  			$json['shiyong']=$v['shiyong'];
  			$json['intro']=$v['intro'];
  			$json_arr[] = $json;
@@ -281,6 +282,7 @@ class ProductController extends PublicController {
  			$json['photo_x']=__DATAURL__.$v['photo_x'];
  			$json['price']=$v['price'];
  			$json['price_yh']=$v['price_yh'];
+			$json['company']=$v['company'];
  			$json['shiyong']=$v['shiyong'];
  			$json['intro']=$v['intro'];
  			$json_arr[] = $json;
@@ -378,7 +380,8 @@ class ProductController extends PublicController {
  			$json['photo_x']=__DATAURL__.$v['photo_x'];
  			$json['price']=$v['price'];
  			$json['price_yh']=$v['price_yh'];
- 			$json['shiyong']=$v['shiyong'];
+ 			$json['company']=$v['company'];
+			$json['shiyong']=$v['shiyong'];
  			//$json['intro']=$v['intro'];
  			if ($v['start_time']>time()) {
  				$json['state'] = 1;
@@ -441,6 +444,7 @@ class ProductController extends PublicController {
  			$json['photo_x']=__DATAURL__.$v['photo_x'];
  			$json['price']=$v['price'];
  			$json['price_yh']=$v['price_yh'];
+			$json['company']=$v['company'];
  			$json['shiyong']=$v['shiyong'];
  			//$json['intro']=$v['intro'];
  			if ($v['start_time']>time()) {
