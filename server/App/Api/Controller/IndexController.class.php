@@ -53,7 +53,7 @@ class IndexController extends PublicController {
         $limit = intval($page*8)-8;
         $limit = $limit>0 ? $limit :0;
         
-        $pro_list = M('product')->where('del=0 AND pro_type=1 AND is_down=0 AND type=1')->order('sort desc,id desc')->field('id,name,photo_x,price_yh,shiyong')->limit($limit.',8')->select();
+        $pro_list = M('product')->where('del=0 AND pro_type=1 AND is_down=0 AND type=1')->order('sort desc,id desc')->field('id,name,photo_x,price_yh,company,shiyong')->limit($limit.',8')->select();
         foreach ($pro_list as $k => $v) {
             $pro_list[$k]['photo_x'] = __DATAURL__.$v['photo_x'];
         }
