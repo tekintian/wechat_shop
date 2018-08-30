@@ -2,6 +2,7 @@ var app = getApp();
 
 Page({
   data: {
+    address: '',
     focus: [],
     indicatorDots: true,
     autoplay: true,
@@ -142,6 +143,7 @@ getMore:function(e){
 
   onLoad: function (options) {
     var that = this;
+
     wx.request({
       url: app.d.apiUrl + 'Index/index',
       method:'post',
@@ -161,6 +163,8 @@ getMore:function(e){
           productData:prolist,
           brand: brand
         });
+
+        that.initAddress();
         //endInitData
       },
       fail:function(e){
@@ -183,8 +187,44 @@ getMore:function(e){
         // 分享失败
       }
     }
+  },
+
+  initAddress: function() {
+    var that = this;
+
+    wx.getLocation({
+      type: 'wgs84', // 默认为 wgs84 返回 gps 坐标，gcj02 返回可用于 wx.openLocation 的坐标
+      success: function(res){
+        // success
+        var longitude=res.longitude
+        var latitude=res.latitude
+
+        wx.request({
+          url: 'https://api.map.baidu.com/geocoder/v2/?ak=gvKRWUeglHk8WKM6moMOkKeABeFwiK0v&location='+latitude+','+longitude+'&output=json',
+          data: {},
+          header:{
+            'Content-Type':'application/json'
+          },
+          success: function(res){
+            // success
+            console.log(res);
+            var address=res.data.result.formatted_address;
+            that.setData({address:address});
+          },
+          fail: function() {
+            // fail
+          },
+          complete: function() {
+            // complete
+          }
+        })
+      },
+      fail: function() {
+        // fail
+      },
+      complete: function() {
+        // complete
+      }
+    })
   }
-
-
-
 });

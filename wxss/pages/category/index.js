@@ -1,6 +1,6 @@
 // import ApiList from  '../../config/api';
 // import request from '../../utils/request.js';
-//获取应用实例  
+//获取应用实例
 var app = getApp();
 Page({
     data: {
@@ -12,7 +12,7 @@ Page({
         ],
         typeTree: [],
     },
-        
+
     onLoad: function (option){
         var that = this;
         wx.request({
@@ -23,9 +23,9 @@ Page({
                 'Content-Type':  'application/x-www-form-urlencoded'
             },
             success: function (res) {
-                //--init data 
+                //--init data
                 var status = res.data.status;
-                if(status==1) { 
+                if(status==1) {
                     var list = res.data.list;
                     var catList = res.data.catList;
                     that.setData({
@@ -40,7 +40,7 @@ Page({
                 }
      that.setData({
             currType: 2
-        });    
+        });
       console.log(list)
 
             },
@@ -52,9 +52,7 @@ Page({
             },
 
         });
-    },    
- 
-
+    },
 
     tapType: function (e){
         var that = this;
@@ -73,7 +71,7 @@ Page({
             },
             success: function (res) {
                 var status = res.data.status;
-                if(status==1) { 
+                if(status==1) {
                     var catList = res.data.catList;
                     that.setData({
                         typeTree:catList,
@@ -108,5 +106,12 @@ Page({
                 }
             });
         }
+    },
+
+    doSearch:function(){
+      var searchKey = this.data.searchValue;
+      wx.navigateTo({
+        url: '/pages/search/search?searchValue=tudou',
+      })
     }
 })

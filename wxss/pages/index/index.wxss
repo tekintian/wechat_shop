@@ -5,6 +5,13 @@
   background-color: #fff;
 }
 
+.address{
+    padding: 1% 3%;
+    background: #ccff66;
+    font-size:24rpx;
+    font-weight:bold;
+}
+
 .swiper-item {
   display: block;
   height: 150px;

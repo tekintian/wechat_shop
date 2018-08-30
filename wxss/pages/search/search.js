@@ -42,7 +42,7 @@ Page({
       this.setData({
         page:(this.data.page+10)
       })
-      
+
       this.searchProductData();
   },
   doKeySearch:function(e){
@@ -71,7 +71,7 @@ Page({
       hotKeyShow:false,
       historyKeyShow:false,
     })
-    
+
     this.data.productData.length = 0;
     this.searchProductData();
 
@@ -126,7 +126,7 @@ Page({
       header: {
         'Content-Type':  'application/x-www-form-urlencoded'
       },
-      success: function (res) {   
+      success: function (res) {
         var data = res.data.pro;
         that.setData({
           productData:that.data.productData.concat(data),
