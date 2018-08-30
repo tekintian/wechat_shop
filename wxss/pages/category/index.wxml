@@ -1,7 +1,6 @@
 <!-- 搜索框 -->
-<view class="search df">
-  <input class="df_1" placeholder="请输入你想要的菜品" auto-focus focus="{{focus}}" value="{{searchValue}}" bindinput="searchValueInput"/>
-  <button bindtap="doSearch"><image class="searchcion" src="/images/search.png"></image></button>
+<view class="search">
+  <button bindtap="doSearch"><image class="searchcion" src="/images/search.png"></image>请搜索你想要的菜品</button>
 </view>
 
 <view class="section">

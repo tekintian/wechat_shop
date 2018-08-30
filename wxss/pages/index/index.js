@@ -35,21 +35,6 @@ listdetail:function(e){
       }
     })
   },
-//跳转商品搜索页
-suo:function(e){
-    wx.navigateTo({
-      url: '../search/search',
-      success: function(res){
-        // success
-      },
-      fail: function() {
-        // fail
-      },
-      complete: function() {
-        // complete
-      }
-    })
-  },
 
 //品牌街跳转商家详情页
 jj:function(e){
@@ -225,6 +210,13 @@ getMore:function(e){
       complete: function() {
         // complete
       }
+    })
+  },
+
+  doSearch:function(){
+    var searchKey = this.data.searchValue;
+    wx.navigateTo({
+      url: '/pages/search/search',
     })
   }
 });
