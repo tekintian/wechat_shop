@@ -111,7 +111,7 @@ Page({
     doSearch:function(){
       var searchKey = this.data.searchValue;
       wx.navigateTo({
-        url: '/pages/search/search?searchValue=tudou',
+        url: '/pages/search/search',
       })
     }
 })
