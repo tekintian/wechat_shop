@@ -49,7 +49,7 @@ class SearchController extends PublicController {
             $page=0;
         }
 
-        $prolist = M('product')->where('del=0 AND pro_type=1 AND is_down=0 AND name LIKE "%'.$keyword.'%"')->order('addtime desc')->field('id,name,photo_x,shiyong,price,price_yh')->select();
+        $prolist = M('product')->where('del=0 AND pro_type=1 AND is_down=0 AND name LIKE "%'.$keyword.'%"')->order('addtime desc')->field('id,name,photo_x,shiyong,price,price_yh,company')->select();
         foreach ($prolist as $k => $v) {
             $prolist[$k]['photo_x'] = __DATAURL__.$v['photo_x'];
         }
@@ -70,7 +70,7 @@ class SearchController extends PublicController {
             $store_list[$k]['city'] = M('china_city')->where('id='.intval($v['city']))->getField('name');
             $store_list[$k]['quyu'] = M('china_city')->where('id='.intval($v['quyu']))->getField('name');
             $store_list[$k]['logo'] = __DATAURL__.$v['logo'];
-            $pro_list = M('product')->where('del=0 AND is_down=0 AND shop_id='.intval($v['id']))->field('id,photo_x,price_yh')->limit(4)->select();
+            $pro_list = M('product')->where('del=0 AND is_down=0 AND shop_id='.intval($v['id']))->field('id,photo_x,price_yh,company')->limit(4)->select();
             foreach ($pro_list as $key => $val) {
                 $pro_list[$key]['photo_x'] = __DATAURL__.$val['photo_x'];
             }
