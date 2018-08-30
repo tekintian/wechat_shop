@@ -95,7 +95,7 @@ page{
 /*边框*/
 .bte{border-top:solid 1px #eee;}
 .bbe{border-bottom: solid 1px #eee;}
-.bre{ border-right: 1px solid #eee}
+.bre{border-right: 1px solid #eee}
 
 /*浮动*/
 .fl_l{ float: left;}
