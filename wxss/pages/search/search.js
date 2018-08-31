@@ -1,75 +1,88 @@
-var app = getApp();
 // pages/search/search.js
-Page({
-  data:{
-    focus:true,
-    hotKeyShow:true,
-    historyKeyShow:true,
-    searchValue:'',
-    page:0,
-    productData:[],
-    historyKeyList:[],
-    hotKeyList:[]
+
+var app = getApp();
+
+Page ({
+  data: {
+    focus         : true,
+    hotKeyShow    : true,
+    historyKeyShow: true,
+    searchValue   : '',
+    page          : 0,
+    productData   : [],
+    historyKeyList: [],
+    hotKeyList    : []
   },
-  onLoad:function(options){
+
+  onLoad: function(options) {
     var that = this;
+
     wx.request({
-      url: app.d.apiUrl + 'Search/index',
-      method:'post',
-      data: {uid:app.d.userId},
+      url   : app.d.apiUrl + 'Search/index',
+      method: 'post',
+      data  : {
+        uid : app.d.userId
+      },
       header: {
-        'Content-Type':  'application/x-www-form-urlencoded'
+        'Content-Type': 'application/x-www-form-urlencoded'
       },
       success: function (res) {
         var remen = res.data.remen;
         var history = res.data.history;
 
         that.setData({
-          historyKeyList:history,
-          hotKeyList:remen,
+          historyKeyList: history,
+          hotKeyList    : remen,
         });
       },
-      fail:function(e){
+
+      fail: function(e) {
         wx.showToast({
-          title: '网络异常！',
+          title   : '网络异常！',
           duration: 2000
         });
       },
     })
   },
-  onReachBottom:function(){
-      //下拉加载更多多...
-      this.setData({
-        page:(this.data.page+10)
-      })
 
-      this.searchProductData();
-  },
-  doKeySearch:function(e){
-    var key = e.currentTarget.dataset.key;
+  onReachBottom: function() {
+    // 下拉加载更多多...
     this.setData({
-      searchValue: key,
-       hotKeyShow:false,
-       historyKeyShow:false,
+      page: this.data.page+10
+    })
+
+    this.searchProductData();
+  },
+
+  doKeySearch: function(e) {
+    var key = e.currentTarget.dataset.key;
+
+    this.setData({
+      searchValue     : key,
+       hotKeyShow     : false,
+       historyKeyShow : false,
     });
 
     this.data.productData.length = 0;
     this.searchProductData();
   },
-  doSearch:function(){
+
+  doSearch: function() {
     var searchKey = this.data.searchValue;
+
     if (!searchKey) {
-        this.setData({
-            focus: true,
-            hotKeyShow:true,
-            historyKeyShow:true,
-        });
-        return;
+      this.setData({
+        focus         : true,
+        hotKeyShow    : true,
+        historyKeyShow: true,
+      });
+
+      return;
     };
 
     this.setData({
-      hotKeyShow:false,
-      historyKeyShow:false,
+      hotKeyShow    : false,
+      historyKeyShow: false,
     })
 
     this.data.productData.length = 0;
@@ -77,68 +90,79 @@ Page({
 
     this.getOrSetSearchHistory(searchKey);
   },
-  getOrSetSearchHistory:function(key){
+
+  getOrSetSearchHistory: function(key) {
     var that = this;
+
     wx.getStorage({
-      key: 'historyKeyList',
+      key : 'historyKeyList',
+
       success: function(res) {
-          console.log(res.data);
+        console.log(res.data);
 
-          //console.log(res.data.indexOf(key))
-          if(res.data.indexOf(key) >= 0){
-            return;
-          }
+        // console.log(res.data.indexOf(key))
+        if (res.data.indexOf(key) >= 0) {
+          return;
+        }
 
-          res.data.push(key);
-          wx.setStorage({
-            key:"historyKeyList",
-            data:res.data,
-          });
+        res.data.push(key);
 
-          that.setData({
-            historyKeyList:res.data
-          });
+        wx.setStorage({
+          key : "historyKeyList",
+          data: res.data,
+        });
+
+        that.setData({
+          historyKeyList: res.data
+        });
       }
     });
   },
-  searchValueInput:function(e){
+
+  searchValueInput: function(e) {
     var value = e.detail.value;
+
     this.setData({
-      searchValue:value,
+      searchValue : value,
     });
-    if(!value && this.data.productData.length == 0){
+
+    if (!value && this.data.productData.length == 0) {
       this.setData({
-        hotKeyShow:true,
-        historyKeyShow:true,
+        hotKeyShow    : true,
+        historyKeyShow: true,
       });
     }
   },
-  searchProductData:function(){
+
+  searchProductData: function() {
     var that = this;
+
     wx.request({
-      url: app.d.apiUrl + 'Search/searches',
-      method:'post',
-      data: {
-        keyword:that.data.searchValue,
-        uid: app.d.userId,
-        page:that.data.page,
+      url   : app.d.apiUrl + 'Search/searches',
+      method: 'post',
+      data  : {
+        keyword : that.data.searchValue,
+        uid     : app.d.userId,
+        page    : that.data.page,
       },
       header: {
-        'Content-Type':  'application/x-www-form-urlencoded'
+        'Content-Type': 'application/x-www-form-urlencoded'
       },
+
       success: function (res) {
         var data = res.data.pro;
+
         that.setData({
-          productData:that.data.productData.concat(data),
+          productData : that.data.productData.concat(data),
         });
       },
-      fail:function(e){
+
+      fail: function(e) {
         wx.showToast({
-          title: '网络异常！',
+          title   : '网络异常！',
           duration: 2000
         });
       },
     });
   },
-
 });

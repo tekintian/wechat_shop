@@ -1,83 +1,98 @@
 /* pages/search/search.wxss */
-.search{
-    padding: 1% 3%;
-    background: #ff3399;
+
+.search {
+  padding       : 1% 3%;
+  background    : #ff3399;
 }
-.search input{
-    width: 75%;
-    border-radius: 13px;
-    background: #fff;
-    border: none;
-    font-size: 12px;
-    padding:1% 2.5%;
-    margin-right: 5px;
-    }
-.search button{
-    line-height:30px;
-    background: none;
-    text-align: center;
-    border: none;
-    padding: 3px;
+
+.search input {
+  width         : 75%;
+  border-radius : 13px;
+  background    : #fff;
+  border        : none;
+  font-size     : 12px;
+  padding       : 1% 2.5%;
+  margin-right  : 5px;
 }
-.search button::after{
-    content: none;
+
+.search button {
+  line-height   : 30px;
+  background    : none;
+  text-align    : center;
+  border        : none;
+  padding       : 3px;
 }
-.searchcion{
-    width: 24px;
-    height: 24px;
-    text-align: center
+
+.search button::after {
+  content       : none;
 }
-.cont{
-     width: 94%;
-     padding: 3%;     
+
+.searchcion {
+  width         : 24px;
+  height        : 24px;
+  text-align    : center
 }
-.w100{ 
-    width: 100%;
-    padding-bottom: 10px;
+
+.cont {
+   width        : 94%;
+   padding      : 3%;
 }
-.w100 button{
-    text-align: center;
-    line-height: 20px;
-    margin: 3% 2% 0 0;
-    display: inline-table;
-    padding:5px 10px;
-    font-size: 12px;
+
+.w100 {
+  width         : 100%;
+  padding-bottom: 10px;
 }
-.shop{
-    width: 49%;
-    background: #fff;
-    float: left;
-    margin-bottom: 4%;
+
+.w100 button {
+  text-align    : center;
+  line-height   : 20px;
+  margin        : 3% 2% 0 0;
+  display       : inline-table;
+  padding       :5px 10px;
+  font-size     : 12px;
 }
-.shop:nth-child(even){
-    margin-right: 2%;
+
+.shop {
+  width         : 49%;
+  background    : #fff;
+  float         : left;
+  margin-bottom : 4%;
 }
-.sh_slt{
-    width: 100%;
-    height: 370rpx;
-    overflow: hidden;
+
+.shop:nth-child(even) {
+  margin-right  : 2%;
 }
-.sp_text{
-    float: left;
-    line-height: 25px;
-    width: 92%;
-    padding: 4%;
+
+.sh_slt {
+  width         : 100%;
+  height        : 370rpx;
+  overflow      : hidden;
 }
-.sp_tit{
-    width: 100%;
-    overflow: hidden;
-    font-size: 14px;
+
+.sp_text {
+  float         : left;
+  line-height   : 25px;
+  width         : 92%;
+  padding       : 4%;
 }
-.sp_company{
-    width: 100%;
-    overflow: hidden;
-    font-size: 14px;
-    font-weight: bold;
+
+.sp_tit {
+  width         : 100%;
+  overflow      : hidden;
+  font-size     : 14px;
 }
-.sp_jg{
-    width: 100%;
-    overflow: hidden;
-    font-size: 14px;
-    color: #fc0628;
-    line-height: 30px;
+
+.sp_company {
+  width         : 100%;
+  overflow      : hidden;
+  font-size     : 14px;
+  font-weight   : bold;
+}
+
+.sp_jg {
+  width         : 100%;
+  overflow      : hidden;
+  font-size     : 14px;
+  color         : #fc0628;
+  line-height : 30px;
 }

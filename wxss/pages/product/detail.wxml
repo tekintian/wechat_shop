@@ -1,8 +1,8 @@
-<!--pages/index/detail.wxml-->
+<!-- pages/index/detail.wxml -->
 
-<!--内容开始-->
+<!-- 内容开始 -->
 <view class="cont">
-  <!--<image class="tp_image" src="{{itemData.photo_d}}"></image>-->
+  <!-- <image class="tp_image" src="{{itemData.photo_d}}"></image> -->
   <swiper style="height:375px" indicator-dots="{{indicatorDots}}" autoplay="{{autoplay}}" interval="{{interval}}" duration="{{duration}}">
     <block wx:for="{{bannerItem}}"  wx:key="id">
       <swiper-item>
@@ -38,11 +38,12 @@
         </view>
       </view>
 
-      <!--<view>
+      <!--
+      <view>
         <text class="cun">尺寸</text>
-      </view>-->
+      </view>
 
-      <!--<view class="commodity_attr_list">
+      <view class="commodity_attr_list">
         <view class="attr_box" wx:for="{{attrValueList}}" wx:for-item="attrValueObj" wx:for-index="attrValueList">
           <view class="attr_name">{{attrValueObj.attrKey}}</view>
 
@@ -50,7 +51,8 @@
             <view class="attr_value {{attrIndex==firstIndex || attrValueObj.attrValueStatus[valueIndex]?(value==attrValueObj.selectedValue?'attr_value_active':''):'attr_value_disabled'}}" bindtap="selectAttrValue" data-status="{{attrValueObj.attrValueStatus[valueIndex]}}" data-value="{{value}}" data-key="{{attrValueObj.attrKey}}" data-index="{{attrIndex}}" data-selectedvalue="{{attrValueObj.selectedValue}}" wx:for="{{attrValueObj.attrValues}}" wx:for-item="value" wx:for-index="valueIndex">{{value}}</view>
           </view>
         </view>
-      </view>-->
+      </view>
+      -->
 
       <view class="shu">
         <text class="cun">购买数量</text>
