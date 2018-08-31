@@ -4,9 +4,11 @@
       <input type="text" hidden="true" value="{{mid}}" name="user_id"/>
       <input type="text" name="name" placeholder="收货人姓名" />
     </view>
+
     <view class="section">
       <input type="text" name="phone" placeholder="电话号码" />
     </view>
+
     <view class="section">
       <picker bindchange="bindPickerChangeshengArr" value="{{shengIndex}}" range="{{shengArr}}" data-id="{{shengId[shengIndex]}}">
         <view class="picker">
@@ -15,6 +17,7 @@
         </view>
       </picker>
     </view>
+
     <view class="section">
       <picker bindchange="bindPickerChangeshiArr" value="{{shiIndex}}" range="{{shiArr}}">
         <view class="picker">
@@ -23,6 +26,7 @@
         </view>
       </picker>
     </view>
+
     <view class="section">
       <picker bindchange="bindPickerChangequArr" value="{{quIndex}}" range="{{quArr}}">
         <view class="picker">
@@ -31,12 +35,15 @@
         </view>
       </picker>
     </view>
+
     <view class="section">
       <input type="text" class="ww" name="address" placeholder="详细地址" />
     </view>
+
     <view>
       <label></label>
     </view>
+
     <view class="btn-area">
       <button formType="submit">保存地址</button>
     </view>

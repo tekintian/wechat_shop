@@ -1,18 +1,23 @@
 // pages/address/user-address/user-address.js
+
 var app = getApp()
-Page({
+
+Page ({
   data: {
-    address: [],
+    address   : [],
     radioindex: '',
-    pro_id:0,
-    num:0,
-    cartId:0
+    pro_id    : 0,
+    num       : 0,
+    cartId    : 0
   },
+
   onLoad: function (options) {
     var that = this;
+
     // 页面初始化 options为页面跳转所带来的参数
     var cartId = options.cartId;
     console.log(app.d.userId);
+
     wx.request({
       url: app.d.apiUrl + 'Address/index',
       data: {
@@ -22,20 +27,22 @@ Page({
       header: {// 设置请求的 header
         'Content-Type':  'application/x-www-form-urlencoded'
       },
-      
+
       success: function (res) {
         // success
         var address = res.data.adds;
         console.log(address);
+
         if (address == '') {
           var address = []
         }
-        
+
         that.setData({
           address: address,
           cartId: cartId,
         })
       },
+
       fail: function () {
         // fail
         wx.showToast({
@@ -44,15 +51,16 @@ Page({
         });
       }
     })
-    
   },
 
   onReady: function () {
     // 页面渲染完成
   },
+
   setDefault: function(e) {
     var that = this;
     var addrId = e.currentTarget.dataset.id;
+
     wx.request({
       url: app.d.apiUrl + 'Address/set_default',
       data: {
@@ -63,16 +71,18 @@ Page({
       header: {// 设置请求的 header
         'Content-Type':  'application/x-www-form-urlencoded'
       },
-      
+
       success: function (res) {
         // success
         var status = res.data.status;
         var cartId = that.data.cartId;
+
         if(status==1){
           if (cartId) {
             wx.redirectTo({
               url: '../../order/pay?cartId=' + cartId,
             });
+
             return false;
           }
 
@@ -80,7 +90,7 @@ Page({
             title: '操作成功！',
             duration: 2000
           });
-          
+
           that.DataonLoad();
         }else{
           wx.showToast({
@@ -89,6 +99,7 @@ Page({
           });
         }
       },
+
       fail: function () {
         // fail
         wx.showToast({
@@ -98,12 +109,16 @@ Page({
       }
     })
   },
+
   delAddress: function (e) {
     var that = this;
+
     var addrId = e.currentTarget.dataset.id;
+
     wx.showModal({
       title: '提示',
       content: '你确认移除吗',
+
       success: function(res) {
         res.confirm && wx.request({
           url: app.d.apiUrl + 'Address/del_adds',
@@ -115,7 +130,7 @@ Page({
           header: {// 设置请求的 header
             'Content-Type':  'application/x-www-form-urlencoded'
           },
-          
+
           success: function (res) {
             // success
             var status = res.data.status;
@@ -128,6 +143,7 @@ Page({
               });
             }
           },
+
           fail: function () {
             // fail
             wx.showToast({
@@ -138,10 +154,11 @@ Page({
         });
       }
     });
-
   },
+
   DataonLoad: function () {
     var that = this;
+
     // 页面初始化 options为页面跳转所带来的参数
     wx.request({
       url: app.d.apiUrl + 'Address/index',
@@ -152,7 +169,7 @@ Page({
       header: {// 设置请求的 header
         'Content-Type':  'application/x-www-form-urlencoded'
       },
-      
+
       success: function (res) {
         // success
         var address = res.data.adds;
@@ -163,6 +180,7 @@ Page({
           address: address,
         })
       },
+
       fail: function () {
         // fail
         wx.showToast({
@@ -171,6 +189,5 @@ Page({
         });
       }
     })
-    
   },
 })
