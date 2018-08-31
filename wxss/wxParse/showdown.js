@@ -1,13 +1,13 @@
 /**
- * 
+ *
  * showdown: https://github.com/showdownjs/showdown
- * 
+ *
  * author: Di (微信小程序开发工程师)
  * organization: WeAppDev(微信小程序开发论坛)(http://weappdev.com)
  *               垂直微信小程序开发交流社区
- * 
+ *
  * github地址: https://github.com/icindy/wxParse
- * 
+ *
  * for: 微信小程序富文本解析
  * detail : http://weappdev.com/t/wxparse-alpha0-1-html-markdown/184
  */
@@ -87,41 +87,43 @@ function getDefaultOpts(simple) {
       type: 'boolean'
     }
   };
+
   if (simple === false) {
     return JSON.parse(JSON.stringify(defaultOptions));
   }
+
   var ret = {};
+
   for (var opt in defaultOptions) {
     if (defaultOptions.hasOwnProperty(opt)) {
       ret[opt] = defaultOptions[opt].defaultValue;
     }
   }
+
   return ret;
 }
 
-/**
- * Created by Tivie on 06-01-2015.
- */
-
 // Private properties
 var showdown = {},
-    parsers = {},
-    extensions = {},
-    globalOptions = getDefaultOpts(true),
-    flavor = {
-      github: {
-        omitExtraWLInCodeBlocks:   true,
-        prefixHeaderId:            'user-content-',
-        simplifiedAutoLink:        true,
-        literalMidWordUnderscores: true,
-        strikethrough:             true,
-        tables:                    true,
-        tablesHeaderId:            true,
-        ghCodeBlocks:              true,
-        tasklists:                 true
-      },
-      vanilla: getDefaultOpts(true)
-    };
+parsers = {},
+extensions = {},
+globalOptions = getDefaultOpts(true),
+
+flavor = {
+  github: {
+    omitExtraWLInCodeBlocks:   true,
+    prefixHeaderId:            'user-content-',
+    simplifiedAutoLink:        true,
+    literalMidWordUnderscores: true,
+    strikethrough:             true,
+    tables:                    true,
+    tablesHeaderId:            true,
+    ghCodeBlocks:              true,
+    tasklists:                 true
+  },
+
+  vanilla: getDefaultOpts(true)
+};
 
 /**
  * helper namespace
@@ -145,6 +147,7 @@ showdown.extensions = {};
 showdown.setOption = function (key, value) {
   'use strict';
   globalOptions[key] = value;
+
   return this;
 };
 
@@ -156,6 +159,7 @@ showdown.setOption = function (key, value) {
  */
 showdown.getOption = function (key) {
   'use strict';
+
   return globalOptions[key];
 };
 
@@ -166,6 +170,7 @@ showdown.getOption = function (key) {
  */
 showdown.getOptions = function () {
   'use strict';
+
   return globalOptions;
 };
 
@@ -175,6 +180,7 @@ showdown.getOptions = function () {
  */
 showdown.resetOptions = function () {
   'use strict';
+
   globalOptions = getDefaultOpts(true);
 };
 
@@ -184,8 +190,10 @@ showdown.resetOptions = function () {
  */
 showdown.setFlavor = function (name) {
   'use strict';
+
   if (flavor.hasOwnProperty(name)) {
     var preset = flavor[name];
+
     for (var option in preset) {
       if (preset.hasOwnProperty(option)) {
         globalOptions[option] = preset[option];
@@ -202,6 +210,7 @@ showdown.setFlavor = function (name) {
  */
 showdown.getDefaultOptions = function (simple) {
   'use strict';
+
   return getDefaultOpts(simple);
 };
 
@@ -217,6 +226,7 @@ showdown.getDefaultOptions = function (simple) {
  */
 showdown.subParser = function (name, func) {
   'use strict';
+
   if (showdown.helper.isString(name)) {
     if (typeof func !== 'undefined') {
       parsers[name] = func;
@@ -251,6 +261,7 @@ showdown.extension = function (name, ext) {
     if (!extensions.hasOwnProperty(name)) {
       throw Error('Extension named ' + name + ' is not registered!');
     }
+
     return extensions[name];
 
     // Setter
@@ -281,6 +292,7 @@ showdown.extension = function (name, ext) {
  */
 showdown.getAllExtensions = function () {
   'use strict';
+
   return extensions;
 };
 
@@ -290,6 +302,7 @@ showdown.getAllExtensions = function () {
  */
 showdown.removeExtension = function (name) {
   'use strict';
+
   delete extensions[name];
 };
 
@@ -298,6 +311,7 @@ showdown.removeExtension = function (name) {
  */
 showdown.resetExtensions = function () {
   'use strict';
+
   extensions = {};
 };
 
@@ -322,7 +336,7 @@ function validate(extension, name) {
 
   for (var i = 0; i < extension.length; ++i) {
     var baseMsg = errMsg + ' sub-extension ' + i + ': ',
-        ext = extension[i];
+      ext = extension[i];
     if (typeof ext !== 'object') {
       ret.valid = false;
       ret.error = baseMsg + 'must be an object, but ' + typeof ext + ' given';
@@ -349,6 +363,7 @@ function validate(extension, name) {
     if (type !== 'lang' && type !== 'output' && type !== 'listener') {
       ret.valid = false;
       ret.error = baseMsg + 'type ' + type + ' is not recognized. Valid values: "lang/language", "output/html" or "listener"';
+
       return ret;
     }
 
@@ -356,12 +371,14 @@ function validate(extension, name) {
       if (showdown.helper.isUndefined(ext.listeners)) {
         ret.valid = false;
         ret.error = baseMsg + '. Extensions of type "listener" must have a property called "listeners"';
+
         return ret;
       }
     } else {
       if (showdown.helper.isUndefined(ext.filter) && showdown.helper.isUndefined(ext.regex)) {
         ret.valid = false;
         ret.error = baseMsg + type + ' extensions must define either a "regex" property or a "filter" method';
+
         return ret;
       }
     }
@@ -370,6 +387,7 @@ function validate(extension, name) {
       if (typeof ext.listeners !== 'object') {
         ret.valid = false;
         ret.error = baseMsg + '"listeners" property must be an object but ' + typeof ext.listeners + ' given';
+
         return ret;
       }
       for (var ln in ext.listeners) {
@@ -378,6 +396,7 @@ function validate(extension, name) {
             ret.valid = false;
             ret.error = baseMsg + '"listeners" property must be an hash of [event name]: [callback]. listeners.' + ln +
               ' must be a function but ' + typeof ext.listeners[ln] + ' given';
+
             return ret;
           }
         }
@@ -388,6 +407,7 @@ function validate(extension, name) {
       if (typeof ext.filter !== 'function') {
         ret.valid = false;
         ret.error = baseMsg + '"filter" must be a function, but ' + typeof ext.filter + ' given';
+
         return ret;
       }
     } else if (ext.regex) {
@@ -397,15 +417,18 @@ function validate(extension, name) {
       if (!ext.regex instanceof RegExp) {
         ret.valid = false;
         ret.error = baseMsg + '"regex" property must either be a string or a RegExp object, but ' + typeof ext.regex + ' given';
+
         return ret;
       }
       if (showdown.helper.isUndefined(ext.replace)) {
         ret.valid = false;
         ret.error = baseMsg + '"regex" extensions must implement a replace string or function';
+
         return ret;
       }
     }
   }
+
   return ret;
 }
 
@@ -420,8 +443,10 @@ showdown.validateExtension = function (ext) {
   var validateExtension = validate(ext, null);
   if (!validateExtension.valid) {
     console.warn(validateExtension.error);
+
     return false;
   }
+
   return true;
 };
 
@@ -441,6 +466,7 @@ if (!showdown.hasOwnProperty('helper')) {
  */
 showdown.helper.isString = function isString(a) {
   'use strict';
+
   return (typeof a === 'string' || a instanceof String);
 };
 
@@ -452,7 +478,9 @@ showdown.helper.isString = function isString(a) {
  */
 showdown.helper.isFunction = function isFunction(a) {
   'use strict';
+
   var getType = {};
+
   return a && getType.toString.call(a) === '[object Function]';
 };
 
@@ -464,6 +492,7 @@ showdown.helper.isFunction = function isFunction(a) {
  */
 showdown.helper.forEach = function forEach(obj, callback) {
   'use strict';
+
   if (typeof obj.forEach === 'function') {
     obj.forEach(callback);
   } else {
@@ -481,6 +510,7 @@ showdown.helper.forEach = function forEach(obj, callback) {
  */
 showdown.helper.isArray = function isArray(a) {
   'use strict';
+
   return a.constructor === Array;
 };
 
@@ -492,6 +522,7 @@ showdown.helper.isArray = function isArray(a) {
  */
 showdown.helper.isUndefined = function isUndefined(value) {
   'use strict';
+
   return typeof value === 'undefined';
 };
 
@@ -503,12 +534,15 @@ showdown.helper.isUndefined = function isUndefined(value) {
  */
 showdown.helper.stdExtName = function (s) {
   'use strict';
+
   return s.replace(/[_-]||\s/g, '').toLowerCase();
 };
 
 function escapeCharactersCallback(wholeMatch, m1) {
   'use strict';
+
   var charCodeToEscape = m1.charCodeAt(0);
+
   return '~E' + charCodeToEscape + 'E';
 }
 
@@ -531,6 +565,7 @@ showdown.helper.escapeCharactersCallback = escapeCharactersCallback;
  */
 showdown.helper.escapeCharacters = function escapeCharacters(text, charsToEscape, afterBackslash) {
   'use strict';
+
   // First we have to escape the escape characters so that
   // we can build a character class out of them
   var regexString = '([' + charsToEscape.replace(/([\[\]\\])/g, '\\$1') + '])';
@@ -547,6 +582,7 @@ showdown.helper.escapeCharacters = function escapeCharacters(text, charsToEscape
 
 var rgxFindMatchPos = function (str, left, right, flags) {
   'use strict';
+
   var f = flags || '',
     g = f.indexOf('g') > -1,
     x = new RegExp(left + '|' + right, 'g' + f.replace(/g/g, '')),
@@ -556,6 +592,7 @@ var rgxFindMatchPos = function (str, left, right, flags) {
 
   do {
     t = 0;
+
     while ((m = x.exec(str))) {
       if (l.test(m[0])) {
         if (!(t++)) {
@@ -565,13 +602,16 @@ var rgxFindMatchPos = function (str, left, right, flags) {
       } else if (t) {
         if (!--t) {
           end = m.index + m[0].length;
+
           var obj = {
             left: {start: start, end: s},
             match: {start: s, end: m.index},
             right: {start: m.index, end: end},
             wholeMatch: {start: start, end: end}
           };
+
           pos.push(obj);
+
           if (!g) {
             return pos;
           }
@@ -626,6 +666,7 @@ showdown.helper.matchRecursiveRegExp = function (str, left, right, flags) {
       str.slice(matchPos[i].right.start, matchPos[i].right.end)
     ]);
   }
+
   return results;
 };
 
@@ -649,8 +690,8 @@ showdown.helper.replaceRecursiveRegExp = function (str, replacement, left, right
   }
 
   var matchPos = rgxFindMatchPos(str, left, right, flags),
-      finalStr = str,
-      lng = matchPos.length;
+    finalStr = str,
+    lng = matchPos.length;
 
   if (lng > 0) {
     var bits = [];
@@ -675,6 +716,7 @@ showdown.helper.replaceRecursiveRegExp = function (str, replacement, left, right
     }
     finalStr = bits.join('');
   }
+
   return finalStr;
 };
 
@@ -712,33 +754,33 @@ showdown.Converter = function (converterOptions) {
   'use strict';
 
   var
-      /**
-       * Options used by this converter
-       * @private
-       * @type {{}}
-       */
-      options = {},
+    /**
+     * Options used by this converter
+     * @private
+     * @type {{}}
+     */
+    options = {},
 
-      /**
-       * Language extensions used by this converter
-       * @private
-       * @type {Array}
-       */
-      langExtensions = [],
+    /**
+     * Language extensions used by this converter
+     * @private
+     * @type {Array}
+     */
+    langExtensions = [],
 
-      /**
-       * Output modifiers extensions used by this converter
-       * @private
-       * @type {Array}
-       */
-      outputModifiers = [],
+    /**
+     * Output modifiers extensions used by this converter
+     * @private
+     * @type {Array}
+     */
+    outputModifiers = [],
 
-      /**
-       * Event listeners
-       * @private
-       * @type {{}}
-       */
-      listeners = {};
+    /**
+     * Event listeners
+     * @private
+     * @type {{}}
+     */
+    listeners = {};
 
   _constructor();
 
@@ -1117,17 +1159,19 @@ showdown.subParser('anchors', function (text, options, globals) {
     if (showdown.helper.isUndefined(m7)) {
       m7 = '';
     }
+
     wholeMatch = m1;
     var linkText = m2,
-        linkId = m3.toLowerCase(),
-        url = m4,
-        title = m7;
+      linkId = m3.toLowerCase(),
+      url = m4,
+      title = m7;
 
     if (!url) {
       if (!linkId) {
         // lower-case and turn embedded newlines into spaces
         linkId = linkText.toLowerCase().replace(/ ?\n/g, ' ');
       }
+
       url = '#' + linkId;
 
       if (!showdown.helper.isUndefined(globals.gUrls[linkId])) {
@@ -1162,24 +1206,24 @@ showdown.subParser('anchors', function (text, options, globals) {
   // First, handle reference-style links: [link text] [id]
   /*
    text = text.replace(/
-   (							// wrap whole match in $1
+   (              // wrap whole match in $1
    \[
    (
    (?:
-   \[[^\]]*\]		// allow brackets nested one level
+   \[[^\]]*\]   // allow brackets nested one level
    |
-   [^\[]			// or anything else
+   [^\[]      // or anything else
    )*
    )
    \]
 
-   [ ]?					// one optional space
-   (?:\n[ ]*)?				// one optional newline followed by spaces
+   [ ]?         // one optional space
+   (?:\n[ ]*)?        // one optional newline followed by spaces
 
    \[
-   (.*?)					// id = $3
+   (.*?)          // id = $3
    \]
-   )()()()()					// pad remaining backreferences
+   )()()()()          // pad remaining backreferences
    /g,_DoAnchors_callback);
    */
   text = text.replace(/(\[((?:\[[^\]]*]|[^\[\]])*)][ ]?(?:\n[ ]*)?\[(.*?)])()()()()/g, writeAnchorTag);
@@ -1190,27 +1234,27 @@ showdown.subParser('anchors', function (text, options, globals) {
 
   /*
    text = text.replace(/
-   (						// wrap whole match in $1
+   (            // wrap whole match in $1
    \[
    (
    (?:
-   \[[^\]]*\]	// allow brackets nested one level
+   \[[^\]]*\] // allow brackets nested one level
    |
-   [^\[\]]			// or anything else
+   [^\[\]]      // or anything else
    )
    )
    \]
-   \(						// literal paren
+   \(           // literal paren
    [ \t]*
-   ()						// no id, so leave $3 empty
-   <?(.*?)>?				// href = $4
+   ()           // no id, so leave $3 empty
+   <?(.*?)>?        // href = $4
    [ \t]*
-   (						// $5
-   (['"])				// quote char = $6
-   (.*?)				// Title = $7
-   \6					// matching quote
-   [ \t]*				// ignore any spaces/tabs between closing quote and )
-   )?						// title is optional
+   (            // $5
+   (['"])       // quote char = $6
+   (.*?)        // Title = $7
+   \6         // matching quote
+   [ \t]*       // ignore any spaces/tabs between closing quote and )
+   )?           // title is optional
    \)
    )
    /g,writeAnchorTag);
@@ -1245,9 +1289,9 @@ showdown.subParser('autoLinks', function (text, options, globals) {
   text = globals.converter._dispatch('autoLinks.before', text, options, globals);
 
   var simpleURLRegex  = /\b(((https?|ftp|dict):\/\/|www\.)[^'">\s]+\.[^'">\s]+)(?=\s|$)(?!["<>])/gi,
-      delimUrlRegex   = /<(((https?|ftp|dict):\/\/|www\.)[^'">\s]+)>/gi,
-      simpleMailRegex = /(?:^|[ \n\t])([A-Za-z0-9!#$%&'*+-/=?^_`\{|}~\.]+@[-a-z0-9]+(\.[-a-z0-9]+)*\.[a-z]+)(?:$|[ \n\t])/gi,
-      delimMailRegex  = /<(?:mailto:)?([-.\w]+@[-a-z0-9]+(\.[-a-z0-9]+)*\.[a-z]+)>/gi;
+    delimUrlRegex   = /<(((https?|ftp|dict):\/\/|www\.)[^'">\s]+)>/gi,
+    simpleMailRegex = /(?:^|[ \n\t])([A-Za-z0-9!#$%&'*+-/=?^_`\{|}~\.]+@[-a-z0-9]+(\.[-a-z0-9]+)*\.[a-z]+)(?:$|[ \n\t])/gi,
+    delimMailRegex  = /<(?:mailto:)?([-.\w]+@[-a-z0-9]+(\.[-a-z0-9]+)*\.[a-z]+)>/gi;
 
   text = text.replace(delimUrlRegex, replaceLink);
   text = text.replace(delimMailRegex, replaceMail);
@@ -1261,14 +1305,17 @@ showdown.subParser('autoLinks', function (text, options, globals) {
 
   function replaceLink(wm, link) {
     var lnkTxt = link;
+
     if (/^www\./i.test(link)) {
       link = link.replace(/^www\./i, 'http://www.');
     }
+
     return '<a href="' + link + '">' + lnkTxt + '</a>';
   }
 
   function replaceMail(wholeMatch, m1) {
     var unescapedStr = showdown.subParser('unescapeSpecialChars')(m1);
+
     return showdown.subParser('encodeEmailAddress')(unescapedStr);
   }
 
@@ -1319,12 +1366,12 @@ showdown.subParser('blockQuotes', function (text, options, globals) {
   text = globals.converter._dispatch('blockQuotes.before', text, options, globals);
   /*
    text = text.replace(/
-   (								// Wrap whole match in $1
+   (                // Wrap whole match in $1
    (
-   ^[ \t]*>[ \t]?			// '>' at the start of a line
-   .+\n					// rest of the first line
-   (.+\n)*					// subsequent consecutive lines
-   \n*						// blanks
+   ^[ \t]*>[ \t]?     // '>' at the start of a line
+   .+\n         // rest of the first line
+   (.+\n)*          // subsequent consecutive lines
+   \n*            // blanks
    )+
    )
    /gm, function(){...});
@@ -1358,6 +1405,7 @@ showdown.subParser('blockQuotes', function (text, options, globals) {
   });
 
   text = globals.converter._dispatch('blockQuotes.after', text, options, globals);
+
   return text;
 });
 
@@ -1371,13 +1419,13 @@ showdown.subParser('codeBlocks', function (text, options, globals) {
   /*
    text = text.replace(text,
    /(?:\n\n|^)
-   (								// $1 = the code block -- one or more lines, starting with a space/tab
+   (                // $1 = the code block -- one or more lines, starting with a space/tab
    (?:
-   (?:[ ]{4}|\t)			// Lines must start with a tab or a tab-width of spaces - attacklab: g_tab_width
+   (?:[ ]{4}|\t)      // Lines must start with a tab or a tab-width of spaces - attacklab: g_tab_width
    .*\n+
    )+
    )
-   (\n*[ ]{0,3}[^ \t\n]|(?=~0))	// attacklab: g_tab_width
+   (\n*[ ]{0,3}[^ \t\n]|(?=~0)) // attacklab: g_tab_width
    /g,function(){...});
    */
 
@@ -1387,8 +1435,8 @@ showdown.subParser('codeBlocks', function (text, options, globals) {
   var pattern = /(?:\n\n|^)((?:(?:[ ]{4}|\t).*\n+)+)(\n*[ ]{0,3}[^ \t\n]|(?=~0))/g;
   text = text.replace(pattern, function (wholeMatch, m1, m2) {
     var codeblock = m1,
-        nextChar = m2,
-        end = '\n';
+      nextChar = m2,
+      end = '\n';
 
     codeblock = showdown.subParser('outdent')(codeblock);
     codeblock = showdown.subParser('encodeCode')(codeblock);
@@ -1409,6 +1457,7 @@ showdown.subParser('codeBlocks', function (text, options, globals) {
   text = text.replace(/~0/, '');
 
   text = globals.converter._dispatch('codeBlocks.after', text, options, globals);
+
   return text;
 });
 
@@ -1444,13 +1493,13 @@ showdown.subParser('codeSpans', function (text, options, globals) {
 
   /*
    text = text.replace(/
-   (^|[^\\])					// Character before opening ` can't be a backslash
-   (`+)						// $2 = Opening run of `
-   (							// $3 = The code block
+   (^|[^\\])          // Character before opening ` can't be a backslash
+   (`+)           // $2 = Opening run of `
+   (              // $3 = The code block
    [^\r]*?
-   [^`]					// attacklab: work around lack of lookbehind
+   [^`]         // attacklab: work around lack of lookbehind
    )
-   \2							// Matching closer
+   \2             // Matching closer
    (?!`)
    /gm, function(){...});
    */
@@ -1461,14 +1510,16 @@ showdown.subParser('codeSpans', function (text, options, globals) {
   text = text.replace(/(^|[^\\])(`+)([^\r]*?[^`])\2(?!`)/gm,
     function (wholeMatch, m1, m2, m3) {
       var c = m3;
-      c = c.replace(/^([ \t]*)/g, '');	// leading whitespace
-      c = c.replace(/[ \t]*$/g, '');	// trailing whitespace
+      c = c.replace(/^([ \t]*)/g, '');  // leading whitespace
+      c = c.replace(/[ \t]*$/g, '');  // trailing whitespace
       c = showdown.subParser('encodeCode')(c);
+
       return m1 + '<code>' + c + '</code>';
     }
   );
 
   text = globals.converter._dispatch('codeSpans.after', text, options, globals);
+
   return text;
 });
 
@@ -1535,6 +1586,7 @@ showdown.subParser('encodeBackslashEscapes', function (text) {
   'use strict';
   text = text.replace(/\\(\\)/g, showdown.helper.escapeCharactersCallback);
   text = text.replace(/\\([`*_{}\[\]()>#+-.!])/g, showdown.helper.escapeCharactersCallback);
+
   return text;
 });
 
@@ -1611,6 +1663,7 @@ showdown.subParser('encodeEmailAddress', function (addr) {
         r > 0.9 ? encode[2](ch) : r > 0.45 ? encode[1](ch) : encode[0](ch)
       );
     }
+
     return ch;
   });
 
@@ -1690,6 +1743,7 @@ showdown.subParser('githubCodeBlocks', function (text, options, globals) {
 showdown.subParser('hashBlock', function (text, options, globals) {
   'use strict';
   text = text.replace(/(^\n+|\n+$)/g, '');
+
   return '\n\n~K' + (globals.gHtmlBlocks.push(text) - 1) + 'K\n\n';
 });
 
@@ -1717,41 +1771,42 @@ showdown.subParser('hashHTMLBlocks', function (text, options, globals) {
   'use strict';
 
   var blockTags = [
-      'pre',
-      'div',
-      'h1',
-      'h2',
-      'h3',
-      'h4',
-      'h5',
-      'h6',
-      'blockquote',
-      'table',
-      'dl',
-      'ol',
-      'ul',
-      'script',
-      'noscript',
-      'form',
-      'fieldset',
-      'iframe',
-      'math',
-      'style',
-      'section',
-      'header',
-      'footer',
-      'nav',
-      'article',
-      'aside',
-      'address',
-      'audio',
-      'canvas',
-      'figure',
-      'hgroup',
-      'output',
-      'video',
-      'p'
+    'pre',
+    'div',
+    'h1',
+    'h2',
+    'h3',
+    'h4',
+    'h5',
+    'h6',
+    'blockquote',
+    'table',
+    'dl',
+    'ol',
+    'ul',
+    'script',
+    'noscript',
+    'form',
+    'fieldset',
+    'iframe',
+    'math',
+    'style',
+    'section',
+    'header',
+    'footer',
+    'nav',
+    'article',
+    'aside',
+    'address',
+    'audio',
+    'canvas',
+    'figure',
+    'hgroup',
+    'output',
+    'video',
+    'p'
     ],
+
     repFunc = function (wholeMatch, match, left, right) {
       var txt = wholeMatch;
       // check if this html element is marked as markdown
@@ -1759,6 +1814,7 @@ showdown.subParser('hashHTMLBlocks', function (text, options, globals) {
       if (left.search(/\bmarkdown\b/) !== -1) {
         txt = left + globals.converter.makeHtml(match) + right;
       }
+
       return '\n\n~K' + (globals.gHtmlBlocks.push(txt) - 1) + 'K\n\n';
     };
 
@@ -1777,6 +1833,7 @@ showdown.subParser('hashHTMLBlocks', function (text, options, globals) {
   // PHP and ASP-style processor instructions (<?...?> and <%...%>)
   text = text.replace(/(?:\n\n)([ ]{0,3}(?:<([?%])[^\r]*?\2>)[ \t]*(?=\n{2,}))/g,
     showdown.subParser('hashElement')(text, options, globals));
+
   return text;
 });
 
@@ -1791,6 +1848,7 @@ showdown.subParser('hashHTMLSpans', function (text, config, globals) {
   for (var i = 0; i < matches.length; ++i) {
     text = text.replace(matches[i][0], '~L' + (globals.gHtmlSpans.push(matches[i][0]) - 1) + 'L');
   }
+
   return text;
 });
 
@@ -1816,10 +1874,12 @@ showdown.subParser('hashPreCodeTags', function (text, config, globals) {
   var repFunc = function (wholeMatch, match, left, right) {
     // encode html entities
     var codeblock = left + showdown.subParser('encodeCode')(match) + right;
+
     return '\n\n~G' + (globals.ghCodeBlocks.push({text: wholeMatch, codeblock: codeblock}) - 1) + 'G\n\n';
   };
 
   text = showdown.helper.replaceRecursiveRegExp(text, repFunc, '^(?: |\\t){0,3}<pre\\b[^>]*>\\s*<code\\b[^>]*>', '^(?: |\\t){0,3}</code>\\s*</pre>', 'gim');
+
   return text;
 });
 
@@ -1829,32 +1889,33 @@ showdown.subParser('headers', function (text, options, globals) {
   text = globals.converter._dispatch('headers.before', text, options, globals);
 
   var prefixHeader = options.prefixHeaderId,
-      headerLevelStart = (isNaN(parseInt(options.headerLevelStart))) ? 1 : parseInt(options.headerLevelStart),
+    headerLevelStart = (isNaN(parseInt(options.headerLevelStart))) ? 1 : parseInt(options.headerLevelStart),
 
   // Set text-style headers:
-  //	Header 1
-  //	========
+  //  Header 1
+  //  ========
   //
-  //	Header 2
-  //	--------
+  //  Header 2
+  //  --------
   //
-      setextRegexH1 = (options.smoothLivePreview) ? /^(.+)[ \t]*\n={2,}[ \t]*\n+/gm : /^(.+)[ \t]*\n=+[ \t]*\n+/gm,
-      setextRegexH2 = (options.smoothLivePreview) ? /^(.+)[ \t]*\n-{2,}[ \t]*\n+/gm : /^(.+)[ \t]*\n-+[ \t]*\n+/gm;
+  setextRegexH1 = (options.smoothLivePreview) ? /^(.+)[ \t]*\n={2,}[ \t]*\n+/gm : /^(.+)[ \t]*\n=+[ \t]*\n+/gm,
+  setextRegexH2 = (options.smoothLivePreview) ? /^(.+)[ \t]*\n-{2,}[ \t]*\n+/gm : /^(.+)[ \t]*\n-+[ \t]*\n+/gm;
 
   text = text.replace(setextRegexH1, function (wholeMatch, m1) {
-
     var spanGamut = showdown.subParser('spanGamut')(m1, options, globals),
-        hID = (options.noHeaderId) ? '' : ' id="' + headerId(m1) + '"',
-        hLevel = headerLevelStart,
-        hashBlock = '<h' + hLevel + hID + '>' + spanGamut + '</h' + hLevel + '>';
+      hID = (options.noHeaderId) ? '' : ' id="' + headerId(m1) + '"',
+      hLevel = headerLevelStart,
+      hashBlock = '<h' + hLevel + hID + '>' + spanGamut + '</h' + hLevel + '>';
+
     return showdown.subParser('hashBlock')(hashBlock, options, globals);
   });
 
   text = text.replace(setextRegexH2, function (matchFound, m1) {
     var spanGamut = showdown.subParser('spanGamut')(m1, options, globals),
-        hID = (options.noHeaderId) ? '' : ' id="' + headerId(m1) + '"',
-        hLevel = headerLevelStart + 1,
+      hID = (options.noHeaderId) ? '' : ' id="' + headerId(m1) + '"',
+      hLevel = headerLevelStart + 1,
       hashBlock = '<h' + hLevel + hID + '>' + spanGamut + '</h' + hLevel + '>';
+
     return showdown.subParser('hashBlock')(hashBlock, options, globals);
   });
 
@@ -1867,9 +1928,9 @@ showdown.subParser('headers', function (text, options, globals) {
   //
   text = text.replace(/^(#{1,6})[ \t]*(.+?)[ \t]*#*\n+/gm, function (wholeMatch, m1, m2) {
     var span = showdown.subParser('spanGamut')(m2, options, globals),
-        hID = (options.noHeaderId) ? '' : ' id="' + headerId(m2) + '"',
-        hLevel = headerLevelStart - 1 + m1.length,
-        header = '<h' + hLevel + hID + '>' + span + '</h' + hLevel + '>';
+      hID = (options.noHeaderId) ? '' : ' id="' + headerId(m2) + '"',
+      hLevel = headerLevelStart - 1 + m1.length,
+      header = '<h' + hLevel + hID + '>' + span + '</h' + hLevel + '>';
 
     return showdown.subParser('hashBlock')(header, options, globals);
   });
@@ -1892,10 +1953,12 @@ showdown.subParser('headers', function (text, options, globals) {
     if (showdown.helper.isString(prefixHeader)) {
       return prefixHeader + title;
     }
+
     return title;
   }
 
   text = globals.converter._dispatch('headers.after', text, options, globals);
+
   return text;
 });
 
@@ -1908,13 +1971,13 @@ showdown.subParser('images', function (text, options, globals) {
   text = globals.converter._dispatch('images.before', text, options, globals);
 
   var inlineRegExp    = /!\[(.*?)]\s?\([ \t]*()<?(\S+?)>?(?: =([*\d]+[A-Za-z%]{0,4})x([*\d]+[A-Za-z%]{0,4}))?[ \t]*(?:(['"])(.*?)\6[ \t]*)?\)/g,
-      referenceRegExp = /!\[([^\]]*?)] ?(?:\n *)?\[(.*?)]()()()()()/g;
+    referenceRegExp = /!\[([^\]]*?)] ?(?:\n *)?\[(.*?)]()()()()()/g;
 
   function writeImageTag (wholeMatch, altText, linkId, url, width, height, m5, title) {
 
     var gUrls   = globals.gUrls,
-        gTitles = globals.gTitles,
-        gDims   = globals.gDimensions;
+      gTitles = globals.gTitles,
+      gDims   = globals.gDimensions;
 
     linkId = linkId.toLowerCase();
 
@@ -1963,6 +2026,7 @@ showdown.subParser('images', function (text, options, globals) {
     }
 
     result += ' />';
+
     return result;
   }
 
@@ -1973,6 +2037,7 @@ showdown.subParser('images', function (text, options, globals) {
   text = text.replace(inlineRegExp, writeImageTag);
 
   text = globals.converter._dispatch('images.after', text, options, globals);
+
   return text;
 });
 
@@ -1997,6 +2062,7 @@ showdown.subParser('italicsAndBold', function (text, options, globals) {
   }
 
   text = globals.converter._dispatch('italicsAndBold.after', text, options, globals);
+
   return text;
 });
 
@@ -2044,22 +2110,25 @@ showdown.subParser('lists', function (text, options, globals) {
     listStr += '~0';
 
     var rgx = /(\n)?(^[ \t]*)([*+-]|\d+[.])[ \t]+((\[(x|X| )?])?[ \t]*[^\r]+?(\n{1,2}))(?=\n*(~0|\2([*+-]|\d+[.])[ \t]+))/gm,
-        isParagraphed = (/\n[ \t]*\n(?!~0)/.test(listStr));
+      isParagraphed = (/\n[ \t]*\n(?!~0)/.test(listStr));
 
     listStr = listStr.replace(rgx, function (wholeMatch, m1, m2, m3, m4, taskbtn, checked) {
       checked = (checked && checked.trim() !== '');
       var item = showdown.subParser('outdent')(m4, options, globals),
-          bulletStyle = '';
+        bulletStyle = '';
 
       // Support for github tasklists
       if (taskbtn && options.tasklists) {
         bulletStyle = ' class="task-list-item" style="list-style-type: none;"';
         item = item.replace(/^[ \t]*\[(x|X| )?]/m, function () {
           var otp = '<input type="checkbox" disabled style="margin: 0px 0.35em 0.25em -1.6em; vertical-align: middle;"';
+
           if (checked) {
             otp += ' checked';
           }
+
           otp += '>';
+
           return otp;
         });
       }
@@ -2080,6 +2149,7 @@ showdown.subParser('lists', function (text, options, globals) {
         }
       }
       item =  '\n<li' + bulletStyle + '>' + item + '</li>\n';
+
       return item;
     });
 
@@ -2112,6 +2182,7 @@ showdown.subParser('lists', function (text, options, globals) {
     if (list.search(counterRxg) !== -1) {
       (function parseCL(txt) {
         var pos = txt.search(counterRxg);
+
         if (pos !== -1) {
           // slice
           result += '\n\n<' + listType + '>' + processListItems(txt.slice(0, pos), !!trimTrailing) + '</' + listType + '>\n\n';
@@ -2126,8 +2197,8 @@ showdown.subParser('lists', function (text, options, globals) {
           result += '\n\n<' + listType + '>' + processListItems(txt, !!trimTrailing) + '</' + listType + '>\n\n';
         }
       })(list);
-      for (var i = 0; i < subLists.length; ++i) {
 
+      for (var i = 0; i < subLists.length; ++i) {
       }
     } else {
       result = '\n\n<' + listType + '>' + processListItems(list, !!trimTrailing) + '</' + listType + '>\n\n';
@@ -2146,14 +2217,15 @@ showdown.subParser('lists', function (text, options, globals) {
   if (globals.gListLevel) {
     text = text.replace(wholeList, function (wholeMatch, list, m2) {
       var listType = (m2.search(/[*+-]/g) > -1) ? 'ul' : 'ol';
+
       return parseConsecutiveLists(list, listType, true);
     });
   } else {
     wholeList = /(\n\n|^\n?)(([ ]{0,3}([*+-]|\d+[.])[ \t]+)[^\r]+?(~0|\n{2,}(?=\S)(?![ \t]*(?:[*+-]|\d+[.])[ \t]+)))/gm;
     //wholeList = /(\n\n|^\n?)( {0,3}([*+-]|\d+\.)[ \t]+[\s\S]+?)(?=(~0)|(\n\n(?!\t| {2,}| {0,3}([*+-]|\d+\.)[ \t])))/g;
     text = text.replace(wholeList, function (wholeMatch, m1, list, m3) {
-
       var listType = (m3.search(/[*+-]/g) > -1) ? 'ul' : 'ol';
+
       return parseConsecutiveLists(list, listType);
     });
   }
@@ -2162,6 +2234,7 @@ showdown.subParser('lists', function (text, options, globals) {
   text = text.replace(/~0/, '');
 
   text = globals.converter._dispatch('lists.after', text, options, globals);
+
   return text;
 });
 
@@ -2193,8 +2266,8 @@ showdown.subParser('paragraphs', function (text, options, globals) {
   text = text.replace(/\n+$/g, '');
 
   var grafs = text.split(/\n{2,}/g),
-      grafsOut = [],
-      end = grafs.length; // Wrap <p> tags
+    grafsOut = [],
+    end = grafs.length; // Wrap <p> tags
 
   for (var i = 0; i < end; i++) {
     var str = grafs[i];
@@ -2213,12 +2286,13 @@ showdown.subParser('paragraphs', function (text, options, globals) {
   end = grafsOut.length;
   for (i = 0; i < end; i++) {
     var blockText = '',
-        grafsOutIt = grafsOut[i],
-        codeFlag = false;
+      grafsOutIt = grafsOut[i],
+      codeFlag = false;
+
     // if this is a marker for an html block...
     while (grafsOutIt.search(/~(K|G)(\d+)\1/) >= 0) {
       var delim = RegExp.$1,
-          num   = RegExp.$2;
+        num   = RegExp.$2;
 
       if (delim === 'K') {
         blockText = globals.gHtmlBlocks[num];
@@ -2245,6 +2319,7 @@ showdown.subParser('paragraphs', function (text, options, globals) {
   // Strip leading and trailing lines:
   text = text.replace(/^\n+/g, '');
   text = text.replace(/\n+$/g, '');
+
   return globals.converter._dispatch('paragraphs.after', text, options, globals);
 });
 
@@ -2260,9 +2335,11 @@ showdown.subParser('runExtension', function (ext, text, options, globals) {
   } else if (ext.regex) {
     // TODO remove this when old extension loading mechanism is deprecated
     var re = ext.regex;
+
     if (!re instanceof RegExp) {
       re = new RegExp(re, 'g');
     }
+
     text = text.replace(re, ext.replace);
   }
 
@@ -2298,6 +2375,7 @@ showdown.subParser('spanGamut', function (text, options, globals) {
   text = text.replace(/  +\n/g, ' <br />\n');
 
   text = globals.converter._dispatch('spanGamut.after', text, options, globals);
+
   return text;
 });
 
@@ -2321,6 +2399,7 @@ showdown.subParser('strikethrough', function (text, options, globals) {
  */
 showdown.subParser('stripBlankLines', function (text) {
   'use strict';
+
   return text.replace(/^[ \t]+$/mg, '');
 });
 
@@ -2378,6 +2457,7 @@ showdown.subParser('stripLinkDefinitions', function (text, options, globals) {
       }
     }
     // Completely remove the definition from the text
+
     return '';
   });
 
@@ -2411,9 +2491,11 @@ showdown.subParser('tables', function (text, options, globals) {
   function parseHeaders(header, style) {
     var id = '';
     header = header.trim();
+
     if (options.tableHeaderId) {
       id = ' id="' + header.replace(/ /g, '_').toLowerCase() + '"';
     }
+
     header = showdown.subParser('spanGamut')(header, options, globals);
 
     return '<th' + id + style + '>' + header + '</th>\n';
@@ -2421,33 +2503,38 @@ showdown.subParser('tables', function (text, options, globals) {
 
   function parseCells(cell, style) {
     var subText = showdown.subParser('spanGamut')(cell, options, globals);
+
     return '<td' + style + '>' + subText + '</td>\n';
   }
 
   function buildTable(headers, cells) {
     var tb = '<table>\n<thead>\n<tr>\n',
-        tblLgn = headers.length;
+      tblLgn = headers.length;
 
     for (var i = 0; i < tblLgn; ++i) {
       tb += headers[i];
     }
+
     tb += '</tr>\n</thead>\n<tbody>\n';
 
     for (i = 0; i < cells.length; ++i) {
       tb += '<tr>\n';
+
       for (var ii = 0; ii < tblLgn; ++ii) {
         tb += cells[i][ii];
       }
+
       tb += '</tr>\n';
     }
+
     tb += '</tbody>\n</table>\n';
+
     return tb;
   }
 
   text = globals.converter._dispatch('tables.before', text, options, globals);
 
   text = text.replace(tableRgx, function (rawTable) {
-
     var i, tableLines = rawTable.split('\n');
 
     // strip wrong first and last column if wrapped tables are used
@@ -2461,11 +2548,11 @@ showdown.subParser('tables', function (text, options, globals) {
     }
 
     var rawHeaders = tableLines[0].split('|').map(function (s) { return s.trim();}),
-        rawStyles = tableLines[1].split('|').map(function (s) { return s.trim();}),
-        rawCells = [],
-        headers = [],
-        styles = [],
-        cells = [];
+      rawStyles = tableLines[1].split('|').map(function (s) { return s.trim();}),
+      rawCells = [],
+      headers = [],
+      styles = [],
+      cells = [];
 
     tableLines.shift();
     tableLines.shift();
@@ -2474,6 +2561,7 @@ showdown.subParser('tables', function (text, options, globals) {
       if (tableLines[i].trim() === '') {
         continue;
       }
+
       rawCells.push(
         tableLines[i]
           .split('|')
@@ -2495,17 +2583,20 @@ showdown.subParser('tables', function (text, options, globals) {
       if (showdown.helper.isUndefined(styles[i])) {
         styles[i] = '';
       }
+
       headers.push(parseHeaders(rawHeaders[i], styles[i]));
     }
 
     for (i = 0; i < rawCells.length; ++i) {
       var row = [];
+
       for (var ii = 0; ii < headers.length; ++ii) {
         if (showdown.helper.isUndefined(rawCells[i][ii])) {
 
         }
         row.push(parseCells(rawCells[i][ii], styles[ii]));
       }
+
       cells.push(row);
     }
 
@@ -2525,8 +2616,11 @@ showdown.subParser('unescapeSpecialChars', function (text) {
 
   text = text.replace(/~E(\d+)E/g, function (wholeMatch, m1) {
     var charCodeToReplace = parseInt(m1);
+
     return String.fromCharCode(charCodeToReplace);
   });
+
   return text;
 });
+
 module.exports = showdown;
