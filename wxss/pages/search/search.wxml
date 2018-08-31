@@ -1,4 +1,4 @@
-<!--pages/search/search.wxml-->
+<!-- pages/search/search.wxml -->
 
 <view class="search df">
   <input class="df_1" placeholder="请输入你想要的菜品" auto-focus focus="{{focus}}" value="{{searchValue}}" bindinput="searchValueInput"/>
@@ -6,17 +6,17 @@
 </view>
 
 <view class="cont" wx:if="{{hotKeyShow}}">
-    <text class="font_14">热门搜索</text>
+  <text class="font_14">热门搜索</text>
 
-    <view class="w100">
-      <button wx:for="{{hotKeyList}}" bindtap="doKeySearch" data-key="{{item.keyword}}">{{item.keyword}}</button>
-    </view>
+  <view class="w100">
+    <button wx:for="{{hotKeyList}}" bindtap="doKeySearch" data-key="{{item.keyword}}">{{item.keyword}}</button>
+  </view>
 
-    <text class="font_14 mt10">历史搜索</text>
+  <text class="font_14 mt10">历史搜索</text>
 
-    <view class="w100">
-      <button wx:for="{{historyKeyList}}" bindtap="doKeySearch" data-key="{{item.keyword}}">{{item.keyword}}</button>
-    </view>
+  <view class="w100">
+    <button wx:for="{{historyKeyList}}" bindtap="doKeySearch" data-key="{{item.keyword}}">{{item.keyword}}</button>
+  </view>
 </view>
 
 <view class="search_no" wx:if="{{!!searchValue && !productData.length}}">

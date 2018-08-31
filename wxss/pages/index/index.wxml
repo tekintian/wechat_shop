@@ -1,8 +1,9 @@
 <!-- index.wxml -->
+
 <view class="page">
-  <view class="address df">
-    <button bindtap="doAddress" class="address">{{address}}</button>
-    <button bindtap="doSearch" class="searchcion"><image class="searchcion" src="/images/search.png"></image></button>
+  <view class="dingwei df">
+    <button bindtap="doAddress" class="dingwei">{{address}}</button>
+    <button bindtap="doSearch" class="sousuo"><image class="weui-icon-search_in-box" src="/images/search.png"></image></button>
   </view>
 
   <swiper indicator-dots="{{indicatorDots}}" autoplay="{{autoplay}}" interval="{{interval}}" duration="{{duration}}">
