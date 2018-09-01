@@ -1,0 +1,51 @@
+.tag-title {
+  margin-top        : 10px;
+  text-align        : center;
+}
+
+.loginbtn {
+  position          : relative;
+  color             : #333;
+  background-color  : #fff;
+  margin-bottom     : 10px;
+  padding-left      : 15px;
+  padding-right     : 15px;
+  border-radius     : 2px;
+  font-size         : 16px;
+  line-height       : 45px;
+  height            : 45px;
+  box-sizing        : border-box;
+  text-decoration   : none;
+  text-align        : center;
+  vertical-align    : middle;
+}
+
+.loginbtn::after {
+  content           : '';
+  position          : absolute;
+  top               : 0;
+  left              : 0;
+  width             : 200%;
+  height            : 200%;
+  transform         : scale(0.5);
+  transform-origin  : 0 0;
+  pointer-events    : none;
+  box-sizing        : border-box;
+  border            : 0 solid #e5e5e5;
+  border-width      : 1px;
+  border-radius     : 4px;
+}
+
+.primary {
+  color             : #fff;
+  background-color  : #4b0;
+}
+
+.primary::after {
+  border-color      : #0a0;
+}
+
+.updatewx {
+  font-size         : 16px;
+  color             : #f44 !important;
+}
