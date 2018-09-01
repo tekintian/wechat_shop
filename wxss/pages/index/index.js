@@ -1,4 +1,6 @@
 var app = getApp();
+var QQMapWX = require('../../utils/qqmap-wx-jssdk.js');
+var qqmapwx;
 
 Page ({
   data: {
@@ -216,8 +218,35 @@ Page ({
         var latitude = res.latitude;
         var longitude = res.longitude;
 
+        qqmapwx = new QQMapWX({
+          key: 'KSSBZ-LL66X-7LV4Z-77M4Z-USSIS-H6FXT'
+        });
+
+        qqmapwx.reverseGeocoder({
+          location: {
+            latitude: latitude,
+            longitude: longitude
+          },
+
+          success: function(res) {
+            console.log(res);
+
+            that.setData({address: res.result.formatted_addresses.recommend});
+          },
+
+          fail: function(res) {
+            console.log(res);
+          },
+
+          complete: function(res) {
+            console.log(res);
+          }
+        });
+
+
+        /*
         wx.request({
-          url: 'https://api.map.baidu.com/geocoder/v3/?location='+latitude+','+longitude+'&coord_type=gcj02&output=json&ak=gvKRWUeglHk8WKM6moMOkKeABeFwiK0v',
+          url: 'https://api.map.baidu.com/geocoder/v2/?location='+latitude+','+longitude+'&coord_type=gcj02&output=json&ak=gvKRWUeglHk8WKM6moMOkKeABeFwiK0v',
           data: {},
           header:{
             'Content-Type':'application/json'
@@ -239,6 +268,7 @@ Page ({
             // complete
           }
         })
+        */
       },
 
       fail: function() {
