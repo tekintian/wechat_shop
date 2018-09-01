@@ -321,10 +321,34 @@
 
 /* 搜索 */
 
+.address {
+  padding         : 1% 1%;
+  background      : #ff3399;
+  font-size       : 24rpx;
+}
+
+.address button {
+  width           : 90%;
+  line-height     :30px;
+  background      : none;
+  text-align      : center;
+  border          : none;
+  padding         : 1px;
+}
+
+.address button::after {
+  content         : none;
+}
+
+.searchcion {
+  width           : 24px;
+  height          : 24px;
+  text-align      : center
+}
+
 .sousuo {
   display         : inline-block;
-  width           : 96%;
-  margin-left     : 15rpx;
+  width           : 90%;
 }
 
 .weui-search-bar {
