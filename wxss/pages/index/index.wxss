@@ -345,6 +345,12 @@
   text-align      : right
 }
 
+.kfcion {
+  width           : 24px;
+  height          : 24px;
+  text-align      : right
+}
+
 .sousuo {
   display         : inline-block;
   width           : 90%;
