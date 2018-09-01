@@ -4,6 +4,7 @@
   <view class="address df">
     <button bindtap="doAddress" class="address">{{address}}</button>
     <button bindtap="doSearch" class="searchcion"><image class="searchcion" src="/images/search.png"></image></button>
+    <button bindtap="doKf" class="kfcion"><image class="kfcion" src="/images/kf.png"></image></button>
   </view>
 
   <swiper indicator-dots="{{indicatorDots}}" autoplay="{{autoplay}}" interval="{{interval}}" duration="{{duration}}">
