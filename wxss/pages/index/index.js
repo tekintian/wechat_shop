@@ -231,7 +231,7 @@ Page ({
           success: function(res) {
             console.log(res);
 
-            that.setData({address: res.result.formatted_addresses.recommend});
+            that.setData({address: res.result.address_component.province + res.result.address_component.city + '  ' + res.result.formatted_addresses.recommend});
           },
 
           fail: function(res) {
