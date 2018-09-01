@@ -12,7 +12,8 @@ App ({
   },
 
   globalData: {
-    userInfo: null
+    userInfo: null,
+    loginCode: null
   },
 
   onLaunch: function () {
@@ -35,31 +36,25 @@ App ({
       wx.login({
         success: function (res) {
           var code = res.code;
+          that.globalData.loginCode = code;
 
-          // get wx user simple info
-          wx.getUserInfo({
-            success: function (res) {
-              that.globalData.userInfo = res.userInfo
-              typeof cb == "function" && cb(that.globalData.userInfo);
-              // get user sessionKey
-              // get sessionKey
-              that.getUserSessionKey(code);
-            }
+          wx.navigateTo({
+            url: '/pages/login/login',
           });
         }
       });
     }
   },
 
-  getUserSessionKey: function (code) {
-    //用户的订单状态
+  getUserSessionKey: function () {
+    // 用户的订单状态
     var that = this;
 
     wx.request({
       url: that.d.apiUrl + 'Login/getsessionkey',
       method: 'post',
       data: {
-        code: code
+        code: that.globalData.loginCode
       },
       header: {
         'Content-Type': 'application/x-www-form-urlencoded'
@@ -71,7 +66,7 @@ App ({
 
         if (data.status==0) {
           wx.showToast({
-            title: data.err,
+            title   : data.err,
             duration: 2000
           });
 

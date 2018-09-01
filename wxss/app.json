@@ -5,6 +5,7 @@
     "pages/search/search",
     "pages/user/user",
 
+    "pages/login/login",
     "pages/user/dingdan",
     "pages/user/tuihuo",
     "pages/order/pay",

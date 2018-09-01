@@ -44,6 +44,8 @@ Page( {
         })
       });
 
+      console.log(that.data.userInfo);
+
       this.loadOrderStatus();
   },
   onShow:function(){
