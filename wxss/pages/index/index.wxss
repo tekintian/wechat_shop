@@ -328,10 +328,9 @@
 }
 
 .address button {
-  width           : 90%;
-  line-height     :30px;
+  line-height     : 30px;
   background      : none;
-  text-align      : center;
+  text-align      : left;
   border          : none;
   padding         : 1px;
 }
@@ -343,7 +342,7 @@
 .searchcion {
   width           : 24px;
   height          : 24px;
-  text-align      : center
+  text-align      : right
 }
 
 .sousuo {
