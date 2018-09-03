@@ -13,3 +13,5 @@ $WxConfig = array(
   'KEY'       => '',
   'NOTIFY_URL'=> 'https://scwhbs.com/index.php/Api/Wxpay/notify',
 );
+
+?>
