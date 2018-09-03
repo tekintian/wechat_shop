@@ -1,4 +1,6 @@
 <?php
+require_once('wxconfig.php');
+
 namespace Api\Controller;
 use Think\Controller;
 class LoginController extends PublicController {
@@ -28,13 +30,13 @@ class LoginController extends PublicController {
 			$_SESSION['LoginName']=$name;
 			$_SESSION['ID']=$usrNum['id'];
 			$_SESSION['photo']=$usrNum['photo'];
-			
+
 			echo json_encode(array('status'=>1,'session'=>$_SESSION));
 			exit();
 		}else{
 			echo json_encode(array('status'=>0,'err'=>'账号密码错误！'));
 			exit();
-		}		 
+		}
 	}
 
 	//***************************
@@ -164,8 +166,8 @@ class LoginController extends PublicController {
 		curl_setopt($ch,CURLOPT_HEADER,0);
 		curl_setopt($ch, CURLOPT_RETURNTRANSFER, 1 );
 		curl_setopt($ch, CURLOPT_CONNECTTIMEOUT, 10);
-		$res = curl_exec($ch);  
-		curl_close($ch);  
+		$res = curl_exec($ch);
+		curl_close($ch);
 		echo $res;
 		exit();
 	}
@@ -175,8 +177,8 @@ class LoginController extends PublicController {
 	//***************************
 	public function getsessionkeys(){
 		$wx_config = C('weixin');
-    	$appid = 'wx5e3dd81af8bf352a';
-    	$secret = '30421d00aaee201bc0400994defbeed7';
+    	$appid = $WxConfig['APPID'];
+    	$secret = $WxConfig['SECRET'];
 
 		$code = trim($_POST['code']);
 		if (!$code) {
@@ -190,8 +192,8 @@ class LoginController extends PublicController {
 		curl_setopt($ch,CURLOPT_HEADER,0);
 		curl_setopt($ch, CURLOPT_RETURNTRANSFER, 1 );
 		curl_setopt($ch, CURLOPT_CONNECTTIMEOUT, 10);
-		$res = curl_exec($ch);  
-		curl_close($ch);  
+		$res = curl_exec($ch);
+		curl_close($ch);
 		echo $res;
 		exit();
 	}
@@ -200,11 +202,11 @@ class LoginController extends PublicController {
 	//  前台退出登录接口
 	//***************************
 	public function logout(){
-		unset($_SESSION['uid']);  
+		unset($_SESSION['uid']);
 		unset($_SESSION['LoginName']);
 		session_destroy();
 		echo json_encode(array('status'=>1));
 		exit();
 	}
-	
+
 }
