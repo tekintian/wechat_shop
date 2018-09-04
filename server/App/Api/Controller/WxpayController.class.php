@@ -1,9 +1,9 @@
 <?php
 
-require_once('wxconfig.php');
-
 namespace Api\Controller;
 use Think\Controller;
+
+require_once('wxconfig.php');
 
 class WxpayController extends Controller{
   //构造函数
