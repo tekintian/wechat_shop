@@ -14,4 +14,7 @@ $WxConfig = array(
   'NOTIFY_URL'=> 'https://scwhbs.com/index.php/Api/Wxpay/notify',
 );
 
+// $WxPayHttps= 'https://api.mch.weixin.qq.com'
+$WxPayHttps   = 'https://api.mch.weixin.qq.com/sandboxnew'
+
 ?>
