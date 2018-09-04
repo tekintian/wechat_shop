@@ -1,6 +1,6 @@
 <?php
 
-require_once('wxconfig.php');
+require('wxconfig.php');
 
 /**
 *   配置账号信息
@@ -26,10 +26,10 @@ class WxPayConfig
    * @var string
    */
 
-  const APPID = $WxConfig['APPID'];
-  const MCHID = $WxConfig['MCHID'];
-  const KEY = $WxConfig['KEY'];
-  const APPSECRET = $WxConfig['SECRET'];
+  const APPID = WxConfig::APPID;
+  const MCHID = WxConfig::MCHID;
+  const KEY = WxConfig::KEY;
+  const APPSECRET = WxConfig::SECRET;
 
   // const APPID = C("wxpay_config.app_id");
   // const MCHID = C("wxpay_config.partner");

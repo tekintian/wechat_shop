@@ -1,6 +1,6 @@
 <?php
 
-require_once('wxconfig.php');
+require('wxconfig.php');
 
 // var_dump('11');exit;
 header("Content-Type:text/html; charset=utf-8");
@@ -53,14 +53,14 @@ return array(
 
   // 微信配置参数
   'weixin'                  => array(
-    'appid'       => $WxConfig['APPID'],      // 微信appid
-    'secret'      => $WxConfig['SECRET'],     // 微信secret
+    'appid'       => WxConfig::APPID,       // 微信appid
+    'secret'      => WxConfig::SECRET,      // 微信secret
 
-    'mchid'       => $WxConfig['MCHID'],
-    'key'         => $WxConfig['KEY'],
+    'mchid'       => WxConfig::MCHID,
+    'key'         => WxConfig::KEY,
 
     // 这里是异步通知页面url，提交到项目的Pay控制器的notifyurl方法；
-    'notify_url'  => $WxConfig['NOTIFY_URL'],
+    'notify_url'  => WxConfig::NOTIFY_URL,
   ),
 );
 

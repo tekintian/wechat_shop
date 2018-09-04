@@ -1,6 +1,6 @@
 <?php
 
-require_once('wxconfig.php');
+require('wxconfig.php');
 
 /**
 *   配置账号信息
@@ -24,11 +24,11 @@ class WxPayConfig
    * 获取地址：https://mp.weixin.qq.com/advanced/advanced?action=dev&t=advanced/dev&token=2005451881&lang=zh_CN
    * @var string
    */
-  const APPID = $WxConfig['APPID'];
-  const MCHID = $WxConfig['MCHID'];
-  const KEY = $WxConfig['KEY'];
-  const APPSECRET = $WxConfig['SECRET'];
-  const NOTIFY_URL = $WxConfig['NOTIFY_URL'];
+  const APPID = WxConfig::APPID;
+  const MCHID = WxConfig::MCHID;
+  const KEY = WxConfig::KEY;
+  const APPSECRET = WxConfig::SECRET;
+  const NOTIFY_URL = WxConfig::NOTIFY_URL;
 
   //=======【证书路径设置】=====================================
   /**

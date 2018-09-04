@@ -1,6 +1,6 @@
 <?php
 
-  require_once('wxconfig.php');
+  require('wxconfig.php');
 
   return array(
     // '配置项 '=>' 配置值'
@@ -24,6 +24,6 @@
     'DB_HOST'               => '127.0.0.1',             // 服务器地址
     'DB_NAME'               => 'wechat_shop',           // 数据库名
     'DB_PORT'               => '3306',                  // 端口，改为你自己的端口
-    'DB_USER'               => $DBConfig['DB_USER'],    // 用户名
-    'DB_PWD'                => $DBConfig['DB_PWD'],     // 数据库用户密码
+    'DB_USER'               => DBConfig::DB_USER,       // 用户名
+    'DB_PWD'                => DBConfig::DB_PWD,        // 数据库用户密码
   );
