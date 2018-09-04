@@ -2,13 +2,13 @@
 
 App ({
   d: {
-    hostUrl: 'https://scwhbs.com/api/',
-    hostImg: 'https://scwhbs.com/api/',
-    hostVideo: 'https://scwhbs.com/api/',
-    userId: 1,
-    appId:"wx5afa288e60d81f0e",
-    appKey:"",
-    apiUrl:'https://scwhbs.com/api/',
+    hostUrl   : 'https://scwhbs.com/api/',
+    hostImg   : 'https://scwhbs.com/api/',
+    hostVideo : 'https://scwhbs.com/api/',
+    userId    : 1,
+    appId     : "wx5afa288e60d81f0e",
+    appKey    : "",
+    apiUrl    : 'https://scwhbs.com/api/',
   },
 
   globalData: {
@@ -80,7 +80,7 @@ App ({
 
       fail: function (e) {
         wx.showToast({
-          title: '网络异常！err:getsessionkeys',
+          title   : '网络异常！err:getsessionkeys',
           duration: 2000
         });
       },
@@ -92,17 +92,17 @@ App ({
     var user = that.globalData.userInfo;
 
     wx.request({
-      url: that.d.apiUrl + 'Login/authlogin',
-      method:'post',
-      data: {
-      SessionId: user.sessionId,
-      gender:user.gender,
-      NickName: user.nickName,
-      HeadUrl: user.avatarUrl,
-      openid:user.openid
+      url   : that.d.apiUrl + 'Login/authlogin',
+      method: 'post',
+      data  : {
+        SessionId : user.sessionId,
+        gender    : user.gender,
+        NickName  : user.nickName,
+        HeadUrl   : user.avatarUrl,
+        openid    : user.openid
       },
       header: {
-      'Content-Type':  'application/x-www-form-urlencoded'
+        'Content-Type': 'application/x-www-form-urlencoded'
       },
 
       success: function (res) {
@@ -112,7 +112,7 @@ App ({
 
         if (status!=1) {
           wx.showToast({
-            title: res.data.err,
+            title   : res.data.err,
             duration: 3000
           });
 
@@ -126,7 +126,7 @@ App ({
 
         if (!userId) {
           wx.showToast({
-            title: '登录失败！',
+            title   : '登录失败！',
             duration: 3000
           });
 
@@ -138,7 +138,7 @@ App ({
 
       fail: function (e) {
         wx.showToast({
-          title: '网络异常！err:authlogin',
+          title   : '网络异常！err:authlogin',
           duration: 2000
         });
       },
