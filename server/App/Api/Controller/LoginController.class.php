@@ -3,7 +3,7 @@
 namespace Api\Controller;
 use Think\Controller;
 
-require_once('wxconfig.php');
+require('wxconfig.php');
 
 class LoginController extends PublicController {
 
@@ -179,8 +179,8 @@ class LoginController extends PublicController {
 	//***************************
 	public function getsessionkeys(){
 		$wx_config = C('weixin');
-    	$appid = $WxConfig['APPID'];
-    	$secret = $WxConfig['SECRET'];
+    $appid = WxConfig::APPID;
+    $secret = WxConfig::SECRET;
 
 		$code = trim($_POST['code']);
 		if (!$code) {
