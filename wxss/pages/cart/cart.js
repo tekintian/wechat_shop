@@ -33,10 +33,10 @@ Page ({
         cart_id : cart_id
       },
       header: {
-        'Content-Type':  'application/x-www-form-urlencoded'
+        'Content-Type': 'application/x-www-form-urlencoded'
       },
 
-      success: function (res) {
+      success: function(res) {
         var status = res.data.status;
 
         if (status==1) {
@@ -56,7 +56,7 @@ Page ({
           that.sum();
         }else{
           wx.showToast({
-            title: '操作失败！',
+            title   : '操作失败！',
             duration: 2000
           });
         }
@@ -65,7 +65,7 @@ Page ({
       fail: function() {
         // fail
         wx.showToast({
-          title: '网络异常！',
+          title   : '网络异常！',
           duration: 2000
         });
       }
@@ -116,7 +116,7 @@ Page ({
           that.sum();
         }else{
           wx.showToast({
-            title: '操作失败！',
+            title   : '操作失败！',
             duration: 2000
           });
         }
@@ -125,7 +125,7 @@ Page ({
       fail: function() {
         // fail
         wx.showToast({
-          title: '网络异常！',
+          title   : '网络异常！',
           duration: 2000
         });
       }
@@ -165,7 +165,7 @@ Page ({
 
    this.setData({
      selectedAllStatus: selectedAllStatus,
-     carts: carts
+     carts            : carts
    });
 
    this.sum()
@@ -185,8 +185,8 @@ Page ({
 
     if (toastStr=='') {
      wx.showToast({
-       title: '请选择要结算的商品！',
-       duration: 2000
+       title    : '请选择要结算的商品！',
+       duration : 2000
      });
 
      return false;
