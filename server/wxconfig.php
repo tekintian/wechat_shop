@@ -8,8 +8,8 @@ class WxConfig {
   const KEY             = 'sxylhaobangshoukejisongcaiwa2018';
   const NOTIFY_URL      = 'https://scwhbs.com/index.php/Api/Wxpay/notify';
 
-  // const WXPAY_HTTPS  = 'https://api.mch.weixin.qq.com'
-  const WXPAY_HTTPS     = 'https://api.mch.weixin.qq.com/sandboxnew'
+  // const WXPAY_HTTPS  = 'https://api.mch.weixin.qq.com';
+  const WXPAY_HTTPS     = 'https://api.mch.weixin.qq.com/sandboxnew';
 }
 
 class DBConfig {

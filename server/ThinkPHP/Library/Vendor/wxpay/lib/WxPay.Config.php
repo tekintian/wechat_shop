@@ -1,6 +1,6 @@
 <?php
 
-require('wxconfig.php');
+require_once('wxconfig.php');
 
 /**
 *   配置账号信息
