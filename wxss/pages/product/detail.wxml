@@ -138,7 +138,7 @@
   </view>
 
   <view class="fl_l w60">
-    <view class="w50 fl_l bg_cheng white" bindtap="addShopCart" data-type="addcart">加入购物车</view>
+    <view class="w50 fl_l bg_green white" bindtap="addShopCart" data-type="addcart">加入购物车</view>
     <view class="bg_red white w50 fl_l" bindtap="setModalStatus" data-status="1">立刻购买</view>
   </view>
 </view>
