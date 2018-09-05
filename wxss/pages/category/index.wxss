@@ -100,7 +100,7 @@
 
 .search {
   padding       : 1% 1%;
-  background    : #ff3399;
+  background    : #9bd869;
 }
 
 .search button {

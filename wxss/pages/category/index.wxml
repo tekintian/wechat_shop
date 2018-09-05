@@ -1,6 +1,6 @@
 <!-- 搜索框 -->
 <view class="search">
-  <button bindtap="doSearch"><image class="searchcion" src="/images/search.png"></image>请搜索你想要的菜品</button>
+  <button bindtap="doSearch"><image class="searchcion" src="/images/search.png"></image>请搜索您需要的菜品</button>
 </view>
 
 <view class="section">
