@@ -461,6 +461,8 @@ class PaymentController extends PublicController {
           $res = $order_pro->add($date);
 
           if (!$res) {
+            echo json_encode(array('status'=>0,'err'=>var_dump($date);)); //
+        exit(); //
             throw new \Exception("下单失败！".__LINE__);
           }
 
@@ -475,6 +477,9 @@ class PaymentController extends PublicController {
           $shopping->where('uid='.intval($uid).' AND id='.intval($var))->delete();
         }
       } else {
+        echo json_encode(array('status'=>0,'err'=>var_dump($data);)); //
+        exit(); //
+
         throw new \Exception("下单失败！");
       }
     } catch (Exception $e) {
