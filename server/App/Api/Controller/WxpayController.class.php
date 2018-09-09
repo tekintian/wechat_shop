@@ -165,4 +165,5 @@ class WxpayController extends Controller{
     return $buff;
   }
 }
+
 ?>

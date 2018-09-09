@@ -212,3 +212,5 @@ class LoginController extends PublicController {
 	}
 
 }
+
+?>
