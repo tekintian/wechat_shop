@@ -3,8 +3,6 @@
 namespace Api\Controller;
 use Think\Controller;
 
-require_once(dirname(__FILE__).'/../../../wxconfig.php');
-
 class LoginController extends PublicController {
 
 	//***************************
