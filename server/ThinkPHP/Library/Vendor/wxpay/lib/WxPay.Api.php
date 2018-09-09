@@ -578,3 +578,4 @@ class WxPayApi
 	}
 }
 
+?>
