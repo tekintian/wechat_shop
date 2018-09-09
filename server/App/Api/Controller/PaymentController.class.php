@@ -422,12 +422,7 @@ class PaymentController extends PublicController {
       $data['remark']=$_REQUEST['remark'];
       $data['order_sn']=$this->build_order_no();  // 生成唯一订单号
 
-      try {
-        $result = $order->add($data);
-      } catch (Exception $e) { //////
-        echo json_encode(array('status'=>0,'err'=>var_dump($data))); /////
-        exit(); /////
-      }
+      $result = $order->add($data);
 
       if ($result) {
         // $prid = explode(",", $_POST['ids']);
@@ -463,12 +458,7 @@ class PaymentController extends PublicController {
           $date['num']=$shops[$key]['num'];
           $date['pro_guige']='';
 
-          try {
-            $res = $order_pro->add($date);
-          } catch (Exception $e) {
-            echo json_encode(array('status'=>0,'err'=>var_dump($date))); //
-            exit(); //
-          }
+          $res = $order_pro->add($date);
 
           if (!$res) {
             throw new \Exception("下单失败！".__LINE__);

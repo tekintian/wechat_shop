@@ -3,7 +3,7 @@
 namespace Api\Controller;
 use Think\Controller;
 
-require_once('wxconfig.php');
+require_once(dirname(__FILE__).'/../../../wxconfig.php');
 
 class WxpayController extends Controller{
   //构造函数
