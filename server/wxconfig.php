@@ -4,7 +4,7 @@ class WxConfig {
   const APPID           = 'wx5afa288e60d81f0e';               // 微信appid
   const SECRET          = '34d14ff3408722e42954aae293ef40a9'; // 微信secret
 
-  const MCHID           = '101198986';
+  const MCHID           = '1511828741';
   const KEY             = 'sxylhaobangshoukejisongcaiwa2018';
   const NOTIFY_URL      = 'https://scwhbs.com/index.php/Api/Wxpay/notify';
 
