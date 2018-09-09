@@ -60,3 +60,5 @@ class WxPayConfig
    */
   const REPORT_LEVENL = 1;
 }
+
+?>
