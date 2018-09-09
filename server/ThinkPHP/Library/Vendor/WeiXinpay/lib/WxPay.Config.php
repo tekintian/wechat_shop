@@ -29,6 +29,7 @@ class WxPayConfig
   const KEY = WxConfig::KEY;
   const APPSECRET = WxConfig::SECRET;
   const NOTIFY_URL = WxConfig::NOTIFY_URL;
+  const WXPAY_HTTPS = WxConfig::WXPAY_HTTPS;
 
   //=======【证书路径设置】=====================================
   /**

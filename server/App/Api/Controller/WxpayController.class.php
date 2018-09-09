@@ -3,8 +3,6 @@
 namespace Api\Controller;
 use Think\Controller;
 
-require_once(dirname(__FILE__).'/../../../wxconfig.php');
-
 class WxpayController extends Controller{
   //构造函数
     public function _initialize(){
@@ -51,7 +49,7 @@ class WxpayController extends Controller{
     $input->SetTime_start(date("YmdHis"));
     $input->SetTime_expire(date("YmdHis", time() + 3600));
     $input->SetGoods_tag("送菜娃商城商品购买_".trim($order_info['order_sn']));
-    $input->SetNotify_url(WxConfig::NOTIFY_URL);
+    $input->SetNotify_url(WxPayConfig::NOTIFY_URL);
     $input->SetTrade_type("JSAPI");
     $input->SetOpenid($openId);
     $order = \WxPayApi::unifiedOrder($input);

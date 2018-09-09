@@ -30,6 +30,8 @@ class WxPayConfig
   const MCHID = WxConfig::MCHID;
   const KEY = WxConfig::KEY;
   const APPSECRET = WxConfig::SECRET;
+  const NOTIFY_URL = WxConfig::NOTIFY_URL;
+  const WXPAY_HTTPS = WxConfig::WXPAY_HTTPS;
 
   // const APPID = C("wxpay_config.app_id");
   // const MCHID = C("wxpay_config.partner");
