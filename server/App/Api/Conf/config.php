@@ -1,6 +1,6 @@
 <?php
 
-require_once('wxconfig.php');
+require_once(dirname(__FILE__).'/../../../wxconfig.php');
 
 // var_dump('11');exit;
 header("Content-Type:text/html; charset=utf-8");
