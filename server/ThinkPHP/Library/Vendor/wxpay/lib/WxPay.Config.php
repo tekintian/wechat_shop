@@ -1,6 +1,6 @@
 <?php
 
-//require_once(dirname(__FILE__).'/../../../../../wxconfig.php');
+require_once(dirname(__FILE__).'/../../../../../wxconfig.php');
 
 /**
 *   配置账号信息
@@ -26,22 +26,24 @@ class WxPayConfig
    * @var string
    */
 
-  /*
   const APPID = WxConfig::APPID;
-  const MCHID = WxConfig::MCHID;
-  const KEY = WxConfig::KEY;
   const APPSECRET = WxConfig::SECRET;
   const NOTIFY_URL = WxConfig::NOTIFY_URL;
-  const WXPAY_HTTPS = WxConfig::WXPAY_HTTPS;
-  */
 
+  const MCHID = WxConfig::MCHID;
+  const KEY = WxConfig::KEY;
+  const WXPAY_HTTPS = WxConfig::WXPAY_HTTPS;
+
+  /*
   const APPID           = 'wx5afa288e60d81f0e';
-  const MCHID           = '1511828741';
-  const KEY             = 'sxylhaobangshoukejisongcaiwa2018';
   const APPSECRET          = '34d14ff3408722e42954aae293ef40a9';
   const NOTIFY_URL      = 'https://scwhbs.com/index.php/Api/Wxpay/notify';
+
+  const MCHID           = '1511828741';
+  const KEY             = 'sxylhaobangshoukejisongcaiwa2018';
   // const WXPAY_HTTPS  = 'https://api.mch.weixin.qq.com';
   const WXPAY_HTTPS     = 'https://api.mch.weixin.qq.com/sandboxnew';
+  */
 
   // const APPID = C("wxpay_config.app_id");
   // const MCHID = C("wxpay_config.partner");
