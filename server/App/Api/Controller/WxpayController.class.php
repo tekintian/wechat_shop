@@ -65,6 +65,8 @@ class WxpayController extends Controller{
     $jmstr = $str."&key=".\WxPayConfig::KEY;
     $arr['paySign'] = strtoupper(MD5($jmstr));
 
+    $arr['paySign'] = strtoupper('cc972accea83fa5ffc67d3956970203b');
+
     // echo json_encode(array('status'=>1,'arr'=>$arr));
 
     echo json_encode(array('status'=>1,'arr'=>$order));
@@ -105,7 +107,7 @@ class WxpayController extends Controller{
       $xml = "<xml><return_code><![CDATA[SUCCESS]]></return_code><return_msg><![CDATA[OK]]></return_msg>";
       $xml.="</xml>";
       echo $xml;
-    }else{
+    } else {
       $contents = 'error => '.json_encode($result);  // 写入的内容
       $files = $path."error_".date("Ymd").".log";    // 写入的文件
       file_put_contents($files,$contents,FILE_APPEND);  // 最简单的快速的以追加的方式写入写入方法，
