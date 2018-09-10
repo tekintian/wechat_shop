@@ -1,6 +1,6 @@
 <?php
 
-  require_once('wxconfig.php');
+  require_once(dirname(__FILE__).'/../../../wxconfig.php');
 
   return array(
     // '配置项 '=>' 配置值'

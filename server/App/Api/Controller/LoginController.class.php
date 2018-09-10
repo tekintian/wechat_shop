@@ -3,8 +3,6 @@
 namespace Api\Controller;
 use Think\Controller;
 
-require_once('wxconfig.php');
-
 class LoginController extends PublicController {
 
 	//***************************
@@ -212,3 +210,5 @@ class LoginController extends PublicController {
 	}
 
 }
+
+?>

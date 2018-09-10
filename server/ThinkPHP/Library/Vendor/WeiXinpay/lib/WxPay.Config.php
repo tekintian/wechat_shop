@@ -1,6 +1,6 @@
 <?php
 
-require_once('wxconfig.php');
+require_once(dirname(__FILE__).'/../../../../../wxconfig.php');
 
 /**
 *   配置账号信息
@@ -24,11 +24,25 @@ class WxPayConfig
    * 获取地址：https://mp.weixin.qq.com/advanced/advanced?action=dev&t=advanced/dev&token=2005451881&lang=zh_CN
    * @var string
    */
+
   const APPID = WxConfig::APPID;
-  const MCHID = WxConfig::MCHID;
-  const KEY = WxConfig::KEY;
   const APPSECRET = WxConfig::SECRET;
   const NOTIFY_URL = WxConfig::NOTIFY_URL;
+
+  const MCHID = WxConfig::MCHID;
+  const KEY = WxConfig::KEY;
+  const WXPAY_HTTPS = WxConfig::WXPAY_HTTPS;
+
+  /*
+  const APPID           = 'wx5afa288e60d81f0e';
+  const APPSECRET          = '34d14ff3408722e42954aae293ef40a9';
+  const NOTIFY_URL      = 'https://scwhbs.com/index.php/Api/Wxpay/notify';
+
+  const MCHID           = '1511828741';
+  const KEY             = 'sxylhaobangshoukejisongcaiwa2018';
+  // const WXPAY_HTTPS  = 'https://api.mch.weixin.qq.com';
+  const WXPAY_HTTPS     = 'https://api.mch.weixin.qq.com/sandboxnew';
+  */
 
   //=======【证书路径设置】=====================================
   /**
@@ -60,3 +74,5 @@ class WxPayConfig
    */
   const REPORT_LEVENL = 1;
 }
+
+?>

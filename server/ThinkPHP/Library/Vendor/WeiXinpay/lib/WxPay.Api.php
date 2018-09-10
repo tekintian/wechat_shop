@@ -1,7 +1,5 @@
 <?php
 
-require_once('wxconfig.php');
-
 /**
  *
  * 接口访问类，包含所有微信支付API列表的封装，类中方法为static方法，
@@ -22,7 +20,7 @@ class WxPayApi
 	 */
 	public static function unifiedOrder($inputObj, $timeOut = 6)
 	{
-		$url = WxConfig::WXPAY_HTTPS."/pay/unifiedorder";
+		$url = WxPayConfig::WXPAY_HTTPS."/pay/unifiedorder";
 		//检测必填参数
 		if(!$inputObj->IsOut_trade_noSet()) {
 			throw new WxPayException("缺少统一支付接口必填参数out_trade_no！");
@@ -76,7 +74,7 @@ class WxPayApi
 	 */
 	public static function orderQuery($inputObj, $timeOut = 6)
 	{
-		$url = WxConfig::WXPAY_HTTPS."/pay/orderquery";
+		$url = WxPayConfig::WXPAY_HTTPS."/pay/orderquery";
 		//检测必填参数
 		if(!$inputObj->IsOut_trade_noSet() && !$inputObj->IsTransaction_idSet()) {
 			throw new WxPayException("订单查询接口中，out_trade_no、transaction_id至少填一个！");
@@ -107,7 +105,7 @@ class WxPayApi
 	 */
 	public static function closeOrder($inputObj, $timeOut = 6)
 	{
-		$url = WxConfig::WXPAY_HTTPS."/pay/closeorder";
+		$url = WxPayConfig::WXPAY_HTTPS."/pay/closeorder";
 		//检测必填参数
 		if(!$inputObj->IsOut_trade_noSet()) {
 			throw new WxPayException("订单查询接口中，out_trade_no必填！");
@@ -139,7 +137,7 @@ class WxPayApi
 	 */
 	public static function refund($inputObj, $timeOut = 6)
 	{
-		$url = WxConfig::WXPAY_HTTPS."/secapi/pay/refund";
+		$url = WxPayConfig::WXPAY_HTTPS."/secapi/pay/refund";
 		//检测必填参数
 		if(!$inputObj->IsOut_trade_noSet() && !$inputObj->IsTransaction_idSet()) {
 			throw new WxPayException("退款申请接口中，out_trade_no、transaction_id至少填一个！");
@@ -180,7 +178,7 @@ class WxPayApi
 	 */
 	public static function refundQuery($inputObj, $timeOut = 6)
 	{
-		$url = WxConfig::WXPAY_HTTPS."/pay/refundquery";
+		$url = WxPayConfig::WXPAY_HTTPS."/pay/refundquery";
 		//检测必填参数
 		if(!$inputObj->IsOut_refund_noSet() &&
 			!$inputObj->IsOut_trade_noSet() &&
@@ -213,7 +211,7 @@ class WxPayApi
 	 */
 	public static function downloadBill($inputObj, $timeOut = 6)
 	{
-		$url = WxConfig::WXPAY_HTTPS."/pay/downloadbill";
+		$url = WxPayConfig::WXPAY_HTTPS."/pay/downloadbill";
 		//检测必填参数
 		if(!$inputObj->IsBill_dateSet()) {
 			throw new WxPayException("对账单接口中，缺少必填参数bill_date！");
@@ -243,7 +241,7 @@ class WxPayApi
 	 */
 	public static function micropay($inputObj, $timeOut = 10)
 	{
-		$url = WxConfig::WXPAY_HTTPS."/pay/micropay";
+		$url = WxPayConfig::WXPAY_HTTPS."/pay/micropay";
 		//检测必填参数
 		if(!$inputObj->IsBodySet()) {
 			throw new WxPayException("提交被扫支付API接口中，缺少必填参数body！");
@@ -281,7 +279,7 @@ class WxPayApi
 	 */
 	public static function reverse($inputObj, $timeOut = 6)
 	{
-		$url = WxConfig::WXPAY_HTTPS."/secapi/pay/reverse";
+		$url = WxPayConfig::WXPAY_HTTPS."/secapi/pay/reverse";
 		//检测必填参数
 		if(!$inputObj->IsOut_trade_noSet() && !$inputObj->IsTransaction_idSet()) {
 			throw new WxPayException("撤销订单API接口中，参数out_trade_no和transaction_id必须填写一个！");
@@ -314,7 +312,7 @@ class WxPayApi
 	 */
 	public static function report($inputObj, $timeOut = 1)
 	{
-		$url = WxConfig::WXPAY_HTTPS."/payitil/report";
+		$url = WxPayConfig::WXPAY_HTTPS."/payitil/report";
 		//检测必填参数
 		if(!$inputObj->IsInterface_urlSet()) {
 			throw new WxPayException("接口URL，缺少必填参数interface_url！");
@@ -379,7 +377,7 @@ class WxPayApi
 	 */
 	public static function shorturl($inputObj, $timeOut = 6)
 	{
-		$url = WxConfig::WXPAY_HTTPS."/tools/shorturl";
+		$url = WxPayConfig::WXPAY_HTTPS."/tools/shorturl";
 		//检测必填参数
 		if(!$inputObj->IsLong_urlSet()) {
 			throw new WxPayException("需要转换的URL，签名用原串，传输需URL encode！");
@@ -583,3 +581,4 @@ class WxPayApi
 	}
 }
 
+?>
