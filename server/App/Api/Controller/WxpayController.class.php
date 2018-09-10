@@ -65,8 +65,6 @@ class WxpayController extends Controller{
     $jmstr = $str."&key=".\WxPayConfig::KEY;
     $arr['paySign'] = strtoupper(MD5($jmstr));
 
-    $arr['paySign'] = strtoupper('cc972accea83fa5ffc67d3956970203b');
-
     // echo json_encode(array('status'=>1,'arr'=>$arr));
 
     echo json_encode(array('status'=>1,'arr'=>$order));

@@ -6,8 +6,8 @@ class WxConfig {
   const NOTIFY_URL      = 'https://scwhbs.com/index.php/Api/Wxpay/notify';
 
   const MCHID           = '1511828741';
-  // const KEY             = 'sxylhaobangshoukejisongcaiwa2018';
-  // const WXPAY_HTTPS     = 'https://api.mch.weixin.qq.com';
+  const KEY             = 'sxylhaobangshoukejisongcaiwa2018';
+  const WXPAY_HTTPS     = 'https://api.mch.weixin.qq.com';
 
   // sandboxnew
 
@@ -24,9 +24,9 @@ class WxConfig {
     <sandbox_signkey><![CDATA[cc972accea83fa5ffc67d3956970203b]]></sandbox_signkey>
   */
 
-  const KEY             = 'sxylhaobangshoukejisongcaiwa2018';
-  const WXPAY_HTTPS     = 'https://api.mch.weixin.qq.com/sandboxnew';
-  const SANDBOX_SIGNKEY = 'cc972accea83fa5ffc67d3956970203b'
+  // const KEY             = 'sxylhaobangshoukejisongcaiwa2018';
+  // const WXPAY_HTTPS     = 'https://api.mch.weixin.qq.com/sandboxnew';
+  // const SANDBOX_SIGNKEY = 'cc972accea83fa5ffc67d3956970203b';
 }
 
 class DBConfig {
