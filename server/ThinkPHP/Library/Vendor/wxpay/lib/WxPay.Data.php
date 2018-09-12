@@ -4,7 +4,7 @@
 **/
 
 /**
- * 
+ *
  * 数据对象基础类，该类中定义数据类最基本的行为，包括：
  * 计算/设置/获取签名、输出xml格式的参数、从xml读取数据对象等
  * @author widyhu
@@ -13,10 +13,10 @@
 class WxPayDataBase
 {
 	protected $values = array();
-	
+
 	/**
 	* 设置签名，详见签名生成算法
-	* @param string $value 
+	* @param string $value
 	**/
 	public function SetSign()
 	{
@@ -24,7 +24,13 @@ class WxPayDataBase
 		$this->values['sign'] = $sign;
 		return $sign;
 	}
-	
+
+  public function SetSignValue($sign)
+	{
+		$this->values['sign'] = $sign;
+		return $sign;
+	}
+
 	/**
 	* 获取签名，详见签名生成算法的值
 	* @return 值
@@ -33,7 +39,7 @@ class WxPayDataBase
 	{
 		return $this->values['sign'];
 	}
-	
+
 	/**
 	* 判断签名，详见签名生成算法是否存在
 	* @return true 或 false
@@ -49,12 +55,12 @@ class WxPayDataBase
 	**/
 	public function ToXml()
 	{
-		if(!is_array($this->values) 
+		if(!is_array($this->values)
 			|| count($this->values) <= 0)
 		{
     		throw new WxPayException("数组数据异常！");
     	}
-    	
+
     	$xml = "<xml>";
     	foreach ($this->values as $key=>$val)
     	{
@@ -65,26 +71,26 @@ class WxPayDataBase
     		}
         }
         $xml.="</xml>";
-        return $xml; 
+        return $xml;
 	}
-	
+
     /**
      * 将xml转为array
      * @param string $xml
      * @throws WxPayException
      */
 	public function FromXml($xml)
-	{	
+	{
 		if(!$xml){
 			throw new WxPayException("xml数据异常！");
 		}
         //将XML转为array
         //禁止引用外部xml实体
         libxml_disable_entity_loader(true);
-        $this->values = json_decode(json_encode(simplexml_load_string($xml, 'SimpleXMLElement', LIBXML_NOCDATA)), true);		
+        $this->values = json_decode(json_encode(simplexml_load_string($xml, 'SimpleXMLElement', LIBXML_NOCDATA)), true);
 		return $this->values;
 	}
-	
+
 	/**
 	 * 格式化参数格式化成url参数
 	 */
@@ -97,11 +103,11 @@ class WxPayDataBase
 				$buff .= $k . "=" . $v . "&";
 			}
 		}
-		
+
 		$buff = trim($buff, "&");
 		return $buff;
 	}
-	
+
 	/**
 	 * 生成签名
 	 * @return 签名，本函数不覆盖sign成员变量，如要设置签名需要调用SetSign方法赋值
@@ -119,7 +125,7 @@ class WxPayDataBase
 		$result = strtoupper($string);
 		return $result;
 	}
-	
+
 	/**
 	 * 获取设置的值
 	 */
@@ -130,7 +136,7 @@ class WxPayDataBase
 }
 
 /**
- * 
+ *
  * 接口调用结果类
  * @author widyhu
  *
@@ -138,7 +144,7 @@ class WxPayDataBase
 class WxPayResults extends WxPayDataBase
 {
 	/**
-	 * 
+	 *
 	 * 检测签名
 	 */
 	public function CheckSign()
@@ -147,16 +153,16 @@ class WxPayResults extends WxPayDataBase
 		if(!$this->IsSignSet()){
 			throw new WxPayException("签名错误！");
 		}
-		
+
 		$sign = $this->MakeSign();
 		if($this->GetSign() == $sign){
 			return true;
 		}
 		throw new WxPayException("签名错误！");
 	}
-	
+
 	/**
-	 * 
+	 *
 	 * 使用数组初始化
 	 * @param array $array
 	 */
@@ -164,9 +170,9 @@ class WxPayResults extends WxPayDataBase
 	{
 		$this->values = $array;
 	}
-	
+
 	/**
-	 * 
+	 *
 	 * 使用数组初始化对象
 	 * @param array $array
 	 * @param 是否检测签名 $noCheckSign
@@ -180,9 +186,9 @@ class WxPayResults extends WxPayDataBase
 		}
         return $obj;
 	}
-	
+
 	/**
-	 * 
+	 *
 	 * 设置参数
 	 * @param string $key
 	 * @param string $value
@@ -191,14 +197,14 @@ class WxPayResults extends WxPayDataBase
 	{
 		$this->values[$key] = $value;
 	}
-	
+
     /**
      * 将xml转为array
      * @param string $xml
      * @throws WxPayException
      */
 	public static function Init($xml)
-	{	
+	{
 		$obj = new self();
 		$obj->FromXml($xml);
 		//fix bug 2015-06-29
@@ -211,7 +217,7 @@ class WxPayResults extends WxPayDataBase
 }
 
 /**
- * 
+ *
  * 回调基础类
  * @author widyhu
  *
@@ -219,7 +225,7 @@ class WxPayResults extends WxPayDataBase
 class WxPayNotifyReply extends  WxPayDataBase
 {
 	/**
-	 * 
+	 *
 	 * 设置错误码 FAIL 或者 SUCCESS
 	 * @param string
 	 */
@@ -227,9 +233,9 @@ class WxPayNotifyReply extends  WxPayDataBase
 	{
 		$this->values['return_code'] = $return_code;
 	}
-	
+
 	/**
-	 * 
+	 *
 	 * 获取错误码 FAIL 或者 SUCCESS
 	 * @return string $return_code
 	 */
@@ -239,7 +245,7 @@ class WxPayNotifyReply extends  WxPayDataBase
 	}
 
 	/**
-	 * 
+	 *
 	 * 设置错误信息
 	 * @param string $return_code
 	 */
@@ -247,9 +253,9 @@ class WxPayNotifyReply extends  WxPayDataBase
 	{
 		$this->values['return_msg'] = $return_msg;
 	}
-	
+
 	/**
-	 * 
+	 *
 	 * 获取错误信息
 	 * @return string
 	 */
@@ -257,9 +263,9 @@ class WxPayNotifyReply extends  WxPayDataBase
 	{
 		return $this->values['return_msg'];
 	}
-	
+
 	/**
-	 * 
+	 *
 	 * 设置返回参数
 	 * @param string $key
 	 * @param string $value
@@ -271,16 +277,16 @@ class WxPayNotifyReply extends  WxPayDataBase
 }
 
 /**
- * 
+ *
  * 统一下单输入对象
  * @author widyhu
  *
  */
 class WxPayUnifiedOrder extends WxPayDataBase
-{	
+{
 	/**
 	* 设置微信分配的公众账号ID
-	* @param string $value 
+	* @param string $value
 	**/
 	public function SetAppid($value)
 	{
@@ -306,7 +312,7 @@ class WxPayUnifiedOrder extends WxPayDataBase
 
 	/**
 	* 设置微信支付分配的商户号
-	* @param string $value 
+	* @param string $value
 	**/
 	public function SetMch_id($value)
 	{
@@ -332,7 +338,7 @@ class WxPayUnifiedOrder extends WxPayDataBase
 
 	/**
 	* 设置微信支付分配的终端设备号，商户自定义
-	* @param string $value 
+	* @param string $value
 	**/
 	public function SetDevice_info($value)
 	{
@@ -358,7 +364,7 @@ class WxPayUnifiedOrder extends WxPayDataBase
 
 	/**
 	* 设置随机字符串，不长于32位。推荐随机数生成算法
-	* @param string $value 
+	* @param string $value
 	**/
 	public function SetNonce_str($value)
 	{
@@ -383,7 +389,7 @@ class WxPayUnifiedOrder extends WxPayDataBase
 
 	/**
 	* 设置商品或支付单简要描述
-	* @param string $value 
+	* @param string $value
 	**/
 	public function SetBody($value)
 	{
@@ -409,7 +415,7 @@ class WxPayUnifiedOrder extends WxPayDataBase
 
 	/**
 	* 设置商品名称明细列表
-	* @param string $value 
+	* @param string $value
 	**/
 	public function SetDetail($value)
 	{
@@ -435,7 +441,7 @@ class WxPayUnifiedOrder extends WxPayDataBase
 
 	/**
 	* 设置附加数据，在查询API和支付通知中原样返回，该字段主要用于商户携带订单的自定义数据
-	* @param string $value 
+	* @param string $value
 	**/
 	public function SetAttach($value)
 	{
@@ -461,7 +467,7 @@ class WxPayUnifiedOrder extends WxPayDataBase
 
 	/**
 	* 设置商户系统内部的订单号,32个字符内、可包含字母, 其他说明见商户订单号
-	* @param string $value 
+	* @param string $value
 	**/
 	public function SetOut_trade_no($value)
 	{
@@ -487,7 +493,7 @@ class WxPayUnifiedOrder extends WxPayDataBase
 
 	/**
 	* 设置符合ISO 4217标准的三位字母代码，默认人民币：CNY，其他值列表详见货币类型
-	* @param string $value 
+	* @param string $value
 	**/
 	public function SetFee_type($value)
 	{
@@ -513,7 +519,7 @@ class WxPayUnifiedOrder extends WxPayDataBase
 
 	/**
 	* 设置订单总金额，只能为整数，详见支付金额
-	* @param string $value 
+	* @param string $value
 	**/
 	public function SetTotal_fee($value)
 	{
@@ -539,7 +545,7 @@ class WxPayUnifiedOrder extends WxPayDataBase
 
 	/**
 	* 设置APP和网页支付提交用户端ip，Native支付填调用微信支付API的机器IP。
-	* @param string $value 
+	* @param string $value
 	**/
 	public function SetSpbill_create_ip($value)
 	{
@@ -565,7 +571,7 @@ class WxPayUnifiedOrder extends WxPayDataBase
 
 	/**
 	* 设置订单生成时间，格式为yyyyMMddHHmmss，如2009年12月25日9点10分10秒表示为20091225091010。其他详见时间规则
-	* @param string $value 
+	* @param string $value
 	**/
 	public function SetTime_start($value)
 	{
@@ -591,7 +597,7 @@ class WxPayUnifiedOrder extends WxPayDataBase
 
 	/**
 	* 设置订单失效时间，格式为yyyyMMddHHmmss，如2009年12月27日9点10分10秒表示为20091227091010。其他详见时间规则
-	* @param string $value 
+	* @param string $value
 	**/
 	public function SetTime_expire($value)
 	{
@@ -617,7 +623,7 @@ class WxPayUnifiedOrder extends WxPayDataBase
 
 	/**
 	* 设置商品标记，代金券或立减优惠功能的参数，说明详见代金券或立减优惠
-	* @param string $value 
+	* @param string $value
 	**/
 	public function SetGoods_tag($value)
 	{
@@ -643,7 +649,7 @@ class WxPayUnifiedOrder extends WxPayDataBase
 
 	/**
 	* 设置接收微信支付异步通知回调地址
-	* @param string $value 
+	* @param string $value
 	**/
 	public function SetNotify_url($value)
 	{
@@ -669,7 +675,7 @@ class WxPayUnifiedOrder extends WxPayDataBase
 
 	/**
 	* 设置取值如下：JSAPI，NATIVE，APP，详细说明见参数规定
-	* @param string $value 
+	* @param string $value
 	**/
 	public function SetTrade_type($value)
 	{
@@ -695,7 +701,7 @@ class WxPayUnifiedOrder extends WxPayDataBase
 
 	/**
 	* 设置trade_type=NATIVE，此参数必传。此id为二维码中包含的商品ID，商户自行定义。
-	* @param string $value 
+	* @param string $value
 	**/
 	public function SetProduct_id($value)
 	{
@@ -720,8 +726,8 @@ class WxPayUnifiedOrder extends WxPayDataBase
 
 
 	/**
-	* 设置trade_type=JSAPI，此参数必传，用户在商户appid下的唯一标识。下单前需要调用【网页授权获取用户信息】接口获取到用户的Openid。 
-	* @param string $value 
+	* 设置trade_type=JSAPI，此参数必传，用户在商户appid下的唯一标识。下单前需要调用【网页授权获取用户信息】接口获取到用户的Openid。
+	* @param string $value
 	**/
 	public function SetOpenid($value)
 	{
@@ -746,7 +752,7 @@ class WxPayUnifiedOrder extends WxPayDataBase
 }
 
 /**
- * 
+ *
  * 订单查询输入对象
  * @author widyhu
  *
@@ -755,7 +761,7 @@ class WxPayOrderQuery extends WxPayDataBase
 {
 	/**
 	* 设置微信分配的公众账号ID
-	* @param string $value 
+	* @param string $value
 	**/
 	public function SetAppid($value)
 	{
@@ -781,7 +787,7 @@ class WxPayOrderQuery extends WxPayDataBase
 
 	/**
 	* 设置微信支付分配的商户号
-	* @param string $value 
+	* @param string $value
 	**/
 	public function SetMch_id($value)
 	{
@@ -807,7 +813,7 @@ class WxPayOrderQuery extends WxPayDataBase
 
 	/**
 	* 设置微信的订单号，优先使用
-	* @param string $value 
+	* @param string $value
 	**/
 	public function SetTransaction_id($value)
 	{
@@ -833,7 +839,7 @@ class WxPayOrderQuery extends WxPayDataBase
 
 	/**
 	* 设置商户系统内部的订单号，当没提供transaction_id时需要传这个。
-	* @param string $value 
+	* @param string $value
 	**/
 	public function SetOut_trade_no($value)
 	{
@@ -859,7 +865,7 @@ class WxPayOrderQuery extends WxPayDataBase
 
 	/**
 	* 设置随机字符串，不长于32位。推荐随机数生成算法
-	* @param string $value 
+	* @param string $value
 	**/
 	public function SetNonce_str($value)
 	{
@@ -884,7 +890,7 @@ class WxPayOrderQuery extends WxPayDataBase
 }
 
 /**
- * 
+ *
  * 关闭订单输入对象
  * @author widyhu
  *
@@ -893,7 +899,7 @@ class WxPayCloseOrder extends WxPayDataBase
 {
 	/**
 	* 设置微信分配的公众账号ID
-	* @param string $value 
+	* @param string $value
 	**/
 	public function SetAppid($value)
 	{
@@ -919,7 +925,7 @@ class WxPayCloseOrder extends WxPayDataBase
 
 	/**
 	* 设置微信支付分配的商户号
-	* @param string $value 
+	* @param string $value
 	**/
 	public function SetMch_id($value)
 	{
@@ -945,7 +951,7 @@ class WxPayCloseOrder extends WxPayDataBase
 
 	/**
 	* 设置商户系统内部的订单号
-	* @param string $value 
+	* @param string $value
 	**/
 	public function SetOut_trade_no($value)
 	{
@@ -971,7 +977,7 @@ class WxPayCloseOrder extends WxPayDataBase
 
 	/**
 	* 设置商户系统内部的订单号,32个字符内、可包含字母, 其他说明见商户订单号
-	* @param string $value 
+	* @param string $value
 	**/
 	public function SetNonce_str($value)
 	{
@@ -996,7 +1002,7 @@ class WxPayCloseOrder extends WxPayDataBase
 }
 
 /**
- * 
+ *
  * 提交退款输入对象
  * @author widyhu
  *
@@ -1005,7 +1011,7 @@ class WxPayRefund extends WxPayDataBase
 {
 	/**
 	* 设置微信分配的公众账号ID
-	* @param string $value 
+	* @param string $value
 	**/
 	public function SetAppid($value)
 	{
@@ -1031,7 +1037,7 @@ class WxPayRefund extends WxPayDataBase
 
 	/**
 	* 设置微信支付分配的商户号
-	* @param string $value 
+	* @param string $value
 	**/
 	public function SetMch_id($value)
 	{
@@ -1057,7 +1063,7 @@ class WxPayRefund extends WxPayDataBase
 
 	/**
 	* 设置微信支付分配的终端设备号，与下单一致
-	* @param string $value 
+	* @param string $value
 	**/
 	public function SetDevice_info($value)
 	{
@@ -1083,7 +1089,7 @@ class WxPayRefund extends WxPayDataBase
 
 	/**
 	* 设置随机字符串，不长于32位。推荐随机数生成算法
-	* @param string $value 
+	* @param string $value
 	**/
 	public function SetNonce_str($value)
 	{
@@ -1108,7 +1114,7 @@ class WxPayRefund extends WxPayDataBase
 
 	/**
 	* 设置微信订单号
-	* @param string $value 
+	* @param string $value
 	**/
 	public function SetTransaction_id($value)
 	{
@@ -1134,7 +1140,7 @@ class WxPayRefund extends WxPayDataBase
 
 	/**
 	* 设置商户系统内部的订单号,transaction_id、out_trade_no二选一，如果同时存在优先级：transaction_id> out_trade_no
-	* @param string $value 
+	* @param string $value
 	**/
 	public function SetOut_trade_no($value)
 	{
@@ -1160,7 +1166,7 @@ class WxPayRefund extends WxPayDataBase
 
 	/**
 	* 设置商户系统内部的退款单号，商户系统内部唯一，同一退款单号多次请求只退一笔
-	* @param string $value 
+	* @param string $value
 	**/
 	public function SetOut_refund_no($value)
 	{
@@ -1186,7 +1192,7 @@ class WxPayRefund extends WxPayDataBase
 
 	/**
 	* 设置订单总金额，单位为分，只能为整数，详见支付金额
-	* @param string $value 
+	* @param string $value
 	**/
 	public function SetTotal_fee($value)
 	{
@@ -1212,7 +1218,7 @@ class WxPayRefund extends WxPayDataBase
 
 	/**
 	* 设置退款总金额，订单总金额，单位为分，只能为整数，详见支付金额
-	* @param string $value 
+	* @param string $value
 	**/
 	public function SetRefund_fee($value)
 	{
@@ -1238,7 +1244,7 @@ class WxPayRefund extends WxPayDataBase
 
 	/**
 	* 设置货币类型，符合ISO 4217标准的三位字母代码，默认人民币：CNY，其他值列表详见货币类型
-	* @param string $value 
+	* @param string $value
 	**/
 	public function SetRefund_fee_type($value)
 	{
@@ -1264,7 +1270,7 @@ class WxPayRefund extends WxPayDataBase
 
 	/**
 	* 设置操作员帐号, 默认为商户号
-	* @param string $value 
+	* @param string $value
 	**/
 	public function SetOp_user_id($value)
 	{
@@ -1289,7 +1295,7 @@ class WxPayRefund extends WxPayDataBase
 }
 
 /**
- * 
+ *
  * 退款查询输入对象
  * @author widyhu
  *
@@ -1298,7 +1304,7 @@ class WxPayRefundQuery extends WxPayDataBase
 {
 	/**
 	* 设置微信分配的公众账号ID
-	* @param string $value 
+	* @param string $value
 	**/
 	public function SetAppid($value)
 	{
@@ -1324,7 +1330,7 @@ class WxPayRefundQuery extends WxPayDataBase
 
 	/**
 	* 设置微信支付分配的商户号
-	* @param string $value 
+	* @param string $value
 	**/
 	public function SetMch_id($value)
 	{
@@ -1350,7 +1356,7 @@ class WxPayRefundQuery extends WxPayDataBase
 
 	/**
 	* 设置微信支付分配的终端设备号
-	* @param string $value 
+	* @param string $value
 	**/
 	public function SetDevice_info($value)
 	{
@@ -1376,7 +1382,7 @@ class WxPayRefundQuery extends WxPayDataBase
 
 	/**
 	* 设置随机字符串，不长于32位。推荐随机数生成算法
-	* @param string $value 
+	* @param string $value
 	**/
 	public function SetNonce_str($value)
 	{
@@ -1401,7 +1407,7 @@ class WxPayRefundQuery extends WxPayDataBase
 
 	/**
 	* 设置微信订单号
-	* @param string $value 
+	* @param string $value
 	**/
 	public function SetTransaction_id($value)
 	{
@@ -1427,7 +1433,7 @@ class WxPayRefundQuery extends WxPayDataBase
 
 	/**
 	* 设置商户系统内部的订单号
-	* @param string $value 
+	* @param string $value
 	**/
 	public function SetOut_trade_no($value)
 	{
@@ -1453,7 +1459,7 @@ class WxPayRefundQuery extends WxPayDataBase
 
 	/**
 	* 设置商户退款单号
-	* @param string $value 
+	* @param string $value
 	**/
 	public function SetOut_refund_no($value)
 	{
@@ -1479,7 +1485,7 @@ class WxPayRefundQuery extends WxPayDataBase
 
 	/**
 	* 设置微信退款单号refund_id、out_refund_no、out_trade_no、transaction_id四个参数必填一个，如果同时存在优先级为：refund_id>out_refund_no>transaction_id>out_trade_no
-	* @param string $value 
+	* @param string $value
 	**/
 	public function SetRefund_id($value)
 	{
@@ -1504,7 +1510,7 @@ class WxPayRefundQuery extends WxPayDataBase
 }
 
 /**
- * 
+ *
  * 下载对账单输入对象
  * @author widyhu
  *
@@ -1513,7 +1519,7 @@ class WxPayDownloadBill extends WxPayDataBase
 {
 	/**
 	* 设置微信分配的公众账号ID
-	* @param string $value 
+	* @param string $value
 	**/
 	public function SetAppid($value)
 	{
@@ -1539,7 +1545,7 @@ class WxPayDownloadBill extends WxPayDataBase
 
 	/**
 	* 设置微信支付分配的商户号
-	* @param string $value 
+	* @param string $value
 	**/
 	public function SetMch_id($value)
 	{
@@ -1565,7 +1571,7 @@ class WxPayDownloadBill extends WxPayDataBase
 
 	/**
 	* 设置微信支付分配的终端设备号，填写此字段，只下载该设备号的对账单
-	* @param string $value 
+	* @param string $value
 	**/
 	public function SetDevice_info($value)
 	{
@@ -1591,7 +1597,7 @@ class WxPayDownloadBill extends WxPayDataBase
 
 	/**
 	* 设置随机字符串，不长于32位。推荐随机数生成算法
-	* @param string $value 
+	* @param string $value
 	**/
 	public function SetNonce_str($value)
 	{
@@ -1616,7 +1622,7 @@ class WxPayDownloadBill extends WxPayDataBase
 
 	/**
 	* 设置下载对账单的日期，格式：20140603
-	* @param string $value 
+	* @param string $value
 	**/
 	public function SetBill_date($value)
 	{
@@ -1642,7 +1648,7 @@ class WxPayDownloadBill extends WxPayDataBase
 
 	/**
 	* 设置ALL，返回当日所有订单信息，默认值SUCCESS，返回当日成功支付的订单REFUND，返回当日退款订单REVOKED，已撤销的订单
-	* @param string $value 
+	* @param string $value
 	**/
 	public function SetBill_type($value)
 	{
@@ -1667,7 +1673,7 @@ class WxPayDownloadBill extends WxPayDataBase
 }
 
 /**
- * 
+ *
  * 测速上报输入对象
  * @author widyhu
  *
@@ -1676,7 +1682,7 @@ class WxPayReport extends WxPayDataBase
 {
 	/**
 	* 设置微信分配的公众账号ID
-	* @param string $value 
+	* @param string $value
 	**/
 	public function SetAppid($value)
 	{
@@ -1702,7 +1708,7 @@ class WxPayReport extends WxPayDataBase
 
 	/**
 	* 设置微信支付分配的商户号
-	* @param string $value 
+	* @param string $value
 	**/
 	public function SetMch_id($value)
 	{
@@ -1728,7 +1734,7 @@ class WxPayReport extends WxPayDataBase
 
 	/**
 	* 设置微信支付分配的终端设备号，商户自定义
-	* @param string $value 
+	* @param string $value
 	**/
 	public function SetDevice_info($value)
 	{
@@ -1754,7 +1760,7 @@ class WxPayReport extends WxPayDataBase
 
 	/**
 	* 设置随机字符串，不长于32位。推荐随机数生成算法
-	* @param string $value 
+	* @param string $value
 	**/
 	public function SetNonce_str($value)
 	{
@@ -1780,7 +1786,7 @@ class WxPayReport extends WxPayDataBase
 
 	/**
 	* 设置上报对应的接口的完整URL，类似：https://api.mch.weixin.qq.com/pay/unifiedorder对于被扫支付，为更好的和商户共同分析一次业务行为的整体耗时情况，对于两种接入模式，请都在门店侧对一次被扫行为进行一次单独的整体上报，上报URL指定为：https://api.mch.weixin.qq.com/pay/micropay/total关于两种接入模式具体可参考本文档章节：被扫支付商户接入模式其它接口调用仍然按照调用一次，上报一次来进行。
-	* @param string $value 
+	* @param string $value
 	**/
 	public function SetInterface_url($value)
 	{
@@ -1806,7 +1812,7 @@ class WxPayReport extends WxPayDataBase
 
 	/**
 	* 设置接口耗时情况，单位为毫秒
-	* @param string $value 
+	* @param string $value
 	**/
 	public function SetExecute_time_($value)
 	{
@@ -1832,7 +1838,7 @@ class WxPayReport extends WxPayDataBase
 
 	/**
 	* 设置SUCCESS/FAIL此字段是通信标识，非交易标识，交易是否成功需要查看trade_state来判断
-	* @param string $value 
+	* @param string $value
 	**/
 	public function SetReturn_code($value)
 	{
@@ -1858,7 +1864,7 @@ class WxPayReport extends WxPayDataBase
 
 	/**
 	* 设置返回信息，如非空，为错误原因签名失败参数格式校验错误
-	* @param string $value 
+	* @param string $value
 	**/
 	public function SetReturn_msg($value)
 	{
@@ -1884,7 +1890,7 @@ class WxPayReport extends WxPayDataBase
 
 	/**
 	* 设置SUCCESS/FAIL
-	* @param string $value 
+	* @param string $value
 	**/
 	public function SetResult_code($value)
 	{
@@ -1910,7 +1916,7 @@ class WxPayReport extends WxPayDataBase
 
 	/**
 	* 设置ORDERNOTEXIST—订单不存在SYSTEMERROR—系统错误
-	* @param string $value 
+	* @param string $value
 	**/
 	public function SetErr_code($value)
 	{
@@ -1936,7 +1942,7 @@ class WxPayReport extends WxPayDataBase
 
 	/**
 	* 设置结果信息描述
-	* @param string $value 
+	* @param string $value
 	**/
 	public function SetErr_code_des($value)
 	{
@@ -1961,8 +1967,8 @@ class WxPayReport extends WxPayDataBase
 
 
 	/**
-	* 设置商户系统内部的订单号,商户可以在上报时提供相关商户订单号方便微信支付更好的提高服务质量。 
-	* @param string $value 
+	* 设置商户系统内部的订单号,商户可以在上报时提供相关商户订单号方便微信支付更好的提高服务质量。
+	* @param string $value
 	**/
 	public function SetOut_trade_no($value)
 	{
@@ -1987,8 +1993,8 @@ class WxPayReport extends WxPayDataBase
 
 
 	/**
-	* 设置发起接口调用时的机器IP 
-	* @param string $value 
+	* 设置发起接口调用时的机器IP
+	* @param string $value
 	**/
 	public function SetUser_ip($value)
 	{
@@ -2014,7 +2020,7 @@ class WxPayReport extends WxPayDataBase
 
 	/**
 	* 设置系统时间，格式为yyyyMMddHHmmss，如2009年12月27日9点10分10秒表示为20091227091010。其他详见时间规则
-	* @param string $value 
+	* @param string $value
 	**/
 	public function SetTime($value)
 	{
@@ -2039,7 +2045,7 @@ class WxPayReport extends WxPayDataBase
 }
 
 /**
- * 
+ *
  * 短链转换输入对象
  * @author widyhu
  *
@@ -2048,7 +2054,7 @@ class WxPayShortUrl extends WxPayDataBase
 {
 	/**
 	* 设置微信分配的公众账号ID
-	* @param string $value 
+	* @param string $value
 	**/
 	public function SetAppid($value)
 	{
@@ -2074,7 +2080,7 @@ class WxPayShortUrl extends WxPayDataBase
 
 	/**
 	* 设置微信支付分配的商户号
-	* @param string $value 
+	* @param string $value
 	**/
 	public function SetMch_id($value)
 	{
@@ -2100,7 +2106,7 @@ class WxPayShortUrl extends WxPayDataBase
 
 	/**
 	* 设置需要转换的URL，签名用原串，传输需URL encode
-	* @param string $value 
+	* @param string $value
 	**/
 	public function SetLong_url($value)
 	{
@@ -2126,7 +2132,7 @@ class WxPayShortUrl extends WxPayDataBase
 
 	/**
 	* 设置随机字符串，不长于32位。推荐随机数生成算法
-	* @param string $value 
+	* @param string $value
 	**/
 	public function SetNonce_str($value)
 	{
@@ -2151,7 +2157,7 @@ class WxPayShortUrl extends WxPayDataBase
 }
 
 /**
- * 
+ *
  * 提交被扫输入对象
  * @author widyhu
  *
@@ -2160,7 +2166,7 @@ class WxPayMicroPay extends WxPayDataBase
 {
 	/**
 	* 设置微信分配的公众账号ID
-	* @param string $value 
+	* @param string $value
 	**/
 	public function SetAppid($value)
 	{
@@ -2186,7 +2192,7 @@ class WxPayMicroPay extends WxPayDataBase
 
 	/**
 	* 设置微信支付分配的商户号
-	* @param string $value 
+	* @param string $value
 	**/
 	public function SetMch_id($value)
 	{
@@ -2212,7 +2218,7 @@ class WxPayMicroPay extends WxPayDataBase
 
 	/**
 	* 设置终端设备号(商户自定义，如门店编号)
-	* @param string $value 
+	* @param string $value
 	**/
 	public function SetDevice_info($value)
 	{
@@ -2238,7 +2244,7 @@ class WxPayMicroPay extends WxPayDataBase
 
 	/**
 	* 设置随机字符串，不长于32位。推荐随机数生成算法
-	* @param string $value 
+	* @param string $value
 	**/
 	public function SetNonce_str($value)
 	{
@@ -2263,7 +2269,7 @@ class WxPayMicroPay extends WxPayDataBase
 
 	/**
 	* 设置商品或支付单简要描述
-	* @param string $value 
+	* @param string $value
 	**/
 	public function SetBody($value)
 	{
@@ -2289,7 +2295,7 @@ class WxPayMicroPay extends WxPayDataBase
 
 	/**
 	* 设置商品名称明细列表
-	* @param string $value 
+	* @param string $value
 	**/
 	public function SetDetail($value)
 	{
@@ -2315,7 +2321,7 @@ class WxPayMicroPay extends WxPayDataBase
 
 	/**
 	* 设置附加数据，在查询API和支付通知中原样返回，该字段主要用于商户携带订单的自定义数据
-	* @param string $value 
+	* @param string $value
 	**/
 	public function SetAttach($value)
 	{
@@ -2341,7 +2347,7 @@ class WxPayMicroPay extends WxPayDataBase
 
 	/**
 	* 设置商户系统内部的订单号,32个字符内、可包含字母, 其他说明见商户订单号
-	* @param string $value 
+	* @param string $value
 	**/
 	public function SetOut_trade_no($value)
 	{
@@ -2367,7 +2373,7 @@ class WxPayMicroPay extends WxPayDataBase
 
 	/**
 	* 设置订单总金额，单位为分，只能为整数，详见支付金额
-	* @param string $value 
+	* @param string $value
 	**/
 	public function SetTotal_fee($value)
 	{
@@ -2393,7 +2399,7 @@ class WxPayMicroPay extends WxPayDataBase
 
 	/**
 	* 设置符合ISO 4217标准的三位字母代码，默认人民币：CNY，其他值列表详见货币类型
-	* @param string $value 
+	* @param string $value
 	**/
 	public function SetFee_type($value)
 	{
@@ -2418,8 +2424,8 @@ class WxPayMicroPay extends WxPayDataBase
 
 
 	/**
-	* 设置调用微信支付API的机器IP 
-	* @param string $value 
+	* 设置调用微信支付API的机器IP
+	* @param string $value
 	**/
 	public function SetSpbill_create_ip($value)
 	{
@@ -2445,7 +2451,7 @@ class WxPayMicroPay extends WxPayDataBase
 
 	/**
 	* 设置订单生成时间，格式为yyyyMMddHHmmss，如2009年12月25日9点10分10秒表示为20091225091010。详见时间规则
-	* @param string $value 
+	* @param string $value
 	**/
 	public function SetTime_start($value)
 	{
@@ -2471,7 +2477,7 @@ class WxPayMicroPay extends WxPayDataBase
 
 	/**
 	* 设置订单失效时间，格式为yyyyMMddHHmmss，如2009年12月27日9点10分10秒表示为20091227091010。详见时间规则
-	* @param string $value 
+	* @param string $value
 	**/
 	public function SetTime_expire($value)
 	{
@@ -2497,7 +2503,7 @@ class WxPayMicroPay extends WxPayDataBase
 
 	/**
 	* 设置商品标记，代金券或立减优惠功能的参数，说明详见代金券或立减优惠
-	* @param string $value 
+	* @param string $value
 	**/
 	public function SetGoods_tag($value)
 	{
@@ -2523,7 +2529,7 @@ class WxPayMicroPay extends WxPayDataBase
 
 	/**
 	* 设置扫码支付授权码，设备读取用户微信中的条码或者二维码信息
-	* @param string $value 
+	* @param string $value
 	**/
 	public function SetAuth_code($value)
 	{
@@ -2548,7 +2554,7 @@ class WxPayMicroPay extends WxPayDataBase
 }
 
 /**
- * 
+ *
  * 撤销输入对象
  * @author widyhu
  *
@@ -2557,7 +2563,7 @@ class WxPayReverse extends WxPayDataBase
 {
 	/**
 	* 设置微信分配的公众账号ID
-	* @param string $value 
+	* @param string $value
 	**/
 	public function SetAppid($value)
 	{
@@ -2583,7 +2589,7 @@ class WxPayReverse extends WxPayDataBase
 
 	/**
 	* 设置微信支付分配的商户号
-	* @param string $value 
+	* @param string $value
 	**/
 	public function SetMch_id($value)
 	{
@@ -2609,7 +2615,7 @@ class WxPayReverse extends WxPayDataBase
 
 	/**
 	* 设置微信的订单号，优先使用
-	* @param string $value 
+	* @param string $value
 	**/
 	public function SetTransaction_id($value)
 	{
@@ -2635,7 +2641,7 @@ class WxPayReverse extends WxPayDataBase
 
 	/**
 	* 设置商户系统内部的订单号,transaction_id、out_trade_no二选一，如果同时存在优先级：transaction_id> out_trade_no
-	* @param string $value 
+	* @param string $value
 	**/
 	public function SetOut_trade_no($value)
 	{
@@ -2661,7 +2667,7 @@ class WxPayReverse extends WxPayDataBase
 
 	/**
 	* 设置随机字符串，不长于32位。推荐随机数生成算法
-	* @param string $value 
+	* @param string $value
 	**/
 	public function SetNonce_str($value)
 	{
@@ -2686,7 +2692,7 @@ class WxPayReverse extends WxPayDataBase
 }
 
 /**
- * 
+ *
  * 提交JSAPI输入对象
  * @author widyhu
  *
@@ -2695,7 +2701,7 @@ class WxPayJsApiPay extends WxPayDataBase
 {
 	/**
 	* 设置微信分配的公众账号ID
-	* @param string $value 
+	* @param string $value
 	**/
 	public function SetAppid($value)
 	{
@@ -2721,7 +2727,7 @@ class WxPayJsApiPay extends WxPayDataBase
 
 	/**
 	* 设置支付时间戳
-	* @param string $value 
+	* @param string $value
 	**/
 	public function SetTimeStamp($value)
 	{
@@ -2743,10 +2749,10 @@ class WxPayJsApiPay extends WxPayDataBase
 	{
 		return array_key_exists('timeStamp', $this->values);
 	}
-	
+
 	/**
 	* 随机字符串
-	* @param string $value 
+	* @param string $value
 	**/
 	public function SetNonceStr($value)
 	{
@@ -2772,7 +2778,7 @@ class WxPayJsApiPay extends WxPayDataBase
 
 	/**
 	* 设置订单详情扩展字符串
-	* @param string $value 
+	* @param string $value
 	**/
 	public function SetPackage($value)
 	{
@@ -2794,10 +2800,10 @@ class WxPayJsApiPay extends WxPayDataBase
 	{
 		return array_key_exists('package', $this->values);
 	}
-	
+
 	/**
 	* 设置签名方式
-	* @param string $value 
+	* @param string $value
 	**/
 	public function SetSignType($value)
 	{
@@ -2819,10 +2825,10 @@ class WxPayJsApiPay extends WxPayDataBase
 	{
 		return array_key_exists('signType', $this->values);
 	}
-	
+
 	/**
 	* 设置签名方式
-	* @param string $value 
+	* @param string $value
 	**/
 	public function SetPaySign($value)
 	{
@@ -2847,7 +2853,7 @@ class WxPayJsApiPay extends WxPayDataBase
 }
 
 /**
- * 
+ *
  * 扫码支付模式一生成二维码参数
  * @author widyhu
  *
@@ -2856,7 +2862,7 @@ class WxPayBizPayUrl extends WxPayDataBase
 {
 		/**
 	* 设置微信分配的公众账号ID
-	* @param string $value 
+	* @param string $value
 	**/
 	public function SetAppid($value)
 	{
@@ -2882,7 +2888,7 @@ class WxPayBizPayUrl extends WxPayDataBase
 
 	/**
 	* 设置微信支付分配的商户号
-	* @param string $value 
+	* @param string $value
 	**/
 	public function SetMch_id($value)
 	{
@@ -2904,10 +2910,10 @@ class WxPayBizPayUrl extends WxPayDataBase
 	{
 		return array_key_exists('mch_id', $this->values);
 	}
-	
+
 	/**
 	* 设置支付时间戳
-	* @param string $value 
+	* @param string $value
 	**/
 	public function SetTime_stamp($value)
 	{
@@ -2929,10 +2935,10 @@ class WxPayBizPayUrl extends WxPayDataBase
 	{
 		return array_key_exists('time_stamp', $this->values);
 	}
-	
+
 	/**
 	* 设置随机字符串
-	* @param string $value 
+	* @param string $value
 	**/
 	public function SetNonce_str($value)
 	{
@@ -2954,10 +2960,10 @@ class WxPayBizPayUrl extends WxPayDataBase
 	{
 		return array_key_exists('nonce_str', $this->values);
 	}
-	
+
 	/**
 	* 设置商品ID
-	* @param string $value 
+	* @param string $value
 	**/
 	public function SetProduct_id($value)
 	{

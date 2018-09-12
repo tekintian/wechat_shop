@@ -52,7 +52,7 @@ class WxPayApi
 		$inputObj->SetNonce_str(self::getNonceStr());//随机字符串
 
 		//签名
-		$inputObj->SetSign();
+		self::SetSign($inputObj);
 		$xml = $inputObj->ToXml();
 
 		$startTimeStamp = self::getMillisecond();//请求开始时间
@@ -83,7 +83,7 @@ class WxPayApi
 		$inputObj->SetMch_id(WxPayConfig::MCHID);//商户号
 		$inputObj->SetNonce_str(self::getNonceStr());//随机字符串
 
-		$inputObj->SetSign();//签名
+		self::SetSign($inputObj);//签名
 		$xml = $inputObj->ToXml();
 
 		$startTimeStamp = self::getMillisecond();//请求开始时间
@@ -114,7 +114,7 @@ class WxPayApi
 		$inputObj->SetMch_id(WxPayConfig::MCHID);//商户号
 		$inputObj->SetNonce_str(self::getNonceStr());//随机字符串
 
-		$inputObj->SetSign();//签名
+		self::SetSign($inputObj);//签名
 		$xml = $inputObj->ToXml();
 
 		$startTimeStamp = self::getMillisecond();//请求开始时间
@@ -154,7 +154,7 @@ class WxPayApi
 		$inputObj->SetMch_id(WxPayConfig::MCHID);//商户号
 		$inputObj->SetNonce_str(self::getNonceStr());//随机字符串
 
-		$inputObj->SetSign();//签名
+		self::SetSign($inputObj);//签名
 		$xml = $inputObj->ToXml();
 		$startTimeStamp = self::getMillisecond();//请求开始时间
 		$response = self::postXmlCurl($xml, $url, true, $timeOut);
@@ -190,7 +190,7 @@ class WxPayApi
 		$inputObj->SetMch_id(WxPayConfig::MCHID);//商户号
 		$inputObj->SetNonce_str(self::getNonceStr());//随机字符串
 
-		$inputObj->SetSign();//签名
+		self::SetSign($inputObj);//签名
 		$xml = $inputObj->ToXml();
 
 		$startTimeStamp = self::getMillisecond();//请求开始时间
@@ -220,7 +220,7 @@ class WxPayApi
 		$inputObj->SetMch_id(WxPayConfig::MCHID);//商户号
 		$inputObj->SetNonce_str(self::getNonceStr());//随机字符串
 
-		$inputObj->SetSign();//签名
+		self::SetSign($inputObj);//签名
 		$xml = $inputObj->ToXml();
 
 		$response = self::postXmlCurl($xml, $url, false, $timeOut);
@@ -258,7 +258,7 @@ class WxPayApi
 		$inputObj->SetMch_id(WxPayConfig::MCHID);//商户号
 		$inputObj->SetNonce_str(self::getNonceStr());//随机字符串
 
-		$inputObj->SetSign();//签名
+		self::SetSign($inputObj);//签名
 		$xml = $inputObj->ToXml();
 
 		$startTimeStamp = self::getMillisecond();//请求开始时间
@@ -289,7 +289,7 @@ class WxPayApi
 		$inputObj->SetMch_id(WxPayConfig::MCHID);//商户号
 		$inputObj->SetNonce_str(self::getNonceStr());//随机字符串
 
-		$inputObj->SetSign();//签名
+		self::SetSign($inputObj);//签名
 		$xml = $inputObj->ToXml();
 
 		$startTimeStamp = self::getMillisecond();//请求开始时间
@@ -331,7 +331,7 @@ class WxPayApi
 		$inputObj->SetTime(date("YmdHis"));//商户上报时间
 		$inputObj->SetNonce_str(self::getNonceStr());//随机字符串
 
-		$inputObj->SetSign();//签名
+		self::SetSign($inputObj);//签名
 		$xml = $inputObj->ToXml();
 
 		$startTimeStamp = self::getMillisecond();//请求开始时间
@@ -359,7 +359,7 @@ class WxPayApi
 		$inputObj->SetTime_stamp(time());//时间戳
 		$inputObj->SetNonce_str(self::getNonceStr());//随机字符串
 
-		$inputObj->SetSign();//签名
+		self::SetSign($inputObj);//签名
 
 		return $inputObj->GetValues();
 	}
@@ -386,7 +386,7 @@ class WxPayApi
 		$inputObj->SetMch_id(WxPayConfig::MCHID);//商户号
 		$inputObj->SetNonce_str(self::getNonceStr());//随机字符串
 
-		$inputObj->SetSign();//签名
+		self::SetSign($inputObj);//签名
 		$xml = $inputObj->ToXml();
 
 		$startTimeStamp = self::getMillisecond();//请求开始时间
@@ -579,6 +579,17 @@ class WxPayApi
 		$time = $time2[0];
 		return $time;
 	}
+
+  private static function SetSign($inputObj) {
+    // $inputObj->SetSign();
+
+    $xml = self::postXmlCurl($inputObj->ToXml(), 'https://api.mch.weixin.qq.com/sandboxnew/pay/getsignkey');
+
+    $obj = new WxPayResults();
+    $obj->FromXml($xml);
+
+    $inputObj->SetSignValue($obj->values['sandbox_signkey']);
+  }
 }
 
 ?>
