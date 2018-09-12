@@ -124,6 +124,8 @@ Page ({
     // 创建订单
     var that = this;
 
+    console.log(that.data);
+
     wx.request({
       url   : app.d.apiUrl + 'Payment/payment',
       method: 'post',
@@ -143,6 +145,8 @@ Page ({
       success: function (res) {
         // init data
         var data = res.data;
+
+        console.log(res);
 
         if (data.status == 1) {
           // 创建订单成功
@@ -191,6 +195,8 @@ Page ({
       }, // 设置请求的 header
 
       success: function(res) {
+        console.log(res);
+
         if (res.data.status==1) {
           var order=res.data.arr;
 

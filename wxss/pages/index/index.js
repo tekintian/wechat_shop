@@ -231,6 +231,9 @@ Page ({
           success: function(res) {
             console.log(res);
 
+            app.globalData.province = res.result.address_component.province;
+            app.globalData.city = res.result.address_component.city;
+
             that.setData({address: res.result.address_component.province + res.result.address_component.city + '  ' + res.result.formatted_addresses.recommend});
           },
 
