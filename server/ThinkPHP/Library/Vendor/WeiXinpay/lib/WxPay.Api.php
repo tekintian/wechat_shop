@@ -581,14 +581,16 @@ class WxPayApi
 	}
 
   private static function SetSign($inputObj) {
-    // $inputObj->SetSign();
+    $inputObj->SetSign();
 
+    /*
     $xml = self::postXmlCurl($inputObj->ToXml(), 'https://api.mch.weixin.qq.com/sandboxnew/pay/getsignkey');
 
     $obj = new WxPayResults();
     $obj->FromXml($xml);
 
     $inputObj->SetSignValue($obj->values['sandbox_signkey']);
+    */
   }
 }
 
