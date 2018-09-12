@@ -1,121 +1,48 @@
 // pages/search/search.js
 
 var app = getApp();
+var QQMapWX = require('../../utils/qqmap-wx-jssdk.js');
+var qqmapwx;
 
 Page ({
   data: {
-    focus         : true,
-    hotKeyShow    : true,
-    historyKeyShow: true,
-    searchValue   : '',
-    page          : 0,
-    productData   : [],
-    historyKeyList: [],
-    hotKeyList    : []
+    focus     : true,
+    addrValue : '',
+    searchData: []
   },
 
   onLoad: function(options) {
     var that = this;
 
-    wx.request({
-      url   : app.d.apiUrl + 'Search/index',
-      method: 'post',
-      data  : {
-        uid : app.d.userId
-      },
-      header: {
-        'Content-Type': 'application/x-www-form-urlencoded'
-      },
-      success: function (res) {
-        var remen = res.data.remen;
-        var history = res.data.history;
-
-        that.setData({
-          historyKeyList: history,
-          hotKeyList    : remen,
-        });
-      },
-
-      fail: function(e) {
-        wx.showToast({
-          title   : '网络异常！',
-          duration: 2000
-        });
-      },
-    })
-  },
-
-  onReachBottom: function() {
-    // 下拉加载更多多...
-    this.setData({
-      page: this.data.page+10
-    })
-
-    this.searchProductData();
-  },
-
-  doKeySearch: function(e) {
-    var key = e.currentTarget.dataset.key;
-
-    this.setData({
-      searchValue     : key,
-       hotKeyShow     : false,
-       historyKeyShow : false,
+    qqmapwx = new QQMapWX({
+      key: 'KSSBZ-LL66X-7LV4Z-77M4Z-USSIS-H6FXT'
     });
-
-    this.data.productData.length = 0;
-    this.searchProductData();
   },
 
   doSearch: function() {
-    var searchKey = this.data.searchValue;
-
-    if (!searchKey) {
-      this.setData({
-        focus         : true,
-        hotKeyShow    : true,
-        historyKeyShow: true,
-      });
-
-      return;
-    };
-
-    this.setData({
-      hotKeyShow    : false,
-      historyKeyShow: false,
-    })
-
-    this.data.productData.length = 0;
-    this.searchProductData();
-
-    this.getOrSetSearchHistory(searchKey);
-  },
-
-  getOrSetSearchHistory: function(key) {
     var that = this;
+    that.data.searchData.length = 0;
 
-    wx.getStorage({
-      key : 'historyKeyList',
+    qqmapwx.getSuggestion({
+        keyword   : this.data.addrValue,
+        region    : app.globalData.province + app.globalData.city,
+        region_fix: 1,
 
-      success: function(res) {
-        console.log(res.data);
+        success: function(res) {
+          that.setData({
+            searchData : res.data,
+          });
 
-        // console.log(res.data.indexOf(key))
-        if (res.data.indexOf(key) >= 0) {
-          return;
+          console.log(that.data.searchData);
+        },
+
+        fail: function(res) {
+          console.log(res);
+        },
+
+        complete: function(res) {
+          console.log(res);
         }
-
-        res.data.push(key);
-
-        wx.setStorage({
-          key : "historyKeyList",
-          data: res.data,
-        });
-
-        that.setData({
-          historyKeyList: res.data
-        });
-      }
     });
   },
 
@@ -123,46 +50,7 @@ Page ({
     var value = e.detail.value;
 
     this.setData({
-      searchValue : value,
+      addrValue : value,
     });
-
-    if (!value && this.data.productData.length == 0) {
-      this.setData({
-        hotKeyShow    : true,
-        historyKeyShow: true,
-      });
-    }
-  },
-
-  searchProductData: function() {
-    var that = this;
-
-    wx.request({
-      url   : app.d.apiUrl + 'Search/searches',
-      method: 'post',
-      data  : {
-        keyword : that.data.searchValue,
-        uid     : app.d.userId,
-        page    : that.data.page,
-      },
-      header: {
-        'Content-Type': 'application/x-www-form-urlencoded'
-      },
-
-      success: function (res) {
-        var data = res.data.pro;
-
-        that.setData({
-          productData : that.data.productData.concat(data),
-        });
-      },
-
-      fail: function(e) {
-        wx.showToast({
-          title   : '网络异常！',
-          duration: 2000
-        });
-      },
-    });
-  },
+  }
 });

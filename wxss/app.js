@@ -12,8 +12,10 @@ App ({
   },
 
   globalData: {
-    userInfo: null,
-    loginCode: null
+    userInfo  : null,
+    loginCode : null,
+    province  : '',
+    city      : ''
   },
 
   onLaunch: function () {
