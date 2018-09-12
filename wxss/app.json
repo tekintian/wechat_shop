@@ -3,6 +3,7 @@
     "pages/index/index",
     "pages/product/detail",
     "pages/search/search",
+    "pages/addr_search/addr_search",
     "pages/user/user",
 
     "pages/login/login",
