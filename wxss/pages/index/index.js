@@ -242,33 +242,6 @@ Page ({
             console.log(res);
           }
         });
-
-
-        /*
-        wx.request({
-          url: 'https://api.map.baidu.com/geocoder/v2/?location='+latitude+','+longitude+'&coord_type=gcj02&output=json&ak=gvKRWUeglHk8WKM6moMOkKeABeFwiK0v',
-          data: {},
-          header:{
-            'Content-Type':'application/json'
-          },
-
-          success: function(res){
-            // success
-            console.log(res);
-            var address=res.data.result.formatted_address;
-
-            that.setData({address:address});
-          },
-
-          fail: function() {
-            // fail
-          },
-
-          complete: function() {
-            // complete
-          }
-        })
-        */
       },
 
       fail: function() {
@@ -286,6 +259,14 @@ Page ({
 
     wx.navigateTo({
       url: '/pages/search/search',
+    })
+  },
+
+  doAddress:function(){
+    var searchKey = this.data.address;
+
+    wx.navigateTo({
+      url: '/pages/addr_search/addr_search',
     })
   }
 });
