@@ -7,8 +7,8 @@ class WxConfig {
 
   const MCHID           = '1511828741';
   const KEY             = 'sxylhaobangshoukejisongcaiwa2018';
-  // const WXPAY_HTTPS     = 'https://api.mch.weixin.qq.com';
-  const WXPAY_HTTPS     = 'https://api.mch.weixin.qq.com/sandboxnew';
+  const WXPAY_HTTPS     = 'https://api.mch.weixin.qq.com';
+  // const WXPAY_HTTPS     = 'https://api.mch.weixin.qq.com/sandboxnew';
 
   // sandboxnew
 
