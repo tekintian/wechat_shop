@@ -269,7 +269,7 @@ Page ({
           app.globalData.province = res.result.address_component.province;
           app.globalData.city = res.result.address_component.city;
 
-          that.setData({address: res.result.formatted_addresses.recommend});
+          that.setData({address: res.result.address_reference.landmark_l2.title});
         },
 
         fail: function(res) {
