@@ -7,8 +7,8 @@
     <button bindtap="doKf" class="kfcion"><image class="kfcion" src="/images/kefu.png"></image></button>
   </view>
 
-  <view class="distance df" wx:if="{{distance == true}}">
-    <text class="distance">您当前选择的“{{address}}”，我们无法配送，我们将尽快开通此区域的配送服务</text>
+  <view class="distance df" wx:if="{{distance == true}}"  style="font-size:120rpx;padding:5rpx 0">
+    <text class="distance">您当前选择的“{{address}}”，未在配送范围，将会为您尽快开通配送服务</text>
   </view>
 
   <swiper indicator-dots="{{indicatorDots}}" autoplay="{{autoplay}}" interval="{{interval}}" duration="{{duration}}">
