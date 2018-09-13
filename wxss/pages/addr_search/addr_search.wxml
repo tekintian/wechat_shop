@@ -10,8 +10,8 @@
   <text>没有找到您要的地址/(ㄒoㄒ)/~~</text>
 </view>
 
-<view wx:for="{{searchData}}">
-  <navigator url="/pages/index/index?latitude={{item.location.lat}}&&longitude={{item.location.lng}}">
+<scroll-view wx:for="{{searchData}}">
+  <navigator url="../index/index?latitude={{item.location.lat}}&&longitude={{item.location.lng}}" hover-class="changestyle">
     <view class="text">{{item.title}}</view>
   </navigator>
-</view>
+</scroll-view>
