@@ -158,6 +158,70 @@ Page ({
   onLoad: function (options) {
     var that = this;
 
+    qqmapwx = new QQMapWX({
+      key: 'KSSBZ-LL66X-7LV4Z-77M4Z-USSIS-H6FXT'
+    });
+
+    if (!that.data.latitude || !that.data.longitude) {
+      wx.getLocation({
+        type: 'gcj02',
+
+        success: function(res) {
+          that.setData({
+            latitude  : res.latitude,
+            longitude : res.longitude
+          });
+
+          console.log(res);
+
+          // 杨陵区政府 {lat: 34.27221, lng: 108.08455}
+
+          qqmapwx.calculateDistance({
+            to  : [
+              {
+                latitude  : 34.27221,
+                longitude : 108.08455
+              }
+            ],
+
+            success: function(res) {
+              console.log(res);
+
+              if (res.result.elements.distance > 5000) {
+                that.setData({
+                  distance  : false
+                });
+              } else {
+                that.setData({
+                  distance  : true
+                });
+              }
+
+              console.log(that.data);
+            },
+
+            fail: function(res) {
+              console.log(res);
+            },
+
+            complete: function(res) {
+              console.log(res);
+            }
+          });
+
+          that.initAddr();
+        },
+
+        fail: function() {
+        },
+
+        complete: function() {
+        }
+      });
+    } else {
+      that.initAddr();
+    }
+
     wx.request({
       url: app.d.apiUrl + 'Index/index',
       method:'post',
@@ -178,8 +242,6 @@ Page ({
           productData:prolist,
           brand: brand
         });
-
-        that.initAddress();
       },
 
       fail:function(e){
@@ -191,48 +253,10 @@ Page ({
     })
   },
 
-  onShareAppMessage: function () {
-    return {
-      title: '送菜娃商城',
-      path: '/pages/index/index',
-
-      success: function(res) {
-        // 分享成功
-      },
-
-      fail: function(res) {
-        // 分享失败
-      }
-    }
-  },
-
-  initAddress: function() {
+  initAddr: function() {
     var that = this;
 
-    if (!that.data.latitude || !that.data.longitude) {
-      wx.getLocation({
-        type: 'gcj02',
-
-        success: function(res) {
-          that.setData({
-            latitude  : res.latitude,
-            longitude : res.longitude
-          });
-        },
-
-        fail: function() {
-        },
-
-        complete: function() {
-        }
-      });
-    }
-
-    if (that.data.latitude && that.data.longitude) {
-      qqmapwx = new QQMapWX({
-        key: 'KSSBZ-LL66X-7LV4Z-77M4Z-USSIS-H6FXT'
-      });
-
+    if (that.data.latitude != null && that.data.longitude != null) {
       qqmapwx.reverseGeocoder({
         location: {
           latitude  : that.data.latitude,
@@ -256,39 +280,21 @@ Page ({
           console.log(res);
         }
       });
+    }
+  },
 
-      qqmapwx.calculateDistance({
-        to  : [
-          {
-            latitude  : 39.984060,
-            longitude : 116.307520
-          }
-        ],
+  onShareAppMessage: function () {
+    return {
+      title: '送菜娃商城',
+      path: '/pages/index/index',
 
-        success: function(res) {
-          console.log(res);
+      success: function(res) {
+        // 分享成功
+      },
 
-          if (res.result.elements.distance > 5000) {
-            distance = false;
-
-            that.setData({
-              distance  : false
-            });
-          } else {
-            that.setData({
-              distance  : true
-            });
-          }
-        },
-
-        fail: function(res) {
-          console.log(res);
-        },
-
-        complete: function(res) {
-          console.log(res);
-        }
-    });
+      fail: function(res) {
+        // 分享失败
+      }
     }
   },
 
