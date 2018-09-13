@@ -11,7 +11,7 @@
 </view>
 
 <view wx:for="{{searchData}}">
-  <navigator>
+  <navigator url="/pages/index/index?latitude={{item.location.lat}}&&longitude={{item.location.lng}}">
     <view class="text">{{item.title}}</view>
   </navigator>
 </view>

@@ -323,8 +323,15 @@
 
 .address {
   padding         : 1% 1%;
-  background      : #c5c5c5;
+  background      : #eeeeee;
   font-size       : 24rpx;
+}
+
+.distance {
+  padding         : 1% 1%;
+  background      : #ff6600;
+  font-size       : 24rpx;
+  line-height     : 30px;
 }
 
 .address button {
