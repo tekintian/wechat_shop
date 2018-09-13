@@ -4,22 +4,24 @@ var qqmapwx;
 
 Page ({
   data: {
-    address: '',
-    focus: [],
-    indicatorDots: true,
-    autoplay: true,
-    interval: 5000,
-    duration: 1000,
-    circular: true,
-    productData: [],
-    proCat:[],
-    page: 2,
-    index: 2,
-    brand:[],
+    address       : '',
+    latitude      : null,
+    longitude     : null,
+    focus         : [],
+    indicatorDots : true,
+    autoplay      : true,
+    interval      : 5000,
+    duration      : 1000,
+    distance      : true,
+    productData   : [],
+    proCat        : [],
+    page          : 2,
+    index         : 2,
+    brand         : [],
     // 滑动
-    imgUrl: [],
-    kbs:[],
-    lastcat:[]
+    imgUrl        : [],
+    kbs           : [],
+    lastcat       : []
   },
 
   // 跳转商品列表页
@@ -169,7 +171,6 @@ Page ({
         var procat = res.data.procat;
         var prolist = res.data.prolist;
         var brand = res.data.brand;
-        //that.initProductData(data);
 
         that.setData({
           focus:focus,
@@ -179,8 +180,6 @@ Page ({
         });
 
         that.initAddress();
-
-        //endInitData
       },
 
       fail:function(e){
@@ -210,64 +209,96 @@ Page ({
   initAddress: function() {
     var that = this;
 
-    wx.getLocation({
-      type: 'gcj02', // 默认为wgs84返回gps坐标, gcj02返回可用于wx.openLocation的坐标
+    if (!that.data.latitude || !that.data.longitude) {
+      wx.getLocation({
+        type: 'gcj02',
 
-      success: function(res){
-        // success
-        var latitude = res.latitude;
-        var longitude = res.longitude;
+        success: function(res) {
+          that.setData({
+            latitude  : res.latitude,
+            longitude : res.longitude
+          });
+        },
 
-        qqmapwx = new QQMapWX({
-          key: 'KSSBZ-LL66X-7LV4Z-77M4Z-USSIS-H6FXT'
-        });
+        fail: function() {
+        },
 
-        qqmapwx.reverseGeocoder({
-          location: {
-            latitude: latitude,
-            longitude: longitude
-          },
+        complete: function() {
+        }
+      });
+    }
 
-          success: function(res) {
-            console.log(res);
+    if (that.data.latitude && that.data.longitude) {
+      qqmapwx = new QQMapWX({
+        key: 'KSSBZ-LL66X-7LV4Z-77M4Z-USSIS-H6FXT'
+      });
 
-            app.globalData.province = res.result.address_component.province;
-            app.globalData.city = res.result.address_component.city;
+      qqmapwx.reverseGeocoder({
+        location: {
+          latitude  : that.data.latitude,
+          longitude : that.data.longitude
+        },
 
-            that.setData({address: res.result.address_component.province + res.result.address_component.city + '  ' + res.result.formatted_addresses.recommend});
-          },
+        success: function(res) {
+          console.log(res);
 
-          fail: function(res) {
-            console.log(res);
-          },
+          app.globalData.province = res.result.address_component.province;
+          app.globalData.city = res.result.address_component.city;
 
-          complete: function(res) {
-            console.log(res);
+          that.setData({address: res.result.formatted_addresses.recommend});
+        },
+
+        fail: function(res) {
+          console.log(res);
+        },
+
+        complete: function(res) {
+          console.log(res);
+        }
+      });
+
+      qqmapwx.calculateDistance({
+        to  : [
+          {
+            latitude  : 39.984060,
+            longitude : 116.307520
           }
-        });
-      },
+        ],
 
-      fail: function() {
-        // fail
-      },
+        success: function(res) {
+          console.log(res);
 
-      complete: function() {
-        // complete
-      }
-    })
+          if (res.result.elements.distance > 5000) {
+            distance = false;
+
+            that.setData({
+              distance  : false
+            });
+          } else {
+            that.setData({
+              distance  : true
+            });
+          }
+        },
+
+        fail: function(res) {
+          console.log(res);
+        },
+
+        complete: function(res) {
+          console.log(res);
+        }
+    });
+    }
   },
 
-  doSearch:function(){
-    var searchKey = this.data.searchValue;
-
+  doSearch: function() {
     wx.navigateTo({
       url: '/pages/search/search',
     })
   },
 
-  doAddress:function(){
-    var searchKey = this.data.address;
-
+  doAddress: function() {
     wx.navigateTo({
       url: '/pages/addr_search/addr_search',
     })

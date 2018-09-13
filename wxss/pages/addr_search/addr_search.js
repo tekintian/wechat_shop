@@ -26,7 +26,6 @@ Page ({
     qqmapwx.getSuggestion({
         keyword   : this.data.addrValue,
         region    : app.globalData.province + app.globalData.city,
-        region_fix: 1,
 
         success: function(res) {
           that.setData({

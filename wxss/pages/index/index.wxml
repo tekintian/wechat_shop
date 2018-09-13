@@ -2,9 +2,13 @@
 
 <view class="page">
   <view class="address df">
-    <button bindtap="doAddress" class="address">{{address}}</button>
+    <button bindtap="doAddress" class="address">{{app.globalData.province}}{{app.globalData.city}} {{address}}</button>
     <button bindtap="doSearch" class="searchcion"><image class="searchcion" src="/images/search.png"></image></button>
     <button bindtap="doKf" class="kfcion"><image class="kfcion" src="/images/kefu.png"></image></button>
+  </view>
+
+  <view class="distance df">
+    <text wx:if="{{distance == false}}" class="distance">您当前选择的“{{address}}”，我们无法配送，我们将尽快开通此区域的配送服务</text>
   </view>
 
   <swiper indicator-dots="{{indicatorDots}}" autoplay="{{autoplay}}" interval="{{interval}}" duration="{{duration}}">
