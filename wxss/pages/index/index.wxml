@@ -8,7 +8,7 @@
   </view>
 
   <view class="distance df" wx:if="{{distance > 5000}}"  style="font-size:120rpx;padding:5rpx 0">
-    <text class="distance">您当前选择的“{{address}}”，未在配送范围，将会为您尽快开通配送服务</text>
+    <text class="distance">您当前选择的“{{address}}”，未在配送范围，我们将会为您尽快开通配送服务</text>
   </view>
 
   <swiper indicator-dots="{{indicatorDots}}" autoplay="{{autoplay}}" interval="{{interval}}" duration="{{duration}}">
