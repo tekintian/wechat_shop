@@ -18,9 +18,11 @@ Page ({
     var cartId = options.cartId;
     console.log(app.d.userId);
 
-    that.setData({
-      cartId  : cartId,
-    })
+    if (cartId) {
+      that.setData({
+        cartId  : cartId,
+      })
+    }
 
     wx.request({
       url   : app.d.apiUrl + 'Address/index',
@@ -42,8 +44,7 @@ Page ({
         }
 
         that.setData({
-          address : address,
-          cartId  : cartId,
+          address : address
         })
       },
 
