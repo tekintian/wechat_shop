@@ -349,13 +349,13 @@
 .searchcion {
   width           : 24px;
   height          : 24px;
-  text-align      : right
+  text-align      : right;
 }
 
 .kfcion {
   width           : 24px;
   height          : 24px;
-  text-align      : right
+  text-align      : right;
 }
 
 .sousuo {
