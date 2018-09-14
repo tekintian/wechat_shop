@@ -30,7 +30,7 @@
   </view>
 </radio-group>
 
-<navigator url="../address?cartId={{cartId}}">
+<navigator url="/pages/address/address?cartId={{cartId}}">
   <view hidden="{{hiddenAddress}}" class="add-address">
     <image class="add-address-icon" src="#"></image>
     <view>新增地址</view>

@@ -14,7 +14,7 @@
   </view>
 
   <view class="p_all bg_white mt10 font_14" wx:if="{{addemt==0}}">
-    <navigator url="../address/user-address/user-address?cartId={{cartId}}" hover-class="none">
+    <navigator url="/pages/address/user-address/user-address?cartId={{cartId}}" hover-class="none">
       <view class="df">
         <view class="df_1 c6">
           <view class="l_h20">收货人：{{address.name}}<text class="fl_r mr10">{{address.tel}}</text></view>
@@ -27,7 +27,7 @@
   </view>
 
   <view class="p_all bg_white mt10 font_14" wx:else>
-    <navigator url="../address/user-address/user-address?cartId={{cartId}}" hover-class="none">
+    <navigator url="/pages/address/user-address/user-address?cartId={{cartId}}" hover-class="none">
       <view class="df">添加收货地址</view>
     </navigator>
   </view>
