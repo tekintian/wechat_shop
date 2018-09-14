@@ -19,7 +19,7 @@ Page ({
     });
   },
 
-  doSearch: function() {
+  doAddrSearch: function() {
     var that = this;
     that.data.searchData.length = 0;
 

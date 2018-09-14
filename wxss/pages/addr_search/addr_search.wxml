@@ -2,7 +2,7 @@
 
 <view class="search df">
   <input class="df_1" placeholder="请输入你想要的地址" auto-focus focus="{{focus}}" value="{{addrValue}}" bindinput="searchValueInput"/>
-  <button bindtap="doSearch"><image class="searchcion" src="/images/search.png"></image></button>
+  <button bindtap="doAddrSearch"><image class="searchcion" src="/images/search.png"></image></button>
 </view>
 
 <view class="search_no" wx:if="{{!!searchValue && !searchData.length}}">
@@ -11,7 +11,7 @@
 </view>
 
 <scroll-view wx:for="{{searchData}}">
-  <navigator url="../index/index?latitude={{item.location.lat}}&&longitude={{item.location.lng}}" hover-class="changestyle">
+  <navigator url="/pages/index/index?latitude={{item.location.lat}}&&longitude={{item.location.lng}}" hover-class="changestyle">
     <view class="text">{{item.title}}</view>
   </navigator>
 </scroll-view>

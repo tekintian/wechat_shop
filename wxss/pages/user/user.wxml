@@ -63,7 +63,7 @@
     </view>
 
     <view class="qbdd mt10">
-      <navigator url="../address/user-address/user-address">
+      <navigator url="/pages/address/user-address/user-address">
         <span class="font_14 c3">地址管理</span>
         <span class="fl_r c9 font_12 l_h20" hover-class="none"> ></span>
       </navigator>

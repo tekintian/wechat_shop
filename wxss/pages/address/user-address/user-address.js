@@ -18,6 +18,10 @@ Page ({
     var cartId = options.cartId;
     console.log(app.d.userId);
 
+    that.setData({
+      cartId  : cartId,
+    })
+
     wx.request({
       url   : app.d.apiUrl + 'Address/index',
       data  : {
@@ -53,10 +57,6 @@ Page ({
     })
   },
 
-  onReady: function() {
-    // 页面渲染完成
-  },
-
   setDefault: function(e) {
     var that = this;
     var addrId = e.currentTarget.dataset.id;
@@ -80,7 +80,7 @@ Page ({
         if (status==1) {
           if (cartId) {
             wx.redirectTo({
-              url: '../../order/pay?cartId=' + cartId,
+              url: '/pages/order/pay?cartId=' + cartId,
             });
 
             return false;
