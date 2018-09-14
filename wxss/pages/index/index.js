@@ -37,6 +37,9 @@ Page ({
 
           latitude = res.latitude;
           longitude = res.longitude;
+
+          that.setDistance(latitude, longitude);
+          that.setAddress(latitude, longitude);
         },
 
         fail: function() {
@@ -45,59 +48,10 @@ Page ({
         complete: function() {
         }
       });
+    } else {
+      that.setDistance(latitude, longitude);
+      that.setAddress(latitude, longitude);
     }
-
-    // 杨陵区政府 {lat: 34.27221, lng: 108.08455}
-    qqmapwx.calculateDistance({
-      from  : {
-        latitude  : latitude,
-        longitude : longitude
-      },
-      to    : [{
-        latitude  : 34.27221,
-        longitude : 108.08455
-      }],
-
-      success: function(res) {
-        console.log(res);
-
-        that.setData({
-          distance  : res.result.elements.distance
-        });
-      },
-
-      fail: function(res) {
-        console.log(res);
-      },
-
-      complete: function(res) {
-        console.log(res);
-      }
-    });
-
-    qqmapwx.reverseGeocoder({
-      location: {
-        latitude  : latitude,
-        longitude : longitude
-      },
-
-      success: function(res) {
-        console.log(res);
-
-        app.globalData.province = res.result.address_component.province;
-        app.globalData.city = res.result.address_component.city;
-
-        that.setData({address: res.result.address_reference.landmark_l2.title});
-      },
-
-      fail: function(res) {
-        console.log(res);
-      },
-
-      complete: function(res) {
-        console.log(res);
-      }
-    });
 
     wx.request({
       url   : app.d.apiUrl + 'Index/index',
@@ -237,5 +191,65 @@ Page ({
     this.setData({
       interval: e.detail.value
     })
+  },
+
+  setDistance: function(latitude, longitude) {
+    var that = this;
+
+    // 杨陵区政府 {lat: 34.27221, lng: 108.08455}
+    qqmapwx.calculateDistance({
+      from  : {
+        latitude  : latitude,
+        longitude : longitude
+      },
+      to    : [{
+        latitude  : 34.27221,
+        longitude : 108.08455
+      }],
+
+      success: function(res) {
+        console.log(res);
+
+        that.setData({
+          distance  : res.result.elements[0].distance
+        });
+      },
+
+      fail: function(res) {
+        console.log(res);
+      },
+
+      complete: function(res) {
+        console.log(res);
+      }
+    });
+  },
+
+  setAddress: function(latitude, longitude) {
+    var that = this;
+
+    qqmapwx.reverseGeocoder({
+      location: {
+        latitude  : latitude,
+        longitude : longitude
+      },
+
+      success: function(res) {
+        console.log(res);
+
+        app.globalData.province = res.result.address_component.province;
+        app.globalData.city = res.result.address_component.city;
+
+        that.setData({address: res.result.address_reference.landmark_l2.title});
+      },
+
+      fail: function(res) {
+        console.log(res);
+      },
+
+      complete: function(res) {
+        console.log(res);
+      }
+    });
   }
 });
