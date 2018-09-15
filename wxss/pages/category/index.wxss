@@ -122,5 +122,6 @@
   padding       : 1% 1%;
   width         : 24px;
   height        : 24px;
-  text-align    : center
+  text-align    : center;
+  vertical-align: middle ;
 }
