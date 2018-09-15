@@ -2,7 +2,8 @@
 
 <view class="page">
   <view class="address df" style="font-size:24px">
-    <button bindtap="doAddressSearch" class="address"> {{address}}</button>
+
+    <button bindtap="doAddressSearch"><image class="dwcoin" src="/images/map.png"></image>{{address}}</button>
     <button bindtap="doSearch" class="searchcion"><image class="searchcion" src="/images/search.png"></image></button>
     <button bindtap="doKf" class="kfcion"><image class="kfcion" src="/images/kefu.png"></image></button>
   </view>

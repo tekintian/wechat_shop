@@ -13,6 +13,7 @@
   font-size     : 12px;
   padding       : 1% 2.5%;
   margin-right  : 5px;
+  margin-top: 4px;
 }
 
 .search button {
@@ -58,4 +59,10 @@
   width         : 92%;
   padding       : 4%;
   font-size     : 12px;
+}
+.dwcoin {
+  padding       : 0.5% 0.5%;
+  width         : 24px;
+  height        : 24px;
+  text-align    : right;
 }
