@@ -106,9 +106,12 @@
 .search button {
   line-height   : 30px;
   background    : none;
-  text-align    : center;
+  text-align    : left;
+  text-indent   : 55rpx;
   border        : none;
   padding       : 1px;
+  font-size     : 35rpx;
+  color         :rgb(87, 60, 209);
 }
 
 .search button::after {

@@ -324,13 +324,14 @@
 .address {
   padding         : 1% 1%;
   background      : #cccccc;
-  font-size       : 24rpx;
+  font-size       : 30rpx;
+  color           :rgb(87, 60, 209);
 }
 
 .distance {
   padding         : 1% 1%;
-  background      : #ff6600;
-  font-size       : 24rpx;
+  background      : #9fcc75;
+  font-size       : 28rpx;
   line-height     : 30px;
 }
 
