@@ -324,9 +324,10 @@
 .address {
   padding         : 1% 1%;
   background      : #cccccc;
-  font-size       : 30rpx;
   color           :rgb(87, 60, 209);
   text-align      :left;
+  /* text-justify:  auto;
+  flex-direction:  row; */
 
 }
 
@@ -338,12 +339,15 @@
 }
 
 .address button {
-  line-height     : 30px;
+  line-height     : 24px;
   background      : none;
-  text-align      : left;
+  text-align      : right;
   border          : none;
   padding         : 1px;
-  border-radius   : 6px;
+  /* border-radius   : 6px; */
+  vertical-align  : middle ;
+
+  
 }
 
 
@@ -354,16 +358,18 @@
 
 .searchcion {
   width           : 24px;
-  height          : 24px;
+  height          : 26px;
   text-align      : right;
-  margin-right: 2%;
+  margin-right    : -5%; 
+  vertical-align  : middle;
 }
 
 .kfcion {
   width           : 24px;
   height          : 24px;
-  margin-right: 0.2%;
-  //text-align      : right;
+  margin-right    : 5%; 
+  vertical-align  : middle ;
+
   
 }
 
@@ -498,9 +504,11 @@ icon {
   opacity         : 0;
 }
 
-.dwcoin {
+.dwcion {
   padding       : 1% 1%;
   width         : 24px;
   height        : 24px;
-  text-align    : center
+  text-align    : left;
+  margin-left   : -10% ;
+  vertical-align: middle ;
 }

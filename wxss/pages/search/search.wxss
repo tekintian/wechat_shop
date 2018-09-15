@@ -13,6 +13,7 @@
   font-size     : 12px;
   padding       : 1% 2.5%;
   margin-right  : 5px;
+  margin-top: 4px;
 }
 
 .search button {
