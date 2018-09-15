@@ -1,6 +1,7 @@
 <!-- pages/addr_search/search.wxml -->
 
 <view class="search df">
+  <button bindtap="doAddressSearch"><image class="dwcoin" src="/images/map.png"></image></button>
   <input class="df_1" placeholder="请输入你想要的地址" auto-focus focus="{{focus}}" value="{{addrValue}}" bindinput="searchValueInput"/>
   <button bindtap="doAddrSearch"><image class="searchcion" src="/images/search.png"></image></button>
 </view>

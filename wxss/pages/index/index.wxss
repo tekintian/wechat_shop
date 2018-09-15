@@ -316,7 +316,7 @@
 }
 
 .dingwei text {
-  text-align      : center;
+  text-align      : left;
 }
 
 /* 搜索 */
@@ -326,6 +326,8 @@
   background      : #cccccc;
   font-size       : 30rpx;
   color           :rgb(87, 60, 209);
+  text-align      :left;
+
 }
 
 .distance {
@@ -341,22 +343,28 @@
   text-align      : left;
   border          : none;
   padding         : 1px;
+  border-radius   : 6px;
 }
+
 
 .address button::after {
   content         : none;
+  text-align      :start;
 }
 
 .searchcion {
   width           : 24px;
   height          : 24px;
   text-align      : right;
+  margin-right: 2%;
 }
 
 .kfcion {
   width           : 24px;
   height          : 24px;
-  text-align      : right;
+  margin-right: 0.2%;
+  //text-align      : right;
+  
 }
 
 .sousuo {
@@ -488,4 +496,11 @@ icon {
   left            : 40rpx;
   display         : flex;
   opacity         : 0;
+}
+
+.dwcoin {
+  padding       : 1% 1%;
+  width         : 24px;
+  height        : 24px;
+  text-align    : center
 }
