@@ -8,6 +8,7 @@ var WxParse = require('../../wxParse/wxParse.js');
 
 Page ({
   firstIndex: -1,
+  isCollect : 0,
   data      : {
     bannerApp     : true,
     winWidth      : 0,
@@ -403,15 +404,30 @@ Page ({
         // init data
         var data = res.data;
 
-        if (data.status == 1) {
+        if (data.status == 1 && that.data.itemData.isCollect != true) {
           wx.showToast({
-            title   : '操作成功！',
-            duration: 2000
+            title   : '收藏成功！',
+            duration: 1500
           });
 
           //变成已收藏，但是目前小程序可能不能改变图片，只能改样式
           that.data.itemData.isCollect = true;
-        }else{
+          isCollect = 1;
+          data.status = 0;
+        }
+        else if (data.status == 1 && that.data.itemData.isCollect == true) {
+          wx.showToast({
+            title: '取消收藏！',
+            duration: 1500
+          });
+
+
+          //变成已收藏，但是目前小程序可能不能改变图片，只能改样式
+          that.data.itemData.isCollect = false;
+          isCollect = 0;
+          data.status = 0;
+        }
+        else{
           wx.showToast({
             title   : data.err,
             duration: 2000
