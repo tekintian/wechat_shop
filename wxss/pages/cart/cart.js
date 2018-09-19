@@ -205,6 +205,9 @@ Page ({
   },
 
   sum: function() {
+    console.log('sum');
+
+
     var carts = this.data.carts;
     // 计算总金额
     var total = 0;
@@ -232,6 +235,7 @@ Page ({
 
   onShow: function() {
     this.loadProductData();
+    this.sum();
   },
 
   removeShopCard: function(e) {
