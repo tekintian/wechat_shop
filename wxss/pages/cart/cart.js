@@ -211,11 +211,13 @@ Page ({
 
     for (var i = 0; i < carts.length; i++) {
       if (carts[i].selected) {
-        var singlesum = ( (100 * carts[i].price ) * carts[i].num) /100 ;
+        var singlesum = ((100 * carts[i].price ).toFixed() * carts[i].num) /100;
         total +=  singlesum ;
       }
     }
+
     total = total.toFixed(2);
+
     // 写回经点击修改后的数组
     this.setData({
       carts: carts,

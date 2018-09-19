@@ -8,7 +8,6 @@ var WxParse = require('../../wxParse/wxParse.js');
 
 Page ({
   firstIndex: -1,
-  isCollect : 0,
   data      : {
     bannerApp     : true,
     winWidth      : 0,
@@ -28,7 +27,8 @@ Page ({
     // 准备数据
     // 数据结构：以一组一组来进行设定
     commodityAttr : [],
-    attrValueList : []
+    attrValueList : [],
+    isCollect     : 0
   },
 
   // 弹窗
@@ -110,6 +110,7 @@ Page ({
       url   : app.d.apiUrl + 'Product/index',
       method: 'post',
       data  : {
+        uid   : app.d.userId,
         pro_id: that.data.productId,
       },
       header: {
@@ -129,9 +130,12 @@ Page ({
           that.setData({
             itemData      : pro,
             bannerItem    : pro.img_arr,
+            isCollect     : pro.collect,
             commodityAttr : res.data.commodityAttr,
             attrValueList : res.data.attrValueList,
           });
+
+          console.log(res);
         } else {
           wx.showToast({
             title   : res.data.err,
@@ -389,6 +393,8 @@ Page ({
   addFavorites: function(e) {
     var that = this;
 
+    console.log(that.data.itemData);
+
     wx.request({
       url   : app.d.apiUrl + 'Product/col',
       method: 'post',
@@ -404,28 +410,26 @@ Page ({
         // init data
         var data = res.data;
 
-        if (data.status == 1 && that.data.itemData.isCollect != true) {
+        if (data.status == 1 && that.data.isCollect!= 1) {
           wx.showToast({
             title   : '收藏成功！',
             duration: 1500
           });
 
-          //变成已收藏，但是目前小程序可能不能改变图片，只能改样式
-          that.data.itemData.isCollect = true;
-          isCollect = 1;
-          data.status = 0;
+          that.setData({
+            isCollect : 1
+          });
         }
-        else if (data.status == 1 && that.data.itemData.isCollect == true) {
+        else if (data.status == 1 && that.data.isCollect == 1) {
           wx.showToast({
             title: '取消收藏！',
             duration: 1500
           });
 
 
-          //变成已收藏，但是目前小程序可能不能改变图片，只能改样式
-          that.data.itemData.isCollect = false;
-          isCollect = 0;
-          data.status = 0;
+          that.setData({
+            isCollect : 0
+          });
         }
         else{
           wx.showToast({
