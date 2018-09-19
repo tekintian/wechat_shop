@@ -131,21 +131,11 @@
 
     <view class="df_1 l_h15 pt5">
       <view bindtap="addFavorites">
-      <!-- <image class="icon_kf" src="/images/shced.png" ></image>
-        <view bindtap="addFavorites" class="dbtext">收藏</view> -->
-         <image  class="icon_kf"  wx:if="{{isCollect == 1 }}"  src="/images/shced.png" ></image>
+         <image  class="icon_kf"  wx:if="{{isCollect == 1}}"  src="/images/shced.png" ></image>
          <image  wx:else class="icon_kf"  wx:else src="/images/shc.png"></image>
          <view bindtap="addFavorites" class="dbtext">收藏</view>
       </view>
     </view>
-   <!-- <image class="icon_kf" src="/images/shc.png" ></image>
-   <view bindtap="addFavorites" class="dbtext">收藏</view> -->
-    <!-- <view class="df_1 l_h15 pt5">
-      <view bindtap="CancelFavorites">
-        <image class="icon_kf" src="/images/shced.png" ></image>
-        <view bindtap="CancelFavorites" class="dbtext">已收藏</view>
-      </view>
-    </view> -->
 
   </view>
 
