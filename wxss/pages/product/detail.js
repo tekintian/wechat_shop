@@ -453,6 +453,8 @@ Page ({
   addShopCart: function(e) {
     var that = this;
 
+    console.log(that);
+
     wx.request({
       url   : app.d.apiUrl + 'Shopping/add',
       method: 'post',
