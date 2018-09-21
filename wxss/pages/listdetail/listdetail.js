@@ -92,14 +92,10 @@ Page ({
           return false;
         }
 
-        //that.initProductData(data);
-
         that.setData({
           page: page+1,
           shopList:that.data.shopList.concat(prolist)
         });
-
-        //endInitData
       },
 
       fail: function(e) {

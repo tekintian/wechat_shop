@@ -2,18 +2,18 @@
 namespace Api\Controller;
 use Think\Controller;
 class IndexController extends PublicController {
-	//***************************
-	//  首页数据接口
-	//***************************
+  //***************************
+  //  首页数据接口
+  //***************************
     public function index(){
-    	//如果缓存首页没有数据，那么就读取数据库
-    	/***********获取首页顶部轮播图************/
-    	$focus=M('focus')->order('sort desc,id asc')->field('id,name,photo')->limit(10)->select();
-		foreach ($focus as $k => $v) {
-			$focus[$k]['photo']=__DATAURL__.$v['photo'];
-			$focus[$k]['name']=urlencode($v['name']);
-		}
-    	/***********获取首页顶部轮播图 end************/
+      //如果缓存首页没有数据，那么就读取数据库
+      /***********获取首页顶部轮播图************/
+      $focus=M('focus')->order('sort desc,id asc')->field('id,name,photo')->limit(10)->select();
+    foreach ($focus as $k => $v) {
+      $focus[$k]['photo']=__DATAURL__.$v['photo'];
+      $focus[$k]['name']=urlencode($v['name']);
+    }
+      /***********获取首页顶部轮播图 end************/
 
         //======================
         //首页推荐品牌 20个
@@ -23,13 +23,15 @@ class IndexController extends PublicController {
             $brand[$k]['photo'] = __DATAURL__.$v['photo'];
         }
 
-    	//======================
-    	//首页推荐产品
-    	//======================
-    	$pro_list = M('product')->where('del=0 AND pro_type=1 AND is_down=0 AND type=1')->order('sort desc,id desc')->field('id,name,intro,photo_x,price_yh,price,company,shiyong')->limit(8)->select();
-    	foreach ($pro_list as $k => $v) {
-    		$pro_list[$k]['photo_x'] = __DATAURL__.$v['photo_x'];
-    	}
+      $qz=C('DB_PREFIX'); // 前缀
+
+      //======================
+      //首页推荐产品
+      //======================
+      $pro_list = M('product')->where('del=0 AND pro_type=1 AND is_down=0 AND '.$qz.'product.type=1')->join('LEFT JOIN __BRAND__ ON __PRODUCT__.brand_id=__BRAND__.id')->order('sort desc,id desc')->field(''.$qz.'product.id,'.$qz.'product.name,intro,photo_x,price_yh,price,company,shiyong,'.$qz.'brand.name as brand')->limit(8)->select();
+      foreach ($pro_list as $k => $v) {
+        $pro_list[$k]['photo_x'] = __DATAURL__.$v['photo_x'];
+      }
 
         //======================
         //首页分类 自己组建数组
@@ -41,8 +43,8 @@ class IndexController extends PublicController {
         }
 
 
-    	echo json_encode(array('focus'=>$focus,'procat'=>$indeximg,'prolist'=>$pro_list,'brand'=>$brand));
-    	exit();
+      echo json_encode(array('focus'=>$focus,'procat'=>$indeximg,'prolist'=>$pro_list,'brand'=>$brand));
+      exit();
     }
 
     //***************************
@@ -52,8 +54,10 @@ class IndexController extends PublicController {
         $page = intval($_REQUEST['page']);
         $limit = intval($page*8)-8;
         $limit = $limit>0 ? $limit :0;
-        
-        $pro_list = M('product')->where('del=0 AND pro_type=1 AND is_down=0 AND type=1')->order('sort desc,id desc')->field('id,name,photo_x,price_yh,company,shiyong')->limit($limit.',8')->select();
+
+        $qz=C('DB_PREFIX'); // 前缀
+
+        $pro_list = M('product')->where('del=0 AND pro_type=1 AND is_down=0 AND '.$qz.'product.type=1')->join('LEFT JOIN __BRAND__ ON __PRODUCT__.brand_id=__BRAND__.id')->order('sort desc,id desc')->field(''.$qz.'product.id,'.$qz.'product.name,photo_x,price_yh,company,shiyong,'.$qz.'brand.name as brand')->limit($limit.',8')->select();
         foreach ($pro_list as $k => $v) {
             $pro_list[$k]['photo_x'] = __DATAURL__.$v['photo_x'];
         }
