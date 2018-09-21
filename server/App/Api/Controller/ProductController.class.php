@@ -14,7 +14,7 @@ class ProductController extends PublicController {
 			echo json_encode(array('status'=>0,'err'=>'商品不存在或已下架！'));
 			exit();
 		}
-		
+
 		$pro = $product->where('id='.intval($pro_id).' AND del=0 AND is_down=0')->find();
 		if(!$pro){
 			echo json_encode(array('status'=>0,'err'=>'商品不存在或已下架！'.__LINE__));
@@ -37,7 +37,7 @@ class ProductController extends PublicController {
 			$b[] = $pro['photo_d'];
 		}
 		$pro['img_arr']=$b;//图片轮播数组
-		
+
 		//处理产品属性
 		$catlist=array();
 		if($pro['pro_buff']){//如果产品属性有值才进行数据组装
@@ -199,13 +199,13 @@ class ProductController extends PublicController {
             $where.=' AND name LIKE "%'.$keyword.'%"';
         }
         if (isset($_REQUEST['ptype']) && $_REQUEST['ptype']=='new') {
-        	$where .=' AND is_show=1'; 
+        	$where .=' AND is_show=1';
         }
         if (isset($_REQUEST['ptype']) && $_REQUEST['ptype']=='hot') {
-        	$where .=' AND is_hot=1'; 
+        	$where .=' AND is_hot=1';
         }
         if (isset($_REQUEST['ptype']) && $_REQUEST['ptype']=='zk') {
-        	$where .=' AND is_sale=1'; 
+        	$where .=' AND is_sale=1';
         }
 
  		$product=M('product')->where($where)->order($order)->limit($page.',8')->select();
@@ -220,6 +220,7 @@ class ProductController extends PublicController {
 			$json['company']=$v['company'];
  			$json['shiyong']=$v['shiyong'];
  			$json['intro']=$v['intro'];
+      $json['brand_id']=$v['brand_id'];
  			$json_arr[] = $json;
  		}
  		$cat_name=M('category')->where("id=".intval($id))->getField('name');
@@ -264,13 +265,13 @@ class ProductController extends PublicController {
             $where.=' AND name LIKE "%'.$keyword.'%"';
         }
         if (isset($_REQUEST['ptype']) && $_REQUEST['ptype']=='new') {
-        	$where .=' AND is_show=1'; 
+        	$where .=' AND is_show=1';
         }
         if (isset($_REQUEST['ptype']) && $_REQUEST['ptype']=='hot') {
-        	$where .=' AND is_hot=1'; 
+        	$where .=' AND is_hot=1';
         }
         if (isset($_REQUEST['ptype']) && $_REQUEST['ptype']=='zk') {
-        	$where .=' AND is_sale=1'; 
+        	$where .=' AND is_sale=1';
         }
 
  		$product=M('product')->where($where)->order($order)->limit($limit.',8')->select();
@@ -312,11 +313,11 @@ class ProductController extends PublicController {
 			sort($stock);
 			//$price = implode(',', $price);
 			echo json_encode(array('status'=>1,'price'=>$price[0],'stock'=>$stock[0]));
-			exit();	
+			exit();
 		}
 
 		echo json_encode(array('status'=>0));
-		exit();	
+		exit();
 	}
 
 	//***************************
@@ -339,7 +340,7 @@ class ProductController extends PublicController {
 			$data['pid'] = intval($pid);
 			$res = M('product_sc')->add($data);
 		}
-		
+
 		if ($res) {
 			echo json_encode(array('status'=>1));
 			exit();

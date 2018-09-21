@@ -91,7 +91,7 @@ class ShoppingController extends PublicController {
 			echo json_encode(array('status'=>0,'err'=>'库存不足！'));
 			exit();
 		}
-		
+
 		$data=array();
 		$data['num']=$num;
 
@@ -103,7 +103,7 @@ class ShoppingController extends PublicController {
 			echo json_encode(array('status'=>0,'err'=>'操作失败.'));
 			exit();
 		}
-		
+
 	}
 
 	//多个购物车商品删除
@@ -178,6 +178,8 @@ class ShoppingController extends PublicController {
 		// 	}
 		// }
 
+    $cart_id = 0;
+
 		//判断购物车内是否已经存在该商品
 		$data = array();
 		$cart_info = $shpp->where('pid='.intval($pid).' AND uid='.intval($uid))->field('id,num')->find();
@@ -189,6 +191,7 @@ class ShoppingController extends PublicController {
 				exit;
 			}
 			$res = $shpp->where('id='.intval($cart_info['id']))->save($data);
+      $cart_id = $cart_info['id'];
 		}else{
 			$data['pid']=intval($pid);
 			$data['num']=intval($num);
@@ -203,10 +206,11 @@ class ShoppingController extends PublicController {
 			$data['price'] = $check_info['price_yh'];
 
 			$res=$shpp->add($data);
+      $cart_id = $res;
 		}
 
 		if($res){
-			echo json_encode(array('status'=>1,'cart_id'=>$res)); //该商品已成功加入您的购物车
+			echo json_encode(array('status'=>1,'cart_id'=>$cart_id)); //该商品已成功加入您的购物车
 			exit;
 		}else{
 			echo json_encode(array('status'=>0,'err'=>'加入失败.'));
@@ -244,9 +248,9 @@ class ShoppingController extends PublicController {
 			echo json_encode(array('status'=>0));
 			exit();
 		}
-		
+
 		$names = i_array_column($shoop, 'shop_id');
-		
+
 		$arr=array_unique($names);
 		$val= sizeof($arr);
 		if($val=='1'){
@@ -255,7 +259,7 @@ class ShoppingController extends PublicController {
 		}else{
 			echo json_encode(array('status'=>2));
 			exit();
-		}	 
+		}
 	}
 
 	//购物车添加。删除检测公共方法
@@ -267,7 +271,7 @@ class ShoppingController extends PublicController {
 		}
 
 		return array('status'=>1);
-	}   
+	}
 
     /*
        去除HTNL标签
