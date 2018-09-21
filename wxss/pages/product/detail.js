@@ -124,7 +124,7 @@ Page ({
         if (status==1) {
           var pro = res.data.pro;
           var content=pro.content;
-          //that.initProductData(data);
+
           WxParse.wxParse('content', 'html', content, that, 3);
 
           that.setData({
@@ -135,6 +135,7 @@ Page ({
             attrValueList : res.data.attrValueList,
           });
 
+          console.log(123);
           console.log(res);
         } else {
           wx.showToast({

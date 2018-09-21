@@ -62,6 +62,7 @@ Page ({
       },
 
       success: function (res) {
+        console.log(res)
         var focus = res.data.focus;
         var procat = res.data.procat;
         var prolist = res.data.prolist;
