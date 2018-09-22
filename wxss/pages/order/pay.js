@@ -106,7 +106,7 @@ Page ({
     });
 
     wx.showToast({
-      title   : "线下支付开通中，敬请期待!",
+      title: "请您与客服确认!",
       duration: 3000
     });
 
