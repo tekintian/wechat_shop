@@ -124,6 +124,14 @@ Page ({
     var brandId = options.brandId;
     var that = this;
 
+    if (!ptype) {
+      ptype = that.data.ptype;
+    }
+
+    if (!brandId) {
+      brandId = that.data.brandId;
+    }
+
     that.setData({
       ptype: ptype,
       catId: cat_id,
