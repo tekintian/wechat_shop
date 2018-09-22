@@ -104,7 +104,7 @@ class ProductController extends PublicController {
 		//$uid=I('request.uid');
 		$uid=1;
 		//获得产品信息
-		$pro = M('product')->field('id,shop_id,photo_x,name,price,price_yh,company')->where('id='.intval($pro_id).' AND del=0 AND is_down=0')->find();
+		$pro = M('product')->field('id,brand_id,shop_id,photo_x,name,price,price_yh,company')->where('id='.intval($pro_id).' AND del=0 AND is_down=0')->find();
 		$pro['photo_x']=__DATAURL__.$pro['photo_x'];
 		if(!$pro){
 			echo json_encode(array('status'=>0,'err'=>'商品不存在或已下架！'));
@@ -123,6 +123,8 @@ class ProductController extends PublicController {
 				$address=$addr[0];
 			}
 		}
+
+    $pro['brand'] = M('brand')->where('id='.intval($pro['brand_id']))->getField('name');
 
 		echo json_encode(array('status'=>1,'pro'=>$pro,'address'=>$address));
 		exit();
@@ -221,6 +223,7 @@ class ProductController extends PublicController {
  			$json['shiyong']=$v['shiyong'];
  			$json['intro']=$v['intro'];
       $json['brand_id']=$v['brand_id'];
+      $json['brand'] = M('brand')->where('id='.intval($v['brand_id']))->getField('name');
  			$json_arr[] = $json;
  		}
  		$cat_name=M('category')->where("id=".intval($id))->getField('name');
@@ -286,6 +289,7 @@ class ProductController extends PublicController {
 			$json['company']=$v['company'];
  			$json['shiyong']=$v['shiyong'];
  			$json['intro']=$v['intro'];
+      $json['brand'] = M('brand')->where('id='.intval($v['brand_id']))->getField('name');
  			$json_arr[] = $json;
  		}
  		$cat_name=M('category')->where("id=".intval($id))->getField('name');
@@ -383,6 +387,7 @@ class ProductController extends PublicController {
  			$json['price_yh']=$v['price_yh'];
  			$json['company']=$v['company'];
 			$json['shiyong']=$v['shiyong'];
+      $json['brand'] = M('brand')->where('id='.intval($v['brand_id']))->getField('name');
  			//$json['intro']=$v['intro'];
  			if ($v['start_time']>time()) {
  				$json['state'] = 1;
@@ -447,6 +452,7 @@ class ProductController extends PublicController {
  			$json['price_yh']=$v['price_yh'];
 			$json['company']=$v['company'];
  			$json['shiyong']=$v['shiyong'];
+      $json['brand'] = M('brand')->where('id='.intval($v['brand_id']))->getField('name');
  			//$json['intro']=$v['intro'];
  			if ($v['start_time']>time()) {
  				$json['state'] = 1;
