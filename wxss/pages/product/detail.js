@@ -134,9 +134,6 @@ Page ({
             commodityAttr : res.data.commodityAttr,
             attrValueList : res.data.attrValueList,
           });
-
-          console.log(123);
-          console.log(res);
         } else {
           wx.showToast({
             title   : res.data.err,

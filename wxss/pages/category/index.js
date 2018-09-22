@@ -48,7 +48,7 @@ Page  ({
             currType: 2
           });
 
-          console.log(list)
+          console.log(res.data);
       },
 
       error: function(e) {
