@@ -2,7 +2,7 @@
 
 <view class="search df">
   <input class="df_1" placeholder="请输入您想要的菜品" auto-focus focus="{{focus}}" value="{{searchValue}}" bindinput="searchValueInput"/>
-  <button bindtap="doSearch"><image class="searchcion" src="/images/search.png"></image></button>
+  <button bindtap="doSearch"><image class="searchcion" src="/images/search.png" auto-focus focus="{{focus}}" ></image></button>
 </view>
 
 <view class="cont" wx:if="{{hotKeyShow}}">
