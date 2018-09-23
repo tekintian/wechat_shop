@@ -5,7 +5,7 @@
         <image class="banner" src="{{item.photo_x}}" mode="widthFix"></image>
 
         <view class="act-item ellipsis">
-          <text class="type">{{item.name}}  {{item.brand}} </text>
+          <text class="type">{{item.name}} | {{item.brand}} </text>
         </view>
 
         <view class="act-item ellipsis" >
