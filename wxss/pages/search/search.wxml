@@ -1,7 +1,7 @@
 <!-- pages/search/search.wxml -->
 
 <view class="search df">
-  <input class="df_1" placeholder="请输入你想要的菜品" auto-focus focus="{{focus}}" value="{{searchValue}}" bindinput="searchValueInput"/>
+  <input class="df_1" placeholder="请输入您想要的菜品" auto-focus focus="{{focus}}" value="{{searchValue}}" bindinput="searchValueInput"/>
   <button bindtap="doSearch"><image class="searchcion" src="/images/search.png"></image></button>
 </view>
 

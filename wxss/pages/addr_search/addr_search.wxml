@@ -2,7 +2,7 @@
 
 <view class="search df">
   <button bindtap="doAddressSearch"><image class="dwcoin" src="/images/map.png"></image></button>
-  <input class="df_1" placeholder="请输入你想要的地址" auto-focus focus="{{focus}}" value="{{addrValue}}" bindinput="searchValueInput"/>
+  <input class="df_1" placeholder="请输入您想要的地址" auto-focus focus="{{focus}}" value="{{addrValue}}" bindinput="searchValueInput"/>
   <button bindtap="doAddrSearch"><image class="searchcion" src="/images/search.png"></image></button>
 </view>
 
@@ -13,6 +13,6 @@
 
 <scroll-view wx:for="{{searchData}}">
   <navigator url="/pages/index/index?latitude={{item.location.lat}}&&longitude={{item.location.lng}}" open-type="reLaunch" hover-class="changestyle">
-    <view class="text">{{item.title}}</view>
+    <view class="text">{{item.title}}({{item.district}})</view>
   </navigator>
 </scroll-view>

@@ -23,7 +23,7 @@ Page ({
 
     wx.showModal({
       title   : '提示',
-      content : '你确认移除吗',
+      content : '您确认移除吗',
       success : function(res) {
         res.confirm && wx.request({
           url   : app.d.hostUrl + 'ztb/productZBT/RemoveCollectCategory',
