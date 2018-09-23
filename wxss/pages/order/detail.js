@@ -58,4 +58,20 @@ Page ({
       }
     });
   },
+
+  searchValueInput: function (e) {
+    var value = e.detail.value;
+
+    this.setData({
+      searchValue: value,
+    });
+
+    if (!value && this.data.productData.length == 0) {
+      this.setData({
+        hotKeyShow: false,
+        historyKeyShow: false,
+      });
+    }
+  },
+
 })
