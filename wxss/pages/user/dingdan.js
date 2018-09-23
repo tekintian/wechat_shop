@@ -46,7 +46,7 @@ Page ({
 
     wx.showModal({
       title   : '提示',
-      content : '你确定要取消订单吗？',
+      content : '您确定要取消订单吗？',
 
       success: function(res) {
         res.confirm && wx.request({
@@ -98,7 +98,7 @@ Page ({
 
     wx.showModal({
       title   : '提示',
-      content : '你确定已收到宝贝吗？',
+      content : '您确定已收到宝贝吗？',
 
       success: function(res) {
         res.confirm && wx.request({
